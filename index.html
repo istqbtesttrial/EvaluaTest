@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>EvaluaTest - Examen blanc ISTQB v4 Foundation Level</title>
+
+    <!-- === BOOTSTRAP 5 (CDN) === -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+    >
+
+    <!-- === Animate.css (CDN) === -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <!-- === AOS (Animate On Scroll) (CDN) === -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+
+    <!-- === Votre feuille de style === -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+<!-- En-tête (plus d’effets Animate.css + classes Bootstrap) -->
+<header
+        class="fade-in text-center p-4 mb-3 bg-primary text-white
+           animate__animated animate__fadeInDown"
+>
+    <h1 class="mb-1">EvaluaTest</h1>
+    <p class="mb-0">Examen blanc ISTQB v4 Foundation Level</p>
+</header>
+
+<!-- Contenu principal -->
+<main class="container mb-5">
+    <!-- Section d'introduction et de démarrage -->
+    <section
+            id="intro"
+            class="fade-in text-center mb-5 animate__animated animate__fadeInUp"
+            data-aos="zoom-in" data-aos-duration="700"
+    >
+        <p>
+            Bienvenue sur <strong>EvaluaTest</strong>, la plateforme d’examens blancs
+            pour la certification <strong>ISTQB v4 Foundation Level</strong>.<br>
+            Cliquez sur le bouton ci-dessous pour commencer votre examen.
+            Vous disposez de <strong>1h15</strong> pour compléter les 40 questions.
+        </p>
+        <button id="start-btn" class="btn btn-success btn-lg px-4 mt-3">
+            Commencer l'examen
+        </button>
+    </section>
+
+    <!-- Section où s'afficheront les questions -->
+    <section
+            id="exam"
+            class="hidden"
+            data-aos="fade-in" data-aos-duration="600"
+    >
+        <h2 class="mb-4">Examen en cours</h2>
+
+        <!-- Conteneur du timer (effet bounce) -->
+        <div
+                id="timer-container"
+                class="bg-warning p-3 rounded mb-4 animate__animated animate__bounceIn"
+        >
+            <strong>Temps restant :</strong>
+            <span id="timer-display" class="fw-bold fs-5 text-danger">01:15:00</span>
+        </div>
+
+        <!-- Conteneur pour la liste de questions -->
+        <div
+                id="questions-container"
+                class="fade-in"
+        >
+            <!-- Les questions générées via JavaScript s'afficheront ici -->
+        </div>
+
+        <!-- Bouton pour valider les réponses (affiché une fois les questions chargées) -->
+        <button
+                id="submit-btn"
+                style="display: none;"
+                class="btn btn-primary btn-lg mt-3 animate__animated"
+                data-aos="fade-up" data-aos-duration="700"
+        >
+            Valider mes réponses
+        </button>
+    </section>
+
+    <!-- Section pour l'affichage des résultats -->
+    <section
+            id="results"
+            class="hidden mt-5"
+            data-aos="zoom-in" data-aos-duration="600"
+    >
+        <h2>Résultats</h2>
+        <p id="score" class="fs-5"></p> <!-- Score (ex: 30/40, 75%) -->
+        <div id="correction">
+            <!-- Détails (bonnes/mauvaises réponses) générés dynamiquement -->
+        </div>
+        <!-- Bouton pour relancer un nouvel examen ou revenir à l'accueil -->
+        <button
+                id="retry-btn"
+                style="display: none;"
+                class="btn btn-secondary btn-lg mt-4"
+                data-aos="fade-up" data-aos-duration="700"
+        >
+            Recommencer
+        </button>
+    </section>
+</main>
+
+<!-- Pied de page -->
+<footer
+        class="fade-in text-center p-3 bg-primary text-white
+           animate__animated animate__fadeInUp"
+>
+    <p class="mb-0">&copy; 2025 - Développé par Belhaj Ouajdi</p>
+</footer>
+
+<!-- === Bootstrap JS (bundle) === -->
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+></script>
+
+<!-- === AOS JS === -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<!-- === Scripts du projet === -->
+<script src="js/utils.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Initialisation d'AOS après chargement du DOM -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            // Vous pouvez configurer d'autres options globales ici :
+            once: false,        // true: l'animation se joue 1 seule fois
+            mirror: false,      // true: l'animation se joue en "scroll back"
+        });
+    });
+</script>
+</body>
+</html>

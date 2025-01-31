@@ -56,6 +56,7 @@ function getUserAnswer(questionId) {
 /**
  * Sélectionne aléatoirement un certain nombre de questions
  * par chapitre (si vous avez besoin d'une répartition).
+ * (Facultatif si vous n'utilisez plus de distribution via un tableau 'chapters'.)
  */
 function selectQuestionsByChapter(chapters, distribution) {
     let selected = [];

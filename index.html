@@ -30,7 +30,7 @@
 <!-- En-tête (plus d’effets Animate.css + classes Bootstrap) -->
 <header
         class="fade-in text-center p-4 mb-3 bg-primary text-white
-           animate__animated animate__fadeInDown"
+         animate__animated animate__fadeInDown"
 >
     <h1 class="mb-1">EvaluaTest</h1>
     <p class="mb-0">Examen blanc ISTQB v4 Foundation Level</p>
@@ -99,6 +99,7 @@
     >
         <h2>Résultats</h2>
         <p id="score" class="fs-5"></p> <!-- Score (ex: 30/40, 75%) -->
+        <p id="time-used" class="fs-6 text-muted"></p> <!-- Temps utilisé -->
         <div id="correction">
             <!-- Détails (bonnes/mauvaises réponses) générés dynamiquement -->
         </div>
@@ -117,7 +118,7 @@
 <!-- Pied de page -->
 <footer
         class="fade-in text-center p-3 bg-primary text-white
-           animate__animated animate__fadeInUp"
+         animate__animated animate__fadeInUp"
 >
     <p class="mb-0">&copy; 2025 - Développé par Belhaj Ouajdi</p>
 </footer>
@@ -129,6 +130,9 @@
 
 <!-- === AOS JS === -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<!-- === Marked (Markdown -> HTML) === -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <!-- === Scripts du projet === -->
 <script src="js/utils.js"></script>

@@ -17,35 +17,57 @@ const retryBtn = document.getElementById('retry-btn');
 const timerDisplay = document.getElementById('timer-display');
 
 /* --- Timer (1h15) --- */
-let timeRemaining = 75 * 60; // 75 minutes en secondes
+let timeRemaining = 75 * 60; // 75 minutes (en secondes)
 let timerInterval; // pour stocker l'intervalle
 
-/*
-   On ne définit plus de tableau en dur.
-   On prépare "allQuestions" pour charger le JSON.
-*/
+/**
+ * Variables globales :
+ * - allQuestions (optionnelle ici, on peut s’en passer totalement)
+ * - selectedQuestions : le tableau final de 40 questions.
+ */
 let allQuestions = [];
-
-/* Variable pour stocker la sélection finale (ici 40 questions) */
 let selectedQuestions = [];
 
 /**
- * Fonction pour charger TOUTES les questions
- * depuis le fichier questions.json
+ * Fonction pour charger et assembler les questions
+ * depuis 6 fichiers JSON : chapt1.json ... chapt6.json.
+ *
+ * Nous allons piocher aléatoirement :
+ *  - 8 questions de chapt1
+ *  - 6 questions de chapt2
+ *  - 4 questions de chapt3
+ *  - 11 questions de chapt4
+ *  - 9 questions de chapt5
+ *  - 2 questions de chapt6
  */
-async function loadQuestionsFromJson() {
+async function loadQuestionsFromMultipleJson() {
     try {
-        const response = await fetch('questions.json');
-        const data = await response.json();
+        // Répartition et fichiers
+        const distribution = [
+            { file: 'chapt1.json', count: 8 },
+            { file: 'chapt2.json', count: 6 },
+            { file: 'chapt3.json', count: 4 },
+            { file: 'chapt4.json', count: 11 },
+            { file: 'chapt5.json', count: 9 },
+            { file: 'chapt6.json', count: 2 },
+        ];
 
-        // data.chapters : tableau [{ id, title, questions: [...] }, ...]
-        let all = [];
-        data.chapters.forEach(chapter => {
-            all = all.concat(chapter.questions);
-        });
-        return all; // Retourne un grand tableau de toutes les questions
+        let finalQuestions = [];
+
+        // Pour chaque chapitre, on récupère le JSON,
+        // on pioche le nombre de questions demandé
+        for (const dist of distribution) {
+            const response = await fetch(dist.file);
+            const data = await response.json();
+            // "data.questions" doit exister dans chaptX.json
+            const subset = getRandomQuestions(data.questions, dist.count);
+            finalQuestions.push(...subset);
+        }
+
+        // finalQuestions contiendra 40 questions
+        return finalQuestions;
     } catch (error) {
-        console.error("Erreur lors du chargement du JSON :", error);
+        console.error("Erreur lors du chargement des JSON :", error);
         return [];
     }
 }
@@ -56,7 +78,6 @@ async function loadQuestionsFromJson() {
 
 /**
  * Lance l'examen
- *  (rendu asynchrone pour pouvoir 'await' le chargement JSON)
  */
 async function startExam() {
     // Masquer la section d'intro
@@ -66,17 +87,17 @@ async function startExam() {
 
     // Réinitialiser le temps restant
     timeRemaining = 75 * 60;
+
     // Démarrer le timer
     startTimer();
 
-    // CHARGER LES QUESTIONS SI CE N'EST PAS DEJA FAIT
-    if (allQuestions.length === 0) {
-        allQuestions = await loadQuestionsFromJson();
-    }
+    // Charger et composer la sélection de 40 questions (6 chapitres)
+    selectedQuestions = await loadQuestionsFromMultipleJson();
 
-    // Sélection aléatoire de 40 questions
-    // (Assurez-vous que votre questions.json en contient au moins 40)
-    selectedQuestions = getRandomQuestions(allQuestions, 40);
+    // (Optionnel) Vérifier qu'on a bien 40 questions
+    if (selectedQuestions.length < 40) {
+        console.warn("Le total de questions récupérées est inférieur à 40 !");
+    }
 
     // Afficher les questions dans le DOM
     displayQuestions(selectedQuestions);
@@ -100,10 +121,12 @@ function displayQuestions(questions) {
         questionDiv.setAttribute("data-aos", aosEffect);
         questionDiv.setAttribute("data-aos-duration", "600");
 
+        // Titre de la question
         const questionTitle = document.createElement('h3');
         questionTitle.textContent = `Question ${index + 1}: ${q.enonce}`;
         questionDiv.appendChild(questionTitle);
 
+        // Ajout des choix (radio)
         q.choices.forEach((choiceText, choiceIndex) => {
             const label = document.createElement('label');
             label.classList.add('choice-label');
@@ -135,7 +158,7 @@ function submitExam() {
     // Arrêter le timer
     clearInterval(timerInterval);
 
-    // Calcul du score
+    // Calcul du score (calculateScore est défini dans utils.js)
     const score = calculateScore(selectedQuestions);
 
     // Afficher les résultats
@@ -151,7 +174,7 @@ function submitExam() {
 function showResults(score) {
     resultsSection.classList.remove('hidden');
 
-    const totalQuestions = selectedQuestions.length; // 40
+    const totalQuestions = selectedQuestions.length; // Devrait être 40
     const pourcentage = ((score / totalQuestions) * 100).toFixed(2);
 
     scorePara.textContent = `Vous avez obtenu ${score}/${totalQuestions} (${pourcentage}%).`;
@@ -171,7 +194,7 @@ function showResults(score) {
     // Afficher un détail question par question
     correctionDiv.innerHTML = "";
     selectedQuestions.forEach(q => {
-        const userAnswer = getUserAnswer(q.questionId);
+        const userAnswer = getUserAnswer(q.questionId); // défini dans utils.js
         const isCorrect = (userAnswer === q.correctIndex);
         const resultLine = document.createElement('p');
         resultLine.innerHTML = `

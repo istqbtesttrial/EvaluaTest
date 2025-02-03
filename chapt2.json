@@ -1,6 +1,7 @@
 {
   "chapterId": 2,
   "title": "Chapitre 2",
+  "enonceFormat": "markdown",
   "questions": [
     {
       "questionId": 1,
@@ -181,6 +182,7 @@
     {
       "questionId": 17,
       "enonce": "Quels types de défaillances (1-4) correspondent le mieux à quels niveaux de test (A-D) ?\n1. Défaillances liées au comportement du système qui s’écarte des besoins métier\n2. Défaillances de communication entre les composants\n3. Défaillances dans la logique d’un module\n4. Défaillances liées à l’implémentation incorrecte de règles métier\n\nA. Test de composants\nB. Test d’intégration de composants\nC. Test système\nD. Test d’acceptation",
+      "enonceFormat": "markdown",
       "choices": [
         "1D, 2B, 3A, 4C",
         "1D, 2B, 3C, 4A",
@@ -192,6 +194,7 @@
     {
       "questionId": 18,
       "enonce": "Vous testez une User Story comportant trois critères d’acceptation : AC1, AC2 et AC3. AC1 est couvert par TC1, AC2 par TC2 et AC3 par TC3. Vous avez trois historiques d’exécution pour trois versions consécutives du logiciel :\n\n• Exécution 1 :\n   - TC1 (1) Échec\n   - TC2 (2) Succès\n   - TC3 (3) Échec\n\n• Exécution 2 :\n   - TC1 (4) Succès\n   - TC2 (5) Échec\n   - TC3 (6) Échec\n\n• Exécution 3 :\n   - TC1 (7) Succès\n   - TC2 (8) Succès\n   - TC3 (9) Succès\n\nLes tests sont répétés dès qu’une nouvelle version est disponible. Lesquels de ces tests sont exécutés en tant que tests de régression ?",
+      "enonceFormat": "markdown",
       "choices": [
         "Uniquement 4, 7, 8, 9",
         "Uniquement 5, 7",
@@ -203,6 +206,7 @@
     {
       "questionId": 19,
       "enonce": "Lesquels des éléments suivants sont des avantages de DevOps ?\n i. Publication plus rapide du produit et réduction du time-to-market\n ii. Augmentation du besoin de tests manuels répétitifs\n iii. Disponibilité constante de logiciels exécutables\n iv. Réduction du nombre de tests de régression associés au remaniement du code\n v. Mettre en place le framework d’automatisation des tests est peu coûteux puisque tout est automatisé",
+      "enonceFormat": "markdown",
       "choices": [
         "i, ii, iv sont des avantages",
         "iii, v sont des avantages",

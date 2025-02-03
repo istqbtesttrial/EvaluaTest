@@ -1,6 +1,7 @@
 {
   "chapterId": 5,
   "title": "Chapitre 5",
+  "enonceFormat": "markdown",
   "questions": [
     {
       "questionId": 1,
@@ -169,7 +170,8 @@
     },
     {
       "questionId": 16,
-      "enonce": "Vous estimez la durée de test nécessaire pour un nouveau projet. Vous avez recueilli l’avis de trois experts qui vous ont donné les chiffres suivants (en jours) :\n\n| Expert  | Optimiste | Probable | Pessimiste |\n|---------|----------|----------|------------|\n| Expert1 | 20       | 40       | 60         |\n| Expert2 | 40       | 55       | 75         |\n| Expert3 | 30       | 70       | 90         |\n\nMoyenne : Optimiste=30, Probable=55, Pessimiste=75\n\nEn appliquant la technique d’estimation à trois points sur ces moyennes, quelle est l’estimation ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous estimez la durée de test nécessaire pour un nouveau projet. Vous avez recueilli l’avis de trois experts qui vous ont donné les chiffres suivants (en jours) :\n\n| Expert  | Optimiste | Probable | Pessimiste |\n|---------|-----------|----------|------------|\n| Expert1 | 20        | 40       | 60         |\n| Expert2 | 40        | 55       | 75         |\n| Expert3 | 30        | 70       | 90         |\n\nMoyenne : Optimiste = 30, Probable = 55, Pessimiste = 75\n\nEn appliquant la technique d’estimation à trois points sur ces moyennes, quelle est l’estimation ?",
       "choices": [
         "325 ± 45",
         "81,25 ± 8",
@@ -180,7 +182,8 @@
     },
     {
       "questionId": 17,
-      "enonce": "Considérez les cas de test suivants pour tester un système comptable :\n\n| TestID | Nom              | Dépendance | Priorité |\n|--------|------------------|------------|---------|\n| 1      | Acheter un item  | aucune     | 2       |\n| 2      | Recevoir facture | Test1      | 3       |\n| 3      | Recevoir biens   | Test1      | 2       |\n| 4      | Envoyer paiement | Test2      | 3       |\n| 5      | Rapport paiements| Test4      | 1       |\n\nDans quel ordre faut-il exécuter ces cas de test ?",
+      "enonceFormat": "markdown",
+      "enonce": "Considérez les cas de test suivants pour tester un système comptable :\n\n| TestID | Nom               | Dépendance | Priorité |\n|--------|-------------------|------------|----------|\n| 1      | Acheter un item   | aucune     | 2        |\n| 2      | Recevoir facture  | Test1      | 3        |\n| 3      | Recevoir biens    | Test1      | 2        |\n| 4      | Envoyer paiement  | Test2      | 3        |\n| 5      | Rapport paiements | Test4      | 1        |\n\nDans quel ordre faut-il exécuter ces cas de test ?",
       "choices": [
         "5, 1, 3, 2, 4",
         "1, 2, 4, 5, 3",
@@ -224,7 +227,7 @@
     },
     {
       "questionId": 21,
-      "enonce": "Vous testez une application mobile qui permet de trouver un restaurant à proximité selon le type de nourriture souhaité. Voici la liste de cas de test, leurs priorités (un nombre plus petit = plus prioritaire) et leurs dépendances :\n\n|Test case| Test condition couvert  | Priorité | Dépendance|\n|---------|-------------------------|----------|-----------|\n|TC001    | Sélection du type de nourriture | 3  | aucune    |\n|TC002    | Sélection du restaurant         | 2  | TC001     |\n|TC003    | Obtenir l’itinéraire           | 1  | TC002     |\n|TC004    | Appeler le restaurant          | 2  | TC002     |\n|TC005    | Faire une réservation          | 3  | TC002     |\n\nQuel test doit être exécuté en troisième ?",
+      "enonce": "Vous testez une application mobile qui permet de trouver un restaurant à proximité selon le type de nourriture souhaité. Voici la liste de cas de test, leurs priorités (un nombre plus petit = plus prioritaire) et leurs dépendances :\n\n| Test case | Test condition couvert         | Priorité | Dépendance |\n|-----------|--------------------------------|----------|------------|\n| TC001     | Sélection du type de nourriture| 3        | aucune     |\n| TC002     | Sélection du restaurant        | 2        | TC001      |\n| TC003     | Obtenir l’itinéraire           | 1        | TC002      |\n| TC004     | Appeler le restaurant          | 2        | TC002      |\n| TC005     | Faire une réservation          | 3        | TC002      |\n\nQuel test doit être exécuté en troisième ?",
       "choices": [
         "TC003",
         "TC005",
@@ -235,7 +238,7 @@
     },
     {
       "questionId": 22,
-      "enonce": "Considérez les catégories de tests (1–4) et les quadrants de test agiles (A–D) :\n1. Tests d’utilisabilité\n2. Tests de composants\n3. Tests fonctionnels\n4. Tests de fiabilité\nA. Quadrant Q1 : orienté technologie, support à l’équipe de développement\nB. Quadrant Q2 : orienté métier, support à l’équipe de développement\nC. Quadrant Q3 : orienté métier, critique du produit\nD. Quadrant Q4 : orienté technologie, critique du produit\nComment s’insèrent les catégories de test suivantes dans les quadrants ?",
+      "enonce": "Considérez les catégories de tests (1–4) et les quadrants de test agiles (A–D) :\n\n1. Tests d’utilisabilité\n2. Tests de composants\n3. Tests fonctionnels\n4. Tests de fiabilité\n\nA. Quadrant Q1 : orienté technologie, support à l’équipe de développement\nB. Quadrant Q2 : orienté métier, support à l’équipe de développement\nC. Quadrant Q3 : orienté métier, critique du produit\nD. Quadrant Q4 : orienté technologie, critique du produit\n\nComment s’insèrent les catégories de test suivantes dans les quadrants ?",
       "choices": [
         "1C, 2A, 3B, 4D",
         "1D, 2A, 3C, 4B",
@@ -290,7 +293,8 @@
     },
     {
       "questionId": 27,
-      "enonce": "Votre équipe utilise le planning poker pour estimer l’effort de test pour une nouvelle fonctionnalité requise. Il existe une règle indiquant que si on manque de temps pour parvenir à un plein consensus et que l’écart des estimations est faible, on peut appliquer une règle telle que « accepter le nombre qui a le plus de voix ».\nAprès deux tours, le consensus n’est pas atteint, on en entame un troisième. Les estimations sont :\n\n| Round 1 | 21, 2, 5, 34, 13, 8, 2 |\n| Round 2 | 13, 8, 8, 34, 13, 8, 5 |\n| Round 3 | 13, 8, 13, 13, 13, 13, 8 |\n\nLaquelle des actions suivantes est le MEILLEUR exemple de l’étape suivante ?",
+      "enonceFormat": "markdown",
+      "enonce": "Votre équipe utilise le planning poker pour estimer l’effort de test pour une nouvelle fonctionnalité requise. Il existe une règle indiquant que si le consensus n’est pas atteint et que l’écart des estimations est faible, on peut accepter le nombre ayant le plus de voix.\n\nAprès deux tours, le consensus n’est pas atteint, on en entame un troisième. Les estimations sont :\n\n| Round 1 | 21, 2, 5, 34, 13, 8, 2 |\n|---------|-------------------------|\n| Round 2 | 13, 8, 8, 34, 13, 8, 5  |\n| Round 3 | 13, 8, 13, 13, 13, 13, 8 |\n\nLaquelle des actions suivantes est le MEILLEUR exemple de l’étape suivante ?",
       "choices": [
         "Le product owner doit intervenir et prendre la décision finale",
         "Accepter 13 comme estimation finale car c’est le nombre qui a le plus de votes",
@@ -323,7 +327,7 @@
     },
     {
       "questionId": 30,
-      "enonce": "La liste suivante contient des risques identifiés pour un nouveau produit logiciel :\n i. La direction retire deux testeurs expérimentés pour un autre projet\n ii. Le système ne respecte pas les normes de sécurité fonctionnelle\n iii. Le temps de réponse du système dépasse les exigences utilisateurs\n iv. Les parties prenantes ont des attentes erronées\n v. Les personnes handicapées rencontrent des difficultés à utiliser le système\n\nLesquels sont des risques projet ?",
+      "enonce": "La liste suivante contient des risques identifiés pour un nouveau produit logiciel :\n\n i. La direction retire deux testeurs expérimentés pour un autre projet\n ii. Le système ne respecte pas les normes de sécurité fonctionnelle\n iii. Le temps de réponse du système dépasse les exigences utilisateurs\n iv. Les parties prenantes ont des attentes erronées\n v. Les personnes handicapées rencontrent des difficultés à utiliser le système\n\nLesquels sont des risques projet ?",
       "choices": [
         "i, iv",
         "iv, v",
@@ -334,10 +338,10 @@
     },
     {
       "questionId": 31,
-      "enonce": "Lequel des exemples suivants illustre la manière dont l’analyse des risques produit influe sur l’exhaustivité et l’étendue des tests ?",
+      "enonce": "Lequel des exemples suivants illustre la manière dont l’analyse des risques produit influe sur l’exhaustivité et l’étendue des tests ?",
       "choices": [
         "Le test manager suit et rapporte chaque jour le niveau de tous les risques connus afin que les parties prenantes décident de la date de livraison",
-        "L’un des risques identifiés était « Manque de support pour les bases de données open source », alors l’équipe a décidé d’intégrer le système à une base de données open source",
+        "L’un des risques identifiés était « Manque de support pour les bases de données open source », alors l’équipe a décidé d’intégrer le système à une base de données open source",
         "Pendant l’analyse quantitative, l’équipe a estimé le niveau total de tous les risques et l’a présenté comme le risque résiduel total avant les tests",
         "L’évaluation des risques a révélé un niveau très élevé pour la performance, il a donc été décidé de réaliser un test détaillé de performance tôt dans le SDLC"
       ],
@@ -345,7 +349,7 @@
     },
     {
       "questionId": 32,
-      "enonce": "Lequel des éléments suivants du rapport d’avancement des tests est le MOINS utile pour les représentants métier ?",
+      "enonce": "Lequel des éléments suivants du rapport d’avancement des tests est le MOINS utile pour les représentants métier ?",
       "choices": [
         "Les obstacles au test (impediments)",
         "La couverture des branches atteinte",
@@ -356,7 +360,7 @@
     },
     {
       "questionId": 33,
-      "enonce": "Considérez la partie suivante d’un plan de test :\n« Les tests seront réalisés via des tests de composants et des tests d’intégration de composants.\nLes réglementations exigent de démontrer une couverture à 100 % des branches pour chaque composant critique. »\nDans quelle section du plan de test figure ce passage ?",
+      "enonce": "Considérez la partie suivante d’un plan de test :\n\n« Les tests seront réalisés via des tests de composants et des tests d’intégration de composants.\nLes réglementations exigent de démontrer une couverture à 100 % des branches pour chaque composant critique. »\n\nDans quelle section du plan de test figure ce passage ?",
       "choices": [
         "Communication",
         "Registre des risques",
@@ -367,29 +371,31 @@
     },
     {
       "questionId": 34,
-      "enonce": "Votre équipe suit un pipeline de livraison DevOps dont les trois premières étapes sont : (1) développement du code, (2) soumission dans un système de gestion de versions et fusion dans la branche \"test\", (3) test de composants du code soumis.\nLaquelle des propositions suivantes convient le MIEUX comme critère d’entrée pour l’étape (2) ?",
+      "enonce": "Votre équipe suit un pipeline de livraison DevOps dont les trois premières étapes sont :\n\n(1) développement du code,\n(2) soumission dans un système de gestion de versions et fusion dans la branche \"test\",\n(3) test de composants du code soumis.\n\nLaquelle des propositions suivantes convient le mieux comme critère d’entrée pour l’étape (2) ?",
       "choices": [
         "L’analyse statique ne renvoie aucun avertissement de sévérité élevée pour le code soumis",
         "Le système de gestion de versions n’indique aucun conflit lors de la fusion dans la branche \"test\"",
         "Les tests de composants sont compilés et prêts à l’exécution",
-        "La couverture des instructions atteint au moins 80 %"
+        "La couverture des instructions atteint au moins 80 %"
       ],
       "correctIndex": 0
     },
     {
       "questionId": 35,
-      "enonce": "Vous voulez estimer l’effort de test pour un nouveau projet en utilisant une estimation basée sur des ratios. Vous calculez le ratio test/développement à partir de 4 projets historiques similaires. Le tableau ci-dessous montre ces données :\n\n| Projet | Effort dev ($) | Effort test ($) |\n|--------|---------------|-----------------|\n| P1     | 800,000       | 40,000          |\n| P2     | 1,200,000     | 130,000         |\n| P3     | 600,000       | 70,000          |\n| P4     | 1,000,000     | 120,000         |\n\nL’effort de développement estimé pour le nouveau projet est de 800,000 $. Quelle est l’estimation de l’effort de test ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous voulez estimer l’effort de test pour un nouveau projet en utilisant une estimation basée sur des ratios. Vous calculez le ratio test/développement à partir de 4 projets historiques similaires. Le tableau ci-dessous montre ces données :\n\n| Projet | Effort dev ($) | Effort test ($) |\n|--------|----------------|-----------------|\n| P1     | 800,000        | 40,000          |\n| P2     | 1,200,000      | 130,000         |\n| P3     | 600,000        | 70,000          |\n| P4     | 1,000,000      | 120,000         |\n\nL’effort de développement estimé pour le nouveau projet est de 800,000 $. Quelle est l’estimation de l’effort de test ?",
       "choices": [
-        "40,000 $",
-        "80,000 $",
-        "81,250 $",
-        "82,500 $"
+        "40,000 $",
+        "80,000 $",
+        "81,250 $",
+        "82,500 $"
       ],
       "correctIndex": 1
     },
     {
       "questionId": 36,
-      "enonce": "Vous testez une application web permettant de RECHERCHER des produits, VOIR leurs détails, AJOUTER ces produits à un panier, et PASSER une COMMANDE.\nVous avez préparé 7 cas de test, tous à exécuter, par ordre de priorité. Les voici :\n\n|Test| Action à tester                | Priorité (1 = plus haute) |\n|----|--------------------------------|---------------------------|\n|TC1 | RECHERCHE produit A           | 4                         |\n|TC2 | RECHERCHE produit B           | 4                         |\n|TC3 | VOIR détail du produit A      | 3                         |\n|TC4 | VOIR détail du produit B      | 2                         |\n|TC5 | AJOUTER produit A au panier   | 3                         |\n|TC6 | AJOUTER produit B au panier   | 1                         |\n|TC7 | PASSER une COMMANDE           | 5                         |\n\nDépendances :\n• On teste la RECHERCHE avant de tester VOIR\n• On teste VOIR avant AJOUTER\n• On teste AJOUTER avant COMMANDE\n\nLequel doit être exécuté en 4e ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous testez une application web permettant de RECHERCHER des produits, VOIR leurs détails, AJOUTER ces produits à un panier, et PASSER une COMMANDE.\n\nVous avez préparé 7 cas de test, tous à exécuter, par ordre de priorité. Les voici :\n\n| Test  | Action à tester               | Priorité (1 = plus haute) |\n|-------|-------------------------------|---------------------------|\n| TC1   | RECHERCHER produit A           | 4                         |\n| TC2   | RECHERCHER produit B           | 4                         |\n| TC3   | VOIR détail du produit A      | 3                         |\n| TC4   | VOIR détail du produit B      | 2                         |\n| TC5   | AJOUTER produit A au panier   | 3                         |\n| TC6   | AJOUTER produit B au panier   | 1                         |\n| TC7   | PASSER une COMMANDE           | 5                         |\n\nDépendances :\n\n- On teste la RECHERCHER avant de tester VOIR\n- On teste VOIR avant AJOUTER\n- On teste AJOUTER avant COMMANDE\n\nLequel doit être exécuté en 4e ?",
       "choices": [
         "TC3",
         "TC1",
@@ -400,7 +406,7 @@
     },
     {
       "questionId": 37,
-      "enonce": "Selon le modèle des quadrants de test, lequel des éléments suivants se situe dans le quadrant Q1 (\"orienté technologie\" et \"soutien à l’équipe\") ?",
+      "enonce": "Selon le modèle des quadrants de test, lequel des éléments suivants se situe dans le quadrant Q1 (\"orienté technologie\" et \"soutien à l’équipe\") ?",
       "choices": [
         "Les tests d’ergonomie (usability)",
         "Les tests fonctionnels",
@@ -411,7 +417,7 @@
     },
     {
       "questionId": 38,
-      "enonce": "Considérez les risques suivants :\n1. Une mauvaise implémentation de boucle provoque des réponses lentes\n2. Les consommateurs changent leurs préférences\n3. Inondation de la salle des serveurs\n4. Les patients au-delà d’un certain âge reçoivent des rapports inexacts\n\nEt les activités d’atténuation suivantes :\nA. Accepter le risque\nB. Faire des tests de performance\nC. Utiliser l’analyse des valeurs limites\nD. Transférer le risque\n\nLequel des appariements suivants décrit au MIEUX les risques et leurs mesures ?",
+      "enonce": "Considérez les risques suivants :\n\n1. Une mauvaise implémentation de boucle provoque des réponses lentes\n2. Les consommateurs changent leurs préférences\n3. Inondation de la salle des serveurs\n4. Les patients au-delà d’un certain âge reçoivent des rapports inexacts\n\nEt les activités d’atténuation suivantes :\n\nA. Accepter le risque\nB. Faire des tests de performance\nC. Utiliser l’analyse des valeurs limites\nD. Transférer le risque\n\nLequel des appariements suivants décrit au mieux les risques et leurs mesures ?",
       "choices": [
         "1C, 2D, 3A, 4B",
         "1B, 2D, 3A, 4C",
@@ -422,7 +428,7 @@
     },
     {
       "questionId": 39,
-      "enonce": "Lequel des éléments suivants est une mesure de qualité du produit (product quality metric) ?",
+      "enonce": "Lequel des éléments suivants est une mesure de qualité du produit (product quality metric) ?",
       "choices": [
         "Le temps moyen entre pannes (MTTF)",
         "Le nombre de défauts trouvés",
@@ -433,7 +439,7 @@
     },
     {
       "questionId": 40,
-      "enonce": "Vous faites partie d’une équipe agile et DevOps, géographiquement distribuée (vous en Amérique du Nord, le client en Europe), et vous utilisez un pipeline de CI/CD. Quelle est la méthode la MOINS efficace pour communiquer l’avancement des tests au client ?",
+      "enonce": "Vous faites partie d’une équipe agile et DevOps, géographiquement distribuée (vous en Amérique du Nord, le client en Europe), et vous utilisez un pipeline de CI/CD. Quelle est la méthode la moins efficace pour communiquer l’avancement des tests au client ?",
       "choices": [
         "Face-à-face",
         "Tableaux de bord (dashboards)",
@@ -444,7 +450,7 @@
     },
     {
       "questionId": 41,
-      "enonce": "Lequel des énoncés suivants décrit le MIEUX comment la gestion de configuration (CM) soutient les tests ?",
+      "enonce": "Lequel des énoncés suivants décrit le mieux comment la gestion de configuration (CM) soutient les tests ?",
       "choices": [
         "Avec le numéro de version de l’environnement, l’outil CM peut récupérer la version des bibliothèques, stubs et drivers utilisés dans cet environnement",
         "Avec l’historique d’entrées de test, l’outil CM peut exécuter les cas de test pour ces configurations et calculer la couverture",
@@ -455,21 +461,21 @@
     },
     {
       "questionId": 42,
-      "enonce": "Vous testez une fonction de tri qui reçoit un ensemble de nombres en entrée et renvoie le même ensemble trié par ordre croissant. Le journal d’exécution de test est le suivant :\n\nEnvironnement : build 2.002.2182, cas de test : TCS-3 (5 TC)\nID exécution :736\nStart 12:43:21.003\n12:43:21.003 Exécution TC1. Input: 3. Output: 3. → passé\n12:43:21.003 Exécution TC2. Input: 3 11 6 5. Output: 3 5 6 11. → passé\n12:43:21.004 Exécution TC3. Input: 8 7 3 7 1. Output: 1 3 7 8. → échec\n12:43:21.005 Exécution TC4. Input: -2 -2 -2 -3 -3. Output: -3 -2. → échec\n12:43:21.005 Exécution TC5. Input: 0 -2 0 3 4 4. Output: -2 0 3 4. → échec\nEnd 12:43:21.005\nTemps total test cycle : 0:00:00.002\n\nQuelle description du dysfonctionnement décrit le mieux l’échec qui peut être utilisée dans un rapport de défaut ?",
+      "enonce": "Vous testez une fonction de tri qui reçoit un ensemble de nombres en entrée et renvoie le même ensemble trié par ordre croissant. Le journal d’exécution de test est le suivant :\n\nEnvironnement : build 2.002.2182, cas de test : TCS-3 (5 TC)\nID exécution : 736\nStart 12:43:21.003\n12:43:21.003 Exécution TC1. Input: 3. Output: 3. → passé\n12:43:21.003 Exécution TC2. Input: 3 11 6 5. Output: 3 5 6 11. → passé\n12:43:21.004 Exécution TC3. Input: 8 7 3 7 1. Output: 1 3 7 8. → échec\n12:43:21.005 Exécution TC4. Input: -2 -2 -2 -3 -3. Output: -3 -2. → échec\n12:43:21.005 Exécution TC5. Input: 0 -2 0 3 4 4. Output: -2 0 3 4. → échec\nEnd 12:43:21.005\nTemps total test cycle : 0:00:00.002\n\nQuelle description du dysfonctionnement décrit le mieux l’échec qui peut être utilisée dans un rapport de défaut ?",
       "choices": [
-        "Le système échoue à trier plusieurs ensembles de nombres. Réf. : TC3, TC4, TC5",
-        "Le système semble ignorer les duplicatas en triant. Réf. : TC3, TC4, TC5",
-        "Le système ne trie pas les nombres négatifs. Réf. : TC4, TC5",
+        "Le système échoue à trier plusieurs ensembles de nombres. Réf. : TC3, TC4, TC5",
+        "Le système semble ignorer les duplicatas en triant. Réf. : TC3, TC4, TC5",
+        "Le système ne trie pas les nombres négatifs. Réf. : TC4, TC5",
         "TC3, TC4, TC5 contiennent des défauts (données d’entrée dupliquées) et doivent être corrigés"
       ],
       "correctIndex": 1
     },
     {
       "questionId": 43,
-      "enonce": "Lequel des énoncés suivants N’EST PAS un objectif d’un plan de test ?",
+      "enonce": "Lequel des énoncés suivants n’est pas un objectif d’un plan de test ?",
       "choices": [
         "Définir des données de test et des résultats attendus pour les tests de composants et d’intégration de composants",
-        "Définir un critère de sortie pour le niveau de test de composants qui exige 100 % de couverture des instructions et des branches",
+        "Définir un critère de sortie pour le niveau de test de composants qui exige 100 % de couverture des instructions et des branches",
         "Décrire quels champs le rapport d’avancement doit contenir et quel format doit prendre ce rapport",
         "Expliquer pourquoi le test d’intégration système sera exclu, bien que la stratégie de test requière ce niveau"
       ],
@@ -477,7 +483,7 @@
     },
     {
       "questionId": 44,
-      "enonce": "Que montre le modèle de la pyramide de tests ?",
+      "enonce": "Que montre le modèle de la pyramide de tests ?",
       "choices": [
         "Que certains tests peuvent avoir des priorités différentes",
         "Que certains tests peuvent avoir une granularité différente",
@@ -488,7 +494,7 @@
     },
     {
       "questionId": 45,
-      "enonce": "Quelle est la relation entre les quadrants de test, les niveaux de test et les types de test ?",
+      "enonce": "Quelle est la relation entre les quadrants de test, les niveaux de test et les types de test ?",
       "choices": [
         "Les quadrants représentent des combinaisons particulières de niveaux de test et de types de test, en définissant leur position dans le cycle de développement logiciel",
         "Les quadrants de test décrivent le degré de granularité des différents types de test effectués à chaque niveau",
@@ -499,7 +505,7 @@
     },
     {
       "questionId": 46,
-      "enonce": "Lequel des exemples suivants décrit comment l’analyse des risques produit peut influer sur le niveau de détail et la portée (thoroughness et scope) des tests ?",
+      "enonce": "Lequel des exemples suivants décrit comment l’analyse des risques produit peut influer sur le niveau de détail et la portée (thoroughness et scope) des tests ?",
       "choices": [
         "Le suivi continu des risques nous permet d’identifier au plus tôt l’apparition de nouveaux risques",
         "L’identification des risques nous permet de mettre en œuvre des actions d’atténuation et de réduire le niveau de risque",
@@ -510,7 +516,7 @@
     },
     {
       "questionId": 47,
-      "enonce": "Laquelle des activités du processus de test utilise LE PLUS les rapports d’avancement des tests ?",
+      "enonce": "Laquelle des activités du processus de test utilise le plus les rapports d’avancement des tests ?",
       "choices": [
         "La conception de test",
         "La clôture des tests (test completion)",
@@ -521,7 +527,7 @@
     },
     {
       "questionId": 48,
-      "enonce": "Lequel des éléments suivants N’EST PAS un exemple de la façon dont la gestion de configuration soutient les tests ?",
+      "enonce": "Lequel des éléments suivants n’est pas un exemple de la façon dont la gestion de configuration soutient les tests ?",
       "choices": [
         "Tous les commits dans le dépôt sont identifiés de manière unique et gérés en version",
         "Tous les changements dans les éléments de l’environnement de test sont suivis",
@@ -532,7 +538,7 @@
     },
     {
       "questionId": 49,
-      "enonce": "Considérez le rapport d’anomalie suivant pour une application de e-commerce :\nApplication : WebShop v0.99\nDéfaut : Le bouton \"Login\" ne fonctionne pas\nÉtapes pour reproduire :\n1. Lancer le site web\n2. Cliquer sur le bouton \"Login\"\n\nRésultat attendu : l’utilisateur doit être redirigé vers la page de connexion\nRésultat réel : le bouton \"Login\" ne réagit pas au clic\nSévérité : High\nPriorité : Urgent\n\nQuelle information la plus importante est absente de ce rapport ?",
+      "enonce": "Considérez le rapport d’anomalie suivant pour une application de e-commerce :\n\nApplication : WebShop v0.99\nDéfaut : Le bouton \"Login\" ne fonctionne pas\nÉtapes pour reproduire :\n1. Lancer le site web\n2. Cliquer sur le bouton \"Login\"\n\nRésultat attendu : l’utilisateur doit être redirigé vers la page de connexion\nRésultat réel : le bouton \"Login\" ne réagit pas au clic\nSévérité : High\nPriorité : Urgent\n\nQuelle information la plus importante est absente de ce rapport ?",
       "choices": [
         "Le nom du testeur et la date du rapport",
         "Les éléments de l’environnement de test et leurs numéros de version",
@@ -543,20 +549,20 @@
     },
     {
       "questionId": 50,
-      "enonce": "L’équipe veut estimer le temps nécessaire pour qu’un testeur exécute 4 cas de test sur un composant logiciel. Voici les mesures recueillies pour l’exécution d’un cas de test :\n• Meilleur cas : 1 heure\n• Pire cas : 8 heures\n• Cas le plus probable : 3 heures\nÉtant donné qu’on utilise la technique d’estimation à trois points, quelle est l’estimation finale pour exécuter les 4 cas de test ?",
+      "enonce": "L’équipe veut estimer le temps nécessaire pour qu’un testeur exécute 4 cas de test sur un composant logiciel. Voici les mesures recueillies pour l’exécution d’un cas de test :\n\n• Meilleur cas : 1 heure\n• Pire cas : 8 heures\n• Cas le plus probable : 3 heures\n\nÉtant donné qu’on utilise la technique d’estimation à trois points, quelle est l’estimation finale pour exécuter les 4 cas de test ?",
       "choices": [
-        "14 heures",
-        "3,5 heures",
-        "16 heures",
-        "12 heures"
+        "14 heures",
+        "3,5 heures",
+        "16 heures",
+        "12 heures"
       ],
       "correctIndex": 0
     },
     {
       "questionId": 51,
-      "enonce": "En quoi les quadrants de test peuvent-ils être utiles pour les tests ?",
+      "enonce": "En quoi les quadrants de test peuvent-ils être utiles pour les tests ?",
       "choices": [
-        "Ils divisent le processus en quatre phases qui correspondent aux niveaux de test de base : composant, intégration, système et acceptation",
+        "Ils divisent le processus en quatre phases qui correspondent aux niveaux de test de base : composant, intégration, système et acceptation",
         "Ils aident à évaluer une couverture de haut niveau (par ex. exigences) en se basant sur une couverture de bas niveau (par ex. code)",
         "Ils aident les parties prenantes non techniques à comprendre qu’il existe différents types de tests et que certains sont plus pertinents à certains niveaux",
         "Ils aident les équipes agiles à élaborer une stratégie de communication basée sur la classification psychologique de quatre types de personnes"
@@ -565,18 +571,18 @@
     },
     {
       "questionId": 52,
-      "enonce": "Pour un risque donné, on sait que son niveau de risque est de 1,000 $ et que sa probabilité est estimée à 50 %. Quelle est l’ampleur (impact) de ce risque ?",
+      "enonce": "Pour un risque donné, on sait que son niveau de risque est de 1,000 $ et que sa probabilité est estimée à 50 %. Quelle est l’ampleur (impact) de ce risque ?",
       "choices": [
-        "500 $",
-        "2,000 $",
-        "50,000 $",
-        "200 $"
+        "500 $",
+        "2,000 $",
+        "50,000 $",
+        "200 $"
       ],
       "correctIndex": 1
     },
     {
       "questionId": 53,
-      "enonce": "Lequel des éléments suivants N’EST PAS un objectif ou une raison valable de produire un rapport de test ?",
+      "enonce": "Lequel des éléments suivants n’est pas un objectif ou une raison valable de produire un rapport de test ?",
       "choices": [
         "Suivre la progression des tests et identifier les domaines qui exigent plus d’attention",
         "Fournir des informations sur les tests exécutés, leurs résultats et tout défaut constaté",
@@ -587,7 +593,7 @@
     },
     {
       "questionId": 54,
-      "enonce": "Un utilisateur a signalé une panne logicielle. Un ingénieur de support lui a demandé le numéro de version. Sur cette base, l’équipe a regroupé tous les fichiers du livrable, permettant au développeur d’analyser, de trouver et de corriger le défaut.\nQu’est-ce qui a rendu possible cette activité ?",
+      "enonce": "Un utilisateur a signalé une panne logicielle. Un ingénieur de support lui a demandé le numéro de version. Sur cette base, l’équipe a regroupé tous les fichiers du livrable, permettant au développeur d’analyser, de trouver et de corriger le défaut.\nQu’est-ce qui a rendu possible cette activité ?",
       "choices": [
         "La gestion des risques",
         "Le suivi et contrôle du test",
@@ -598,7 +604,7 @@
     },
     {
       "questionId": 55,
-      "enonce": "Considérez ce rapport d’anomalie pour un Système de Prêt de Livres :\nID anomalie : 001 | Titre : Impossible de rendre un livre\nSévérité : High | Priorité : [vide]\nEnvironnement : Windows 10, Google Chrome\n\nDescription : Lors de l’utilisation de la fonction \"Retour d’un livre\", le système n’enregistre pas le retour et le livre reste emprunté par l’utilisateur.\nÉtapes pour reproduire :\n1) Se connecter au Système de Prêt en tant qu’utilisateur ayant déjà un livre emprunté\n2) Cliquer sur \"Retour\" pour le livre emprunté\n   → Le système n’enregistre pas le retour, le livre reste emprunté.\nRésultat attendu : Le livre doit être rendu et ne plus apparaître comme emprunté.\nRésultat réel : Le livre reste emprunté par l’utilisateur et n’est pas marqué comme retourné.\nPièces jointes : [liste vide]\n\nLequel des éléments suivants aiderait le PLUS le développeur à reproduire rapidement l’échec ?",
+      "enonce": "Considérez ce rapport d’anomalie pour un Système de Prêt de Livres :\n\nID anomalie : 001 | Titre : Impossible de rendre un livre\nSévérité : High | Priorité : [vide]\nEnvironnement : Windows 10, Google Chrome\n\nDescription : Lors de l’utilisation de la fonction \"Retour d’un livre\", le système n’enregistre pas le retour et le livre reste emprunté par l’utilisateur.\nÉtapes pour reproduire :\n1) Se connecter au Système de Prêt en tant qu’utilisateur ayant déjà un livre emprunté\n2) Cliquer sur \"Retour\" pour le livre emprunté\n   → Le système n’enregistre pas le retour, le livre reste emprunté.\nRésultat attendu : Le livre doit être rendu et ne plus apparaître comme emprunté.\nRésultat réel : Le livre reste emprunté par l’utilisateur et n’est pas marqué comme retourné.\nPièces jointes : [liste vide]\n\nLequel des éléments suivants aiderait le plus le développeur à reproduire rapidement l’échec ?",
       "choices": [
         "Ajouter des informations sur quels utilisateurs et quels livres sont concernés dans la section \"Description\"",
         "Renseigner la valeur manquante du champ \"Priorité\"",

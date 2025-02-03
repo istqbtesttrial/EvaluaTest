@@ -59,7 +59,10 @@ async function loadQuestionsFromMultipleJson() {
         for (const dist of distribution) {
             const response = await fetch(dist.file);
             const data = await response.json();
-            // "data.questions" doit exister dans chaptX.json
+            // Si le chapitre définit le format d'enoncé (markdown), on l'applique à toutes les questions
+            if (data.enonceFormat) {
+                data.questions.forEach(q => { q.enonceFormat = data.enonceFormat; });
+            }
             const subset = getRandomQuestions(data.questions, dist.count);
             finalQuestions.push(...subset);
         }
@@ -123,7 +126,12 @@ function displayQuestions(questions) {
 
         // Titre de la question
         const questionTitle = document.createElement('h3');
-        questionTitle.textContent = `Question ${index + 1}: ${q.enonce}`;
+        // Si la question (ou le chapitre) indique que l'enoncé est en Markdown, on utilise marked pour le convertir
+        if (q.enonceFormat && q.enonceFormat === "markdown") {
+            questionTitle.innerHTML = `Question ${index + 1}: ` + marked.parse(q.enonce);
+        } else {
+            questionTitle.textContent = `Question ${index + 1}: ${q.enonce}`;
+        }
         questionDiv.appendChild(questionTitle);
 
         // Ajout des choix (radio)

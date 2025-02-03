@@ -1,6 +1,7 @@
 {
   "chapterId": 4,
   "title": "Chapitre 4",
+  "enonceFormat": "markdown",
   "questions": [
     {
       "questionId": 1,
@@ -70,6 +71,7 @@
     },
     {
       "questionId": 7,
+      "enonceFormat": "markdown",
       "enonce": "Vous testez une machine qui corrige des copies d’examen et attribue des notes. Les résultats sont : de 1 à 49 = F, de 50 à 59 = D-, de 60 à 69 = D, de 70 à 79 = C, de 80 à 89 = B, de 90 à 100 = A.\nSi vous appliquez la partition d’équivalence, combien de cas de test sont nécessaires pour obtenir la couverture de test minimale ?",
       "choices": [
         "6",
@@ -81,7 +83,8 @@
     },
     {
       "questionId": 8,
-      "enonce": "Vous testez un thermostat pour un système de chauffage/climatisation. Les spécifications sont :\n• En dessous de 70°, mettre en marche le chauffage\n• Au-dessus de 75°, mettre en marche la climatisation\n• Entre 70° et 75° inclus, mettre en marche seulement le ventilateur\nQuelle est la liste de valeurs de température minimale pour obtenir 100% de couverture en analyse des valeurs limites à deux valeurs ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous testez un thermostat pour un système de chauffage/climatisation. Les spécifications sont :\n\n- En dessous de 70°, mettre en marche le chauffage\n- Au-dessus de 75°, mettre en marche la climatisation\n- Entre 70° et 75° inclus, mettre en marche seulement le ventilateur\n\nQuelle est la liste de valeurs de température minimale pour obtenir 100% de couverture en analyse des valeurs limites à deux valeurs ?",
       "choices": [
         "70, 75",
         "65, 72, 80",
@@ -114,7 +117,7 @@
     },
     {
       "questionId": 11,
-      "enonce": "Vous créez des cas de test pour la User Story suivante (ATDD) :\nEn tant que propriétaire d’hôtel,\nJe veux réserver toutes les chambres à un étage avant de passer à l’étage suivant,\nAfin de maximiser l’efficacité du personnel d’entretien.\nVous avez identifié les partitions suivantes pour l’occupation d’un étage : 0 | 1 – étage complet | surréservation. Vous voulez également vous assurer que le logiciel est utilisable par le personnel et qu’il détermine rapidement les étages disponibles.\nQuel ordre de priorité devez-vous adopter pour les tests ?",
+      "enonce": "Vous créez des cas de test pour la User Story suivante (ATDD) :\n\nEn tant que propriétaire d’hôtel,\nJe veux réserver toutes les chambres à un étage avant de passer à l’étage suivant,\nAfin de maximiser l’efficacité du personnel d’entretien.\n\nVous avez identifié les partitions suivantes pour l’occupation d’un étage :\n\n- 0\n- 1 – étage complet\n- surréservation\n\nVous voulez également vous assurer que le logiciel est utilisable par le personnel et qu’il détermine rapidement les étages disponibles.\n\nQuel ordre de priorité devez-vous adopter pour les tests ?",
       "choices": [
         "0, 1–étage complet, surréservation, utilisabilité, performance",
         "Performance, 1–étage complet, utilisabilité, surréservation, 0",
@@ -202,7 +205,8 @@
     },
     {
       "questionId": 19,
-      "enonce": "Vous testez un système de pesée qui calcule les coûts d’expédition pour un distributeur régional de pièces auto. Pour des raisons réglementaires, le poids ne peut dépasser 100 livres. Vous voulez inclure l’analyse des valeurs limites (2 valeurs) dans votre conception de test en boîte noire.\nVoici les tranches de poids :\n• 0 à 10 lb → 5,00 $\n• 11 à 25 lb → 7,50 $\n• 26 à 50 lb → 12,00 $\n• 51 à 100 lb → 17,00 $\nCombien de tests devez-vous exécuter pour obtenir 100 % de couverture par analyse de valeurs limites à deux valeurs ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous testez un système de pesée qui calcule les coûts d’expédition pour un distributeur régional de pièces auto. Pour des raisons réglementaires, le poids ne peut dépasser 100 livres. Vous voulez inclure l’analyse des valeurs limites (2 valeurs) dans votre conception de test en boîte noire.\n\nVoici les tranches de poids :\n\n- 0 à 10 lb → 5,00 $\n- 11 à 25 lb → 7,50 $\n- 26 à 50 lb → 12,00 $\n- 51 à 100 lb → 17,00 $\n\nCombien de tests devez-vous exécuter pour obtenir 100 % de couverture par analyse de valeurs limites à deux valeurs ?",
       "choices": [
         "4",
         "8",
@@ -213,6 +217,7 @@
     },
     {
       "questionId": 20,
+      "enonceFormat": "markdown",
       "enonce": "Vous testez un processus e-commerce qui comporte les états et transitions suivants :\n1. Login (invalide) → Login\n2. Login → Recherche\n3. Recherche → Recherche\n4. Recherche → Panier\n5. Panier → Recherche\n6. Panier → Paiement (Checkout)\n7. Paiement → Recherche\n8. Paiement → Déconnexion\n\nDans un diagramme de transitions d’états, combien de transitions doivent être affichées ?",
       "choices": [
         "4",
@@ -224,7 +229,8 @@
     },
     {
       "questionId": 21,
-      "enonce": "Vous avez la User Story suivante (ATDD) :\nEn tant que propriétaire d’hôtel,\nJe veux réserver toutes les chambres à un étage avant de passer à l’étage suivant,\nafin de maximiser l’efficacité du personnel d’entretien.\n\nVous avez appliqué l’analyse des valeurs limites et identifié les partitions : 0 | 1–étage complet | surréservation. Vous voulez aussi vérifier l’utilisabilité et la performance.\nVous avez conçu les cas de test suivants :\n1) Tester avec 1 occupant.\n2) Tester avec l’étage complet et vérifier que l’étage suivant devient disponible.\n3) Tester avec 0 occupants et vérifier que l’étage n’est dispo que si les étages inférieurs sont complets.\n4) Tester l’utilisabilité (personnel).\n5) Tester la performance (80% occupé).\n\nQu’est-ce qui manque ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous avez la User Story suivante (ATDD) :\n\nEn tant que propriétaire d’hôtel,\nJe veux réserver toutes les chambres à un étage avant de passer à l’étage suivant,\nAfin de maximiser l’efficacité du personnel d’entretien.\n\nVous avez appliqué l’analyse des valeurs limites et identifié les partitions :\n\n- 0\n- 1 – étage complet\n- surréservation\n\nVous voulez aussi vérifier l’utilisabilité et la performance.\nVous avez conçu les cas de test suivants :\n1) Tester avec 1 occupant.\n2) Tester avec l’étage complet et vérifier que l’étage suivant devient disponible.\n3) Tester avec 0 occupants et vérifier que l’étage n’est dispo que si les étages inférieurs sont complets.\n4) Tester l’utilisabilité (personnel).\n5) Tester la performance (80% occupé).\n\nQu’est-ce qui manque ?",
       "choices": [
         "Un test avec un étage partiellement occupé mais pas complètement",
         "Un test de performance",
@@ -246,7 +252,8 @@
     },
     {
       "questionId": 23,
-      "enonce": "Vous testez un formulaire de recherche d’appartement simplifié avec deux critères :\n• l’étage (trois options : rez-de-chaussée, premier étage, deuxième ou étage supérieur)\n• le type de jardin (trois options : pas de jardin, petit jardin, grand jardin)\nSeuls les appartements du rez-de-chaussée ont un jardin. Le formulaire a une validation intégrée qui empêche l’utilisation de critères de recherche invalides.\nChaque test comporte deux valeurs d’entrée : l’étage et le type de jardin. Vous voulez appliquer la partition d’équivalence (EP) pour couvrir chaque étage et chaque type de jardin.\nQuel est le nombre minimal de cas de test pour obtenir 100 % de couverture EP ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous testez un formulaire de recherche d’appartement simplifié avec deux critères :\n\n- l’étage (trois options : rez-de-chaussée, premier étage, deuxième ou étage supérieur)\n- le type de jardin (trois options : pas de jardin, petit jardin, grand jardin)\n\nSeuls les appartements du rez-de-chaussée ont un jardin. Le formulaire a une validation intégrée qui empêche l’utilisation de critères de recherche invalides.\nChaque test comporte deux valeurs d’entrée : l’étage et le type de jardin. Vous voulez appliquer la partition d’équivalence (EP) pour couvrir chaque étage et chaque type de jardin.\n\nQuel est le nombre minimal de cas de test pour obtenir 100 % de couverture EP ?",
       "choices": [
         "3",
         "4",
@@ -257,7 +264,8 @@
     },
     {
       "questionId": 24,
-      "enonce": "Vous testez un système qui calcule la note finale pour un étudiant selon les règles suivantes :\n• 0–50 points : échec\n• 51–60 : passable\n• 61–70 : satisfaisant\n• 71–80 : bien\n• 81–90 : très bien\n• 91–100 : excellent\nVous disposez des cas de test suivants :\nFinalResult  | FinalGrade\nTC1 : 91     | excellent\nTC2 : 50     | échec\nTC3 : 81     | très bien\nTC4 : 60     | passable\nTC5 : 70     | satisfaisant\nTC6 : 80     | bien\n\nQuel est le pourcentage de couverture BVA (2 valeurs) pour FinalResult obtenu avec ces cas de test ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous testez un système qui calcule la note finale pour un étudiant selon les règles suivantes:\n\n- 0–50 points : échec\n- 51–60 : passable\n- 61–70 : satisfaisant\n- 71–80 : bien\n- 81–90 : très bien\n- 91–100 : excellent\n\nVous disposez des cas de test suivants:\n\n| FinalResult | FinalGrade   |\n| ----------- | ------------ |\n| TC1 : 91   | excellent    |\n| TC2 : 50   | échec        |\n| TC3 : 81   | très bien    |\n| TC4 : 60   | passable     |\n| TC5 : 70   | satisfaisant |\n| TC6 : 80   | bien         |\n\nQuel est le pourcentage de couverture BVA (2 valeurs) pour FinalResult obtenu avec ces cas de test ?",
       "choices": [
         "50%",
         "60%",
@@ -312,7 +320,7 @@
     },
     {
       "questionId": 29,
-      "enonce": "Laquelle des propositions suivantes décrit LE MIEUX la manière de documenter les critères d’acceptation ?",
+      "enonce": "Laquelle des propositions suivantes décrit LE MIEU la manière de documenter les critères d’acceptation ?",
       "choices": [
         "Réaliser des rétrospectives pour déterminer les besoins réels des parties prenantes pour une User Story donnée",
         "Utiliser le format given/when/then pour décrire un exemple de condition de test liée à une User Story donnée",
@@ -323,7 +331,8 @@
     },
     {
       "questionId": 30,
-      "enonce": "Considérez la User Story suivante :\nEn tant qu’Éditeur,\nJe veux réviser le contenu avant qu’il ne soit publié,\nafin de m’assurer que la grammaire est correcte.\n\nEt ses critères d’acceptation :\n• L’utilisateur peut se connecter avec le rôle \"Éditeur\"\n• L’éditeur peut visualiser les pages de contenu existantes\n• L’éditeur peut modifier le contenu de la page\n• L’éditeur peut ajouter des commentaires de balisage\n• L’éditeur peut enregistrer les modifications\n• L’éditeur peut réattribuer au rôle \"propriétaire du contenu\" pour effectuer des mises à jour\n\nLequel des éléments suivants est le MEILLEUR exemple de test ATDD pour cette User Story ?",
+      "enonceFormat": "markdown",
+      "enonce": "Considérez la User Story suivante :\n\nEn tant qu’Éditeur,\nJe veux réviser le contenu avant qu’il ne soit publié,\nafin de m’assurer que la grammaire est correcte.\n\nEt ses critères d’acceptation :\n\n- L’utilisateur peut se connecter avec le rôle \"Éditeur\"\n- L’éditeur peut visualiser les pages de contenu existantes\n- L’éditeur peut modifier le contenu de la page\n- L’éditeur peut ajouter des commentaires de balisage\n- L’éditeur peut enregistrer les modifications\n- L’éditeur peut réattribuer au rôle \"propriétaire du contenu\" pour effectuer des mises à jour\n\nLequel des éléments suivants est le MEILLEUR exemple de test ATDD pour cette User Story ?",
       "choices": [
         "Tester si l’éditeur peut enregistrer le document après avoir modifié la page",
         "Tester si le propriétaire du contenu peut se connecter et mettre à jour le contenu",
@@ -334,6 +343,7 @@
     },
     {
       "questionId": 31,
+      "enonceFormat": "markdown",
       "enonce": "Un système de stockage de vin utilise un dispositif de contrôle qui mesure la température de la cave (T, en °C, arrondie), et alerte si elle s’écarte de 12, selon :\n• si T=12 : \"température optimale\"\n• si T<12 : \"température trop basse\"\n• si T>12 : \"température trop élevée\"\nVous voulez utiliser l’analyse des valeurs limites en 3 points (3-point BVA). Un test en entrée est la température (°C) fournie par l’appareil.\nQuel est l’ensemble MINIMAL d’entrées de test pour couvrir 100 % de la couverture visée ?",
       "choices": [
         "11, 12, 13",
@@ -427,7 +437,7 @@
         "X = nombre d’issues de décision exercées, Y = total des issues de décision dans le code",
         "X = nombre de branches conditionnelles exercées, Y = nombre total de branches dans le code",
         "X = nombre de branches exercées, Y = nombre total de branches dans le code",
-        "X = nombre de branches conditionnelles exercées, Y = nombre total de issues de décision dans le code"
+        "X = nombre de branches conditionnelles exercées, Y = nombre total d’issues de décision dans le code"
       ],
       "correctIndex": 2
     },
@@ -444,7 +454,8 @@
     },
     {
       "questionId": 41,
-      "enonce": "Considérez les critères d’acceptation d’une User Story rédigés ainsi :\nÉtant donné que l’utilisateur est connecté et sur la page d’accueil,\nQuand l’utilisateur clique sur le bouton \"Ajouter un article\",\nAlors le formulaire \"Créer un article\" doit apparaître,\nEt l’utilisateur doit pouvoir saisir un nom et un prix pour le nouvel article.\n\nSous quel format sont rédigés ces critères d’acceptation ?",
+      "enonceFormat": "markdown",
+      "enonce": "Considérez les critères d’acceptation d’une User Story rédigés ainsi :\n\nÉtant donné que l’utilisateur est connecté et sur la page d’accueil,\nQuand l’utilisateur clique sur le bouton \"Ajouter un article\",\nAlors le formulaire \"Créer un article\" doit apparaître,\nEt l’utilisateur doit pouvoir saisir un nom et un prix pour le nouvel article.\n\nSous quel format sont rédigés ces critères d’acceptation ?",
       "choices": [
         "Basé sur les règles",
         "Orienté scénario",
@@ -455,7 +466,7 @@
     },
     {
       "questionId": 42,
-      "enonce": "Votre équipe analyse la User Story suivante afin d’en définir les critères d’acceptation :\nEn tant que client enregistré, je veux voir mes commandes précédentes sur le site de la société, afin de suivre mes achats.\nLequel des cas de test ci-dessous ne relève PAS de cette User Story ?",
+      "enonce": "Votre équipe analyse la User Story suivante afin d’en définir les critères d’acceptation :\n\nEn tant que client enregistré, je veux voir mes commandes précédentes sur le site de la société, afin de suivre mes achats.\n\nLequel des cas de test ci-dessous ne relève PAS de cette User Story ?",
       "choices": [
         "Entrée : le client se connecte et clique sur « voir l’historique des commandes »\nSortie attendue : le système affiche la liste de toutes les commandes précédentes, avec date, numéro de commande, coût total",
         "Entrée : le client clique sur une commande de la liste\nSortie attendue : le système affiche les articles, leur prix et quantité",
@@ -488,7 +499,8 @@
     },
     {
       "questionId": 45,
-      "enonce": "Un développeur doit implémenter la règle métier suivante :\nENTRÉE : valeur (entier)\nSI (valeur ≤100 OU valeur ≥200) ALORS \"valeur incorrecte\"\nSINON \"valeur correcte\"\nVous concevez les cas de test via l’analyse des valeurs limites à deux valeurs (2VBVA). Quel ensemble d’entrées de test obtient la meilleure couverture ?",
+      "enonceFormat": "markdown",
+      "enonce": "Un développeur doit implémenter la règle suivante :\nEntrée : valeur (entier)\nSI (valeur ≤ 100 OU valeur ≥ 200) ALORS \"valeur incorrecte\"\nSINON \"valeur correcte\".\nVous concevez les cas de test via l’analyse des valeurs limites (2VBVA). Quel ensemble d’entrées de test obtient la meilleure couverture ?",
       "choices": [
         "100, 150, 200, 201",
         "99, 100, 200, 201",
@@ -503,14 +515,15 @@
       "choices": [
         "Les mesures de couverture en boîte blanche peuvent aider les testeurs à évaluer les tests boîte noire en termes de couverture du code atteinte par ces tests",
         "L’analyse de la couverture en boîte blanche peut aider à identifier des fragments de code inaccessibles",
-        "La couverture par branches englobe les techniques de test boîte noire, donc avoir 100% de couverture des branches garantit la couverture totale de tout test en boîte noire",
-        "Les techniques de test en boîte blanche peuvent fournir des éléments de couverture pour des techniques boîte noire"
+        "La couverture par branches englobe les techniques boîte noire, donc 100% branches = 100% de toute technique boîte noire",
+        "Les techniques boîte blanche peuvent fournir des éléments de couverture pour les techniques boîte noire"
       ],
       "correctIndex": 0
     },
     {
       "questionId": 47,
-      "enonce": "Examinez la liste suivante :\n• Entrée correcte non acceptée\n• Entrée incorrecte acceptée\n• Format de sortie erroné\n• Division par zéro\n\nQuelle technique de test le testeur utilise-t-il probablement lorsqu’il emploie cette liste ?",
+      "enonceFormat": "markdown",
+      "enonce": "Examinez la liste suivante :\n\n- Entrée correcte non acceptée\n- Entrée incorrecte acceptée\n- Format de sortie erroné\n- Division par zéro\n\nQuelle technique de test le testeur utilise-t-il probablement lorsqu’il emploie cette liste ?",
       "choices": [
         "Tests exploratoires",
         "Attaque par défauts (fault attack)",
@@ -523,9 +536,9 @@
       "questionId": 48,
       "enonce": "Laquelle des propositions suivantes décrit LE MIEUX comment l’utilisation de tests basés sur une checklist peut augmenter la couverture ?",
       "choices": [
-        "Les items de la checklist peuvent être définis à un niveau de détail suffisamment fin pour que le testeur implémente et exécute des tests détaillés basés sur ces items",
+        "Les items de la checklist peuvent être définis à un niveau de détail suffisamment fin pour que le testeur implémente et exécute des cas de test détaillés basés sur ces items",
         "Les checklists peuvent être automatisées, donc chaque exécution de test automatisé couvre les items de la checklist, entraînant une couverture supplémentaire",
-        "Chaque item de la checklist doit être testé séparément et indépendamment, ainsi ces éléments couvrent différentes zones du logiciel",
+        "Chaque item de checklist doit être testé séparément et indépendamment, ainsi ces éléments couvrent différentes zones du logiciel",
         "Deux testeurs concevant et exécutant des tests à partir des mêmes items de checklist à haut niveau testeront probablement le logiciel de manières légèrement différentes"
       ],
       "correctIndex": 3
@@ -537,23 +550,25 @@
         "L’application doit permettre aux utilisateurs de supprimer leur compte et toutes leurs données associées sur demande",
         "Lorsqu’un client ajoute un article à son panier et procède au paiement, il doit être invité à se connecter ou à créer un compte s’il n’en a pas déjà un",
         "IF (contain(product(23).Name, cart.products())) THEN return FALSE",
-        "Le site doit respecter la norme d’accessibilité 508 ICT et être utilisable par les personnes handicapées"
+        "Le site doit respecter la norme 508 ICT pour l’accessibilité"
       ],
       "correctIndex": 1
     },
     {
       "questionId": 50,
-      "enonce": "Vous utilisez ATDD pour concevoir des tests à partir de cette User Story :\nEn tant qu’utilisateur Régulier ou Spécial, je veux pouvoir utiliser ma carte d’étage électronique pour accéder à des étages spécifiques.\n\nCritères d’acceptation :\nAC1 : Les utilisateurs Réguliers ont accès aux étages 1 à 3\nAC2 : L’étage 4 est accessible uniquement aux utilisateurs Spéciaux\nAC3 : Les utilisateurs Spéciaux ont tous les droits d’accès des utilisateurs Réguliers\n\nQuel cas de test est le plus raisonnable pour tester AC3 ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous utilisez ATDD pour concevoir des tests à partir de cette User Story :\n\nEn tant qu’utilisateur Régulier ou Spécial, je veux pouvoir utiliser ma carte d’étage électronique pour accéder à des étages spécifiques.\n\nCritères d’acceptation :\n\n- AC1 : Les utilisateurs Réguliers ont accès aux étages 1 à 3\n- AC2 : L’étage 4 est accessible uniquement aux utilisateurs Spéciaux\n- AC3 : Les utilisateurs Spéciaux ont tous les droits d’accès des utilisateurs Réguliers\n\nQuel cas de test est le plus raisonnable pour tester AC3 ?",
       "choices": [
         "Vérifier qu’un utilisateur Régulier peut accéder aux étages 1 et 3",
         "Vérifier qu’un utilisateur Régulier ne peut pas accéder à l’étage 4",
-        "Vérifier qu’un utilisateur Spécial peut accéder à l’étage 5",
+        "Vérifier qu’un utilisateur Spécial peut accéder à un étage 5",
         "Vérifier qu’un utilisateur Spécial peut accéder aux étages 1, 2 et 3"
       ],
       "correctIndex": 3
     },
     {
       "questionId": 51,
+      "enonceFormat": "markdown",
       "enonce": "Quelle est la PRINCIPALE différence entre les techniques de test boîte noire et celles basées sur l’expérience ?",
       "choices": [
         "L’objet de test",
@@ -565,7 +580,8 @@
     },
     {
       "questionId": 52,
-      "enonce": "Vous testez un validateur de code PIN qui accepte les PIN valides et rejette les PIN invalides. Un PIN est une suite de chiffres. Un PIN est valide s’il contient 4 chiffres et au moins deux chiffres différents. Lequel des ensembles de données couvre toutes les partitions d’équivalence pour ce scénario ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous testez un validateur de code PIN qui accepte les PIN valides et rejette les PIN invalides. Un PIN est une suite de chiffres. Un PIN est valide s’il contient 4 chiffres et au moins deux chiffres différents.\n\nLequel des ensembles de données couvre toutes les partitions d’équivalence pour ce scénario ?",
       "choices": [
         "112, 1111, 1234, 123456",
         "1, 123, 1111, 1234",
@@ -576,7 +592,8 @@
     },
     {
       "questionId": 53,
-      "enonce": "Un développeur doit implémenter la règle suivante :\nEntrée : valeur (entier)\nSI (valeur ≤ 100 OU valeur ≥ 200) ALORS \"valeur incorrecte\"\nSINON \"valeur correcte\".\nVous concevez les cas de test via l’analyse des valeurs limites (2VBVA). Quel ensemble d’entrées de test atteint la meilleure couverture ?",
+      "enonceFormat": "markdown",
+      "enonce": "Un développeur doit implémenter la règle suivante :\n\nEntrée : valeur (entier)\nSI (valeur ≤ 100 OU valeur ≥ 200) ALORS \"valeur incorrecte\"\nSINON \"valeur correcte\".\n\nVous concevez les cas de test via l’analyse des valeurs limites (2VBVA). Quel ensemble d’entrées de test atteint la meilleure couverture ?",
       "choices": [
         "100, 150, 200, 201",
         "99, 100, 200, 201",
@@ -587,9 +604,10 @@
     },
     {
       "questionId": 54,
+      "enonceFormat": "markdown",
       "enonce": "Comment les tests boîte blanche peuvent-ils aider à soutenir les tests en boîte noire ?",
       "choices": [
-        "Les mesures de couverture en boîte blanche peuvent aider à évaluer la couverture du code atteinte par les tests boîte noire",
+        "Les mesures de couverture en boîte blanche peuvent aider les testeurs à évaluer la couverture du code atteinte par les tests boîte noire",
         "L’analyse de la couverture en boîte blanche peut révéler des fragments de code inaccessibles",
         "La couverture par branches englobe les techniques boîte noire, donc 100% branches = 100% de toute technique boîte noire",
         "Les techniques boîte blanche peuvent fournir des éléments de couverture pour les techniques boîte noire"
@@ -598,7 +616,8 @@
     },
     {
       "questionId": 55,
-      "enonce": "Considérez la liste :\n• Entrée correcte non acceptée\n• Entrée incorrecte acceptée\n• Format de sortie erroné\n• Division par zéro\n\nQuelle technique de test est probablement utilisée lorsqu’un testeur emploie cette liste ?",
+      "enonceFormat": "markdown",
+      "enonce": "Considérez la liste :\n\n- Entrée correcte non acceptée\n- Entrée incorrecte acceptée\n- Format de sortie erroné\n- Division par zéro\n\nQuelle technique de test est probablement utilisée lorsqu’un testeur emploie cette liste ?",
       "choices": [
         "Test exploratoire",
         "Attaque par défauts (fault attack)",
@@ -609,7 +628,8 @@
     },
     {
       "questionId": 56,
-      "enonce": "Comment l’utilisation de tests basés sur une checklist peut-elle accroître la couverture ?",
+      "enonceFormat": "markdown",
+      "enonce": "Comment l’utilisation de tests basés sur une checklist peut-elle accroître la couverture ?\n\n- Les éléments de la checklist peuvent être définis de façon assez détaillée pour que le testeur conçoive et exécute des cas de test précis\n- Les checklists sont automatisables, donc chaque exécution automatisée entraîne plus de couverture\n- Chaque élément de checklist doit être testé indépendamment, et ces éléments couvrent divers domaines du logiciel\n- Si deux testeurs conçoivent et exécutent des tests à partir de la même checklist de haut niveau, ils testeront souvent différemment",
       "choices": [
         "Les éléments de la checklist peuvent être définis de façon assez détaillée pour que le testeur conçoive et exécute des cas de test précis",
         "Les checklists sont automatisables, donc chaque exécution automatisée entraîne plus de couverture",
@@ -620,10 +640,11 @@
     },
     {
       "questionId": 57,
+      "enonceFormat": "markdown",
       "enonce": "Lequel des exemples suivants illustre le MIEUX un critère d’acceptation orienté scénario ?",
       "choices": [
         "L’application doit permettre aux utilisateurs de supprimer leur compte et leurs données",
-        "Lorsqu’un client ajoute un article à son panier et passe au paiement, il doit se connecter ou créer un compte s’il n’en a pas déjà un",
+        "Lorsqu’un client ajoute un article à son panier et passe au paiement, il doit être invité à se connecter ou à créer un compte s’il n’en a pas déjà un",
         "IF (contain(product(23).Name, cart.products())) THEN return FALSE",
         "Le site doit respecter la norme 508 ICT pour l’accessibilité"
       ],
@@ -631,7 +652,8 @@
     },
     {
       "questionId": 58,
-      "enonce": "Vous concevez des tests par ATDD à partir de la User Story :\nEn tant qu’utilisateur Régulier ou Spécial, je veux utiliser ma carte d’étage électronique pour accéder à certains étages.\nCritères d’acceptation :\n• AC1 : Les utilisateurs Réguliers ont accès aux étages 1–3\n• AC2 : L’étage 4 est seulement accessible aux utilisateurs Spéciaux\n• AC3 : Les utilisateurs Spéciaux ont tous les droits des utilisateurs Réguliers\n\nQuel cas de test est le plus pertinent pour tester AC3 ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous concevez des tests par ATDD à partir de la User Story :\n\nEn tant qu’utilisateur Régulier ou Spécial, je veux utiliser ma carte d’étage électronique pour accéder à certains étages.\n\nCritères d’acceptation :\n\n- AC1 : Les utilisateurs Réguliers ont accès aux étages 1–3\n- AC2 : L’étage 4 est seulement accessible aux utilisateurs Spéciaux\n- AC3 : Les utilisateurs Spéciaux ont tous les droits des utilisateurs Réguliers\n\nQuel cas de test est le plus pertinent pour tester AC3 ?",
       "choices": [
         "Vérifier qu’un utilisateur Régulier peut accéder aux étages 1 et 3",
         "Vérifier qu’un utilisateur Régulier ne peut pas accéder à l’étage 4",
@@ -642,7 +664,8 @@
     },
     {
       "questionId": 59,
-      "enonce": "Vous exécutez des tests système sur une application e-commerce avec la règle suivante :\n« Si le total des achats dépasse 100 $, le client bénéficie d’une remise de 5% sur les achats ultérieurs. Sinon, pas de remise. »\nQuelles techniques de test seront LES PLUS utiles pour concevoir des cas de test à partir de cette exigence ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous exécutez des tests système sur une application e-commerce avec la règle suivante :\n\n« Si le total des achats dépasse 100 $, le client bénéficie d’une remise de 5% sur les achats ultérieurs. Sinon, pas de remise. »\n\nQuelles techniques de test seront LES PLUS utiles pour concevoir des cas de test à partir de cette exigence ?",
       "choices": [
         "Techniques boîte blanche (white-box)",
         "Techniques boîte noire (black-box)",
@@ -653,7 +676,8 @@
     },
     {
       "questionId": 60,
-      "enonce": "Vous testez un système de régulation de température pour une chambre froide horticole. La température, arrondie au degré Celsius, est l’entrée. Si la température est entre 0 et 2 inclus, le système affiche « température OK ». En dessous de 0 : « température trop basse ». Au-dessus de 2 : « température trop élevée ».\nAvec une analyse des valeurs limites à deux valeurs (2VBVA), quel ensemble d’entrées apporte la meilleure couverture de limites ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous testez un système de régulation de température pour une chambre froide horticole. La température, arrondie au degré Celsius, est l’entrée. Si la température est entre 0 et 2 inclus, le système affiche « température OK ». En dessous de 0 : « température trop basse ». Au-dessus de 2 : « température trop élevée ».\n\nAvec une analyse des valeurs limites à deux valeurs (2VBVA), quel ensemble d’entrées apporte la meilleure couverture de limites ?",
       "choices": [
         "-1, 3",
         "0, 2",
@@ -664,7 +688,8 @@
     },
     {
       "questionId": 61,
-      "enonce": "Votre suite de tests S pour un programme P atteint 100% de couverture des instructions. Elle se compose de trois tests, chacun obtenant 50% de couverture. Laquelle des affirmations suivantes est CORRECTE ?",
+      "enonceFormat": "markdown",
+      "enonce": "Votre suite de tests S pour un programme P atteint 100% de couverture des instructions. Elle se compose de trois tests, chacun obtenant 50% de couverture.\n\nLaquelle des affirmations suivantes est CORRECTE ?",
       "choices": [
         "Exécuter S provoquera toutes les pannes possibles de P",
         "S atteint 100% de couverture des branches pour P",
@@ -675,6 +700,7 @@
     },
     {
       "questionId": 62,
+      "enonceFormat": "markdown",
       "enonce": "Pourquoi les tests en boîte blanche facilitent-ils la détection de défauts même si la spécification est vague, obsolète ou incomplète ?",
       "choices": [
         "Parce que les cas de test sont conçus à partir de la structure de l’objet de test plutôt que de la spécification",
@@ -686,6 +712,7 @@
     },
     {
       "questionId": 63,
+      "enonceFormat": "markdown",
       "enonce": "Laquelle des options suivantes n’est PAS anticipée par le testeur lors de l’application de l’estimation d’erreurs (error guessing) ?",
       "choices": [
         "Le développeur a mal compris la formule décrite dans la User Story pour calculer les intérêts",
@@ -697,6 +724,7 @@
     },
     {
       "questionId": 64,
+      "enonceFormat": "markdown",
       "enonce": "Laquelle des affirmations suivantes est vraie à propos des tests exploratoires ?",
       "choices": [
         "Les cas de test sont conçus avant le début de la session exploratoire",
@@ -708,6 +736,7 @@
     },
     {
       "questionId": 65,
+      "enonceFormat": "markdown",
       "enonce": "Quelle pratique collaborative dans l’écriture de User Stories permet à l’équipe d’avoir une compréhension commune de ce qui doit être livré ?",
       "choices": [
         "Le planning poker, pour que l’équipe s’aligne sur l’effort nécessaire à implémenter une User Story",
@@ -719,7 +748,8 @@
     },
     {
       "questionId": 66,
-      "enonce": "Vous commencez la conception de tests pour la User Story suivante :\nEn tant que client,\nJe veux filtrer les résultats de recherche par fourchette de prix,\nafin de trouver plus facilement des produits dans mon budget.\n\nCritères d’acceptation :\n1) Le filtre doit fonctionner pour toutes les versions 3.0 et supérieures\n2) Le filtre doit permettre au client de définir un prix minimum et maximum\n3) Les résultats de recherche doivent se mettre à jour dynamiquement au fur et à mesure du réglage du filtre\n\nEn précondition, il n’y a que deux produits en stock : A à 100 $ et B à 110 $.\nLequel des cas de test ci-dessous illustre LE MIEUX un test pour cette User Story ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous commencez la conception de tests pour la User Story suivante :\n\nEn tant que client,\nJe veux filtrer les résultats de recherche par fourchette de prix,\nafin de trouver plus facilement des produits dans mon budget.\n\nCritères d’acceptation :\n\n1) Le filtre doit fonctionner pour toutes les versions 3.0 et supérieures\n2) Le filtre doit permettre au client de définir un prix minimum et maximum\n3) Les résultats de recherche doivent se mettre à jour dynamiquement au fur et à mesure du réglage du filtre\n\nEn précondition, il n’y a que deux produits en stock : A à 100 $ et B à 110 $.\n\nLequel des cas de test ci-dessous illustre LE MIEUX un test pour cette User Story ?",
       "choices": [
         "Entrer la page, définir le filtre 90–100, résultat : A seulement. Puis max = 110, résultat : A et B",
         "Entrer la page. Résultat : min et max par défaut sont 100 et 110. Ajouter un produit C à 120 $. Rafraîchir la page. Résultat : max = 120",

@@ -1,6 +1,7 @@
 {
   "chapterId": 1,
   "title": "Chapitre 1",
+  "enonceFormat": "markdown",
   "questions": [
     {
       "questionId": 1,
@@ -235,7 +236,8 @@
     },
     {
       "questionId": 22,
-      "enonce": "Parmi les compétences (i-v) ci-dessous, lesquelles sont LES PLUS importantes pour un testeur ?\n i. Connaissance du domaine\n ii. Créer une vision de produit\n iii. Être un bon membre d'équipe\n iv. Planifier et organiser le travail de l'équipe\n v. Pensée critique",
+      "enonce": "Parmi les compétences suivantes, lesquelles sont **LES PLUS importantes** pour un testeur ?\n\n**Compétences :**\n\n1. Connaissance du domaine\n2. Créer une vision de produit\n3. Être un bon membre d'équipe\n4. Planifier et organiser le travail de l'équipe\n5. Pensée critique",
+      "enonceFormat": "markdown",
       "choices": [
         "ii et iv sont importantes",
         "i, iii et v sont importantes",
@@ -290,7 +292,8 @@
     },
     {
       "questionId": 27,
-      "enonce": "Considérez le testware suivant :\n\nTest Charter #04.018\nDurée de session : 1h\nPérimètre : Page d’inscription\nAvec : Différents jeux de données d’entrée incorrectes\nObjectif : Découvrir les défauts liés à l’acceptation du processus d’inscription avec des données incorrectes.\n\nQuelle activité de test produit ce testware en tant que livrable ?",
+      "enonce": "Considérez le testware suivant :\n\n**Testware :**\n\n| Attribut         | Valeur                                                    |\n| ---------------- | --------------------------------------------------------- |\n| Test Charter     | #04.018                                                  |\n| Durée de session | 1h                                                       |\n| Périmètre        | Page d’inscription                                       |\n| Avec             | Différents jeux de données d’entrée incorrectes          |\n| Objectif         | Découvrir les défauts liés à l’acceptation du processus d’inscription avec des données incorrectes |\n\nQuelle activité de test produit ce testware en tant que livrable ?",
+      "enonceFormat": "markdown",
       "choices": [
         "La planification du test (test planning)",
         "Le suivi et contrôle du test (test monitoring and control)",
@@ -315,7 +318,7 @@
       "enonce": "Laquelle des affirmations suivantes décrit LE MIEUX un avantage de l'indépendance des tests ?",
       "choices": [
         "Le recours à une équipe de test indépendante permet à la direction du projet d’attribuer à cette équipe la responsabilité de la qualité du produit final",
-        "Si l'on peut se permettre une équipe de test externe à l'organisation, elle ne sera pas influencée par les contraintes de livraison et par les délais stricts",
+        "C'est correct. Ces noms peuvent être utilisés de manière interchangeable car les tests et l'AQ se concentrent sur les mêmes problématiques de qualité",
         "Une équipe de test indépendante peut travailler séparément des développeurs, sans être distraite par les changements de spécifications, et limiter les échanges à la déclaration des défauts",
         "Lorsqu'il y a des ambiguïtés dans les spécifications, un testeur indépendant peut être utile pour remettre en question les hypothèses et l'interprétation faite par le développeur"
       ],
@@ -444,7 +447,8 @@
     },
     {
       "questionId": 41,
-      "enonce": "Étant donné le testware suivant :\n1. Éléments de couverture\n2. Demandes de changement\n3. Planning (ordre) d'exécution des tests\n4. Conditions de test priorisées\nEt les activités de test suivantes :\nA. Analyse du test\nB. Conception du test\nC. Implémentation du test\nD. Clôture du test\nLaquelle des propositions illustre le MIEUX le testware produit par chaque activité ?",
+      "enonce": "Étant donné le testware suivant :\n\n**Testware :**\n\n1. **Éléments de couverture**\n2. **Demandes de changement**\n3. **Planning (ordre) d'exécution des tests**\n4. **Conditions de test priorisées**\n\n**Activités de test :**\n\n**A. Analyse du test**\n**B. Conception du test**\n**C. Implémentation du test**\n**D. Clôture du test**\n\n**Question :**\nLaquelle des propositions illustre le MIEUX le testware produit par chaque activité ?",
+      "enonceFormat": "markdown",
       "choices": [
         "1B, 2A, 3D, 4C",
         "1B, 2D, 3A, 4C",
@@ -521,18 +525,20 @@
     },
     {
       "questionId": 48,
-      "enonce": "Considérez les tâches de test suivantes :\n1. Dériver des cas de test à partir des conditions de test\n2. Identifier le testware réutilisable\n3. Organiser les cas de test en procédures de test\n4. Évaluer la base de tests et l'objet de test\nEt les activités de test suivantes :\nA. Analyse du test\nB. Conception du test\nC. Implémentation du test\nD. Clôture du test\nLaquelle des correspondances suivantes décrit LE MIEUX le testware produit par ces tâches ?",
+      "enonce": "Considérez les tâches de test suivantes :\n\n**Tâches de test :**\n\n| Numéro | Tâche |\n| ------ | ----- |\n| 1      | Dériver des cas de test à partir des conditions de test |\n| 2      | Identifier le testware réutilisable |\n| 3      | Organiser les cas de test en procédures de test |\n| 4      | Évaluer la base de tests et l'objet de test |\n\n**Activités de test :**\n\n| Lettre | Activité                  |\n| ------ | ------------------------- |\n| A      | Analyse du test           |\n| B      | Conception du test        |\n| C      | Implémentation du test    |\n| D      | Clôture du test           |\n\nLaquelle des correspondances suivantes décrit LE MIEUX le testware produit par ces tâches ?",
+      "enonceFormat": "markdown",
       "choices": [
         "1B, 2A, 3D, 4C",
-        "1B, 2D, 3C, 4A",
-        "1C, 2A, 3B, 4D",
-        "1C, 2D, 3A, 4B"
+        "1B, 2D, 3A, 4C",
+        "1D, 2C, 3A, 4B",
+        "1D, 2C, 3B, 4A"
       ],
       "correctIndex": 1
     },
     {
       "questionId": 49,
-      "enonce": "Étant donné le testware suivant :\ni. Rapport de clôture de test\nii. Données conservées dans une base de données, utilisées comme entrées de test et résultats attendus\niii. Liste des éléments nécessaires pour construire l'environnement de test\niv. Séquences documentées de cas de test dans leur ordre d'exécution\nv. Cas de test\nLequel des ensembles suivants correspond LE MIEUX au testware produit lors de l'implémentation du test ?",
+      "enonce": "Étant donné le testware suivant :\n\n**Testware :**\n\n| Numéro | Contenu |\n| ------ | ------- |\n| i      | Rapport de clôture de test |\n| ii     | Données conservées dans une base de données, utilisées comme entrées de test et résultats attendus |\n| iii    | Liste des éléments nécessaires pour construire l'environnement de test |\n| iv     | Séquences documentées de cas de test dans leur ordre d'exécution |\n| v      | Cas de test |\n\nLequel des ensembles suivants correspond LE MIEUX au testware produit lors de l'implémentation du test ?",
+      "enonceFormat": "markdown",
       "choices": [
         "ii, iv",
         "iii, v",
@@ -565,7 +571,8 @@
     },
     {
       "questionId": 52,
-      "enonce": "Étant donné les avantages et inconvénients suivants liés à l'indépendance des tests :\ni. Les testeurs travaillent dans un lieu différent de celui des développeurs\nii. Les testeurs remettent en question les hypothèses faites par les programmeurs lors de l'écriture du code\niii. Une dynamique conflictuelle s'est établie entre testeurs et développeurs\niv. Les développeurs se sont convaincus que la qualité relève principalement des testeurs\nv. Les testeurs ont des biais différents de ceux des développeurs\nLesquels sont LES PLUS susceptibles d’être considérés comme des avantages ?",
+      "enonce": "Étant donné les avantages et inconvénients suivants liés à l'indépendance des tests :\n\n- i. Les testeurs travaillent dans un lieu différent de celui des développeurs\n- ii. Les testeurs remettent en question les hypothèses faites par les programmeurs lors de l'écriture du code\n- iii. Une dynamique conflictuelle s'est établie entre testeurs et développeurs\n- iv. Les développeurs se sont convaincus que la qualité relève principalement des testeurs\n- v. Les testeurs ont des biais différents de ceux des développeurs\n\nLesquels sont LES PLUS susceptibles d’être considérés comme des avantages ?",
+      "enonceFormat": "markdown",
       "choices": [
         "i, iv",
         "ii, v",

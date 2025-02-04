@@ -1,6 +1,7 @@
 {
   "chapterId": 6,
   "title": "Chapitre 6",
+  "enonceFormat": "markdown",
   "questions": [
     {
       "questionId": 1,
@@ -70,6 +71,7 @@
     },
     {
       "questionId": 7,
+      "enonceFormat": "markdown",
       "enonce": "Étant donné les descriptions suivantes :\n1. Supporter le suivi du flux de travail\n2. Faciliter la communication\n3. Machines virtuelles\n4. Soutenir les revues\n\nEt les catégories d’outils suivantes :\nA. Outils de test statique\nB. Outils de support de la scalabilité et de la standardisation du déploiement\nC. Outils DevOps\nD. Outils de collaboration\n\nLequel des appariements suivants décrit LE MIEUX ces descriptions et catégories ?",
       "choices": [
         "1A, 2B, 3C, 4D",
@@ -81,7 +83,7 @@
     },
     {
       "questionId": 8,
-      "enonce": "Lequel des énoncés suivants est le PLUS susceptible d’être un avantage de l’automatisation des tests ?",
+      "enonce": "Lequel des énoncés suivants est le PLUS susceptible d’être un avantage de l’automatisation des tests ?",
       "choices": [
         "Il fournit des mesures de couverture trop complexes pour que l’humain puisse les déduire",
         "Il partage la responsabilité du test avec le fournisseur de l’outil",
@@ -92,7 +94,7 @@
     },
     {
       "questionId": 9,
-      "enonce": "Les outils de quelle catégorie aident à organiser les cas de test, les défauts détectés et la gestion de configuration ?",
+      "enonce": "Les outils de quelle catégorie aident à organiser les cas de test, les défauts détectés et la gestion de configuration ?",
       "choices": [
         "Les outils d’exécution et de couverture",
         "Les outils de conception et d’implémentation des tests",
@@ -103,7 +105,7 @@
     },
     {
       "questionId": 10,
-      "enonce": "Lequel des énoncés suivants est LE PLUS susceptible d’être un avantage de l’automatisation des tests ?",
+      "enonce": "Lequel des énoncés suivants est LE PLUS susceptible d’être un avantage de l’automatisation des tests ?",
       "choices": [
         "La possibilité de générer des cas de test sans accès à la base de tests",
         "La réalisation d’une couverture accrue via une évaluation plus objective",

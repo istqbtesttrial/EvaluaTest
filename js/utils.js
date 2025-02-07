@@ -5,8 +5,7 @@
  ********************************************/
 
 /**
- * Mélange le contenu d'un tableau (in place),
- * en utilisant l'algorithme de Fisher-Yates.
+ * Mélange le contenu d'un tableau (in place) via l'algorithme de Fisher-Yates.
  */
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -26,7 +25,7 @@ function getRandomQuestions(questions, n) {
 }
 
 /**
- * Calcule le score de l'utilisateur (nombre de réponses justes).
+ * Calcule le score de l'utilisateur en comptant les réponses justes.
  */
 function calculateScore(selectedQuestions) {
     let score = 0;
@@ -40,8 +39,8 @@ function calculateScore(selectedQuestions) {
 }
 
 /**
- * Extrait la réponse choisie par l'utilisateur (index)
- * pour une question donnée, en scrutant le DOM (radio).
+ * Récupère la réponse choisie par l'utilisateur pour une question donnée,
+ * en scannant les boutons radio dont le nom est basé sur questionId.
  */
 function getUserAnswer(questionId) {
     const radios = document.getElementsByName(`question-${questionId}`);
@@ -54,9 +53,7 @@ function getUserAnswer(questionId) {
 }
 
 /**
- * Sélectionne aléatoirement un certain nombre de questions
- * par chapitre (si vous avez besoin d'une répartition).
- * (Facultatif si vous n'utilisez plus de distribution via un tableau 'chapters'.)
+ * (Optionnel) Fonction pour sélectionner des questions par chapitre si besoin.
  */
 function selectQuestionsByChapter(chapters, distribution) {
     let selected = [];

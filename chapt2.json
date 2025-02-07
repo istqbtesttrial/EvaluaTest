@@ -4,7 +4,7 @@
   "enonceFormat": "markdown",
   "questions": [
     {
-      "questionId": 1,
+      "questionId": "2-1",
       "enonce": "Lequel des exemples suivants constitue une bonne pratique de test ?",
       "choices": [
         "Les testeurs devraient avoir de l'expérience en développement",
@@ -15,7 +15,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 2,
+      "questionId": "2-2",
       "enonce": "Lorsque l'écriture du code est guidée par les cas de test, quelle approche de développement est utilisée ?",
       "choices": [
         "TDD (Test-Driven Development)",
@@ -26,7 +26,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 3,
+      "questionId": "2-3",
       "enonce": "Au cours de quel(s) niveau(x) de test doit-on exécuter des tests non-fonctionnels ?",
       "choices": [
         "Uniquement en test unitaire et en intégration",
@@ -37,7 +37,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 4,
+      "questionId": "2-4",
       "enonce": "Lorsqu'un système est destiné à être mis hors service, quel type de test de maintenance peut être requis ?",
       "choices": [
         "Retirement testing (tests de retrait)",
@@ -48,7 +48,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 5,
+      "questionId": "2-5",
       "enonce": "Dans un modèle de cycle de vie itératif, laquelle des affirmations suivantes est exacte à propos des activités de test ?",
       "choices": [
         "Pour chaque activité de développement, il devrait y avoir une activité de test correspondante",
@@ -59,7 +59,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 6,
+      "questionId": "2-6",
       "enonce": "En quoi le CI/CD est-il un exemple du concept de shift-left ?",
       "choices": [
         "Il met le code en production plus rapidement",
@@ -70,7 +70,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 7,
+      "questionId": "2-7",
       "enonce": "Lequel des exemples suivants illustre une bonne pratique de test ?",
       "choices": [
         "Les différents niveaux de test devraient avoir des objectifs de test spécifiques",
@@ -81,7 +81,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 8,
+      "questionId": "2-8",
       "enonce": "Quelle approche de développement saisit les exigences dans un format simple de cas de test ?",
       "choices": [
         "TDD",
@@ -92,7 +92,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 9,
+      "questionId": "2-9",
       "enonce": "Les tests d'utilisabilité (usability) sont un exemple de quel type de test ?",
       "choices": [
         "Fonctionnel",
@@ -103,7 +103,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 10,
+      "questionId": "2-10",
       "enonce": "Vous recevez des builds quotidiens des développeurs. Même s'ils documentent les correctifs inclus dans chaque build, vous constatez que les correctifs ne sont pas présents ou ne fonctionnent pas. Quel type de test est le mieux adapté pour détecter ces problèmes ?",
       "choices": [
         "Tests unitaires",
@@ -114,7 +114,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 11,
+      "questionId": "2-11",
       "enonce": "Votre équipe vient de terminer une rétrospective. Elle a discuté de ce qui a bien fonctionné et doit être conservé, et de ce qui doit être amélioré. Quoi d'autre doivent-ils discuter pour concrétiser l'amélioration du processus ?",
       "choices": [
         "Ce qui sera conservé ou modifié à l'avenir",
@@ -125,7 +125,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 12,
+      "questionId": "2-12",
       "enonce": "Votre organisation a décidé de mettre en place DevOps. Les équipes d'exploitation sont préoccupées par des problèmes de performance en production. Comment la mise en place de DevOps et CI/CD aidera-t-elle à résoudre ce problème ?",
       "choices": [
         "Cela ne résoudra rien : le problème doit être traité au stade de la conception",
@@ -136,7 +136,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 13,
+      "questionId": "2-13",
       "enonce": "Considérez la règle suivante : « pour chaque activité du SDLC, il existe une activité de test correspondante ». Dans quels modèles SDLC cette règle s’applique-t-elle ?",
       "choices": [
         "Uniquement dans les modèles de développement séquentiel",
@@ -147,7 +147,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 14,
+      "questionId": "2-14",
       "enonce": "Laquelle des propositions suivantes décrit LE MIEUX l’approche ATDD (acceptance test-driven development) ?",
       "choices": [
         "Dans l’ATDD, les critères d'acceptation sont généralement rédigés au format given/when/then",
@@ -158,7 +158,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 15,
+      "questionId": "2-15",
       "enonce": "Lequel des exemples suivants n’est PAS un exemple d’approche « shift left » ?",
       "choices": [
         "Relire les exigences utilisateurs avant leur acceptation formelle par les parties prenantes",
@@ -169,7 +169,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 16,
+      "questionId": "2-16",
       "enonce": "Lequel des arguments suivants utiliseriez-vous pour convaincre votre responsable d’organiser des rétrospectives à la fin de chaque cycle de release ?",
       "choices": [
         "Les rétrospectives sont très tendance, et les clients apprécieraient que nous les ajoutions à nos processus",
@@ -180,7 +180,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 17,
+      "questionId": "2-17",
       "enonce": "Quels types de défaillances (1-4) correspondent le mieux à quels niveaux de test (A-D) ?\n1. Défaillances liées au comportement du système qui s’écarte des besoins métier\n2. Défaillances de communication entre les composants\n3. Défaillances dans la logique d’un module\n4. Défaillances liées à l’implémentation incorrecte de règles métier\n\nA. Test de composants\nB. Test d’intégration de composants\nC. Test système\nD. Test d’acceptation",
       "enonceFormat": "markdown",
       "choices": [
@@ -192,7 +192,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 18,
+      "questionId": "2-18",
       "enonce": "Vous testez une User Story comportant trois critères d’acceptation : AC1, AC2 et AC3. AC1 est couvert par TC1, AC2 par TC2 et AC3 par TC3. Vous avez trois historiques d’exécution pour trois versions consécutives du logiciel :\n\n• Exécution 1 :\n   - TC1 (1) Échec\n   - TC2 (2) Succès\n   - TC3 (3) Échec\n\n• Exécution 2 :\n   - TC1 (4) Succès\n   - TC2 (5) Échec\n   - TC3 (6) Échec\n\n• Exécution 3 :\n   - TC1 (7) Succès\n   - TC2 (8) Succès\n   - TC3 (9) Succès\n\nLes tests sont répétés dès qu’une nouvelle version est disponible. Lesquels de ces tests sont exécutés en tant que tests de régression ?",
       "enonceFormat": "markdown",
       "choices": [
@@ -204,7 +204,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 19,
+      "questionId": "2-19",
       "enonce": "Lesquels des éléments suivants sont des avantages de DevOps ?\n i. Publication plus rapide du produit et réduction du time-to-market\n ii. Augmentation du besoin de tests manuels répétitifs\n iii. Disponibilité constante de logiciels exécutables\n iv. Réduction du nombre de tests de régression associés au remaniement du code\n v. Mettre en place le framework d’automatisation des tests est peu coûteux puisque tout est automatisé",
       "enonceFormat": "markdown",
       "choices": [
@@ -216,7 +216,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 20,
+      "questionId": "2-20",
       "enonce": "Vous travaillez comme testeur sur un projet d’application mobile de commande de nourriture pour un client. Le client vous a envoyé une liste d’exigences. L’une d’elles, très prioritaire, dit : « La commande doit être traitée en moins de 10 secondes dans 95 % des cas. » Vous avez créé un ensemble de cas de test dans lesquels un certain nombre de commandes aléatoires sont passées, le temps de traitement est mesuré, et les résultats de test comparés aux exigences. Quel type de test avez-vous effectué ?",
       "choices": [
         "Un test fonctionnel, car les cas de test couvrent les besoins métier de l’utilisateur",
@@ -227,7 +227,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 21,
+      "questionId": "2-21",
       "enonce": "La stratégie de test de votre organisation suggère que, lorsqu’un système doit être retiré, la migration des données doit être testée. Dans le cadre de quel type de test cette activité sera-t-elle TRÈS probablement réalisée ?",
       "choices": [
         "Tests de maintenance",
@@ -238,7 +238,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 22,
+      "questionId": "2-22",
       "enonce": "Laquelle des affirmations suivantes à propos du cycle de vie logiciel choisi est CORRECTE ?",
       "choices": [
         "Si un développement Agile est utilisé, l’automatisation des tests système remplace la nécessité des tests de régression",
@@ -249,7 +249,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 23,
+      "questionId": "2-23",
       "enonce": "Laquelle des propositions suivantes est une bonne pratique de test qui s’applique à tous les cycles de développement logiciel ?",
       "choices": [
         "Les testeurs devraient relire les produits de travail lors de la prochaine phase de développement",
@@ -260,7 +260,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 24,
+      "questionId": "2-24",
       "enonce": "Lequel des exemples suivants illustre une approche de développement « test-first » ?",
       "choices": [
         "Test-Driven Development (TDD)",
@@ -271,7 +271,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 25,
+      "questionId": "2-25",
       "enonce": "Laquelle des affirmations suivantes à propos de DevOps est CORRECTE ?",
       "choices": [
         "Pour accélérer les releases, l’intégration continue encourage les développeurs à soumettre rapidement leur code, sans avoir besoin de terminer les tests de composants",
@@ -282,7 +282,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 26,
+      "questionId": "2-26",
       "enonce": "Lequel des exemples suivants est LE PLUS susceptible d’être réalisé lors des tests système ?",
       "choices": [
         "Un test de sécurité d’un système de gestion du crédit, effectué par une équipe de test indépendante",
@@ -293,7 +293,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 27,
+      "questionId": "2-27",
       "enonce": "Laquelle des affirmations suivantes est CORRECTE ?",
       "choices": [
         "Le nombre de tests de régression augmente avec la progression du projet, tandis que le nombre de tests de confirmation diminue",
@@ -304,7 +304,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 28,
+      "questionId": "2-28",
       "enonce": "Laquelle des propositions suivantes est une bonne pratique de test qui s’applique à tous les cycles de développement logiciel ?",
       "choices": [
         "Pour chaque niveau de test, il existe un niveau de développement correspondant",
@@ -315,7 +315,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 29,
+      "questionId": "2-29",
       "enonce": "Lequel des exemples suivants illustre une approche de développement « test-first » ?",
       "choices": [
         "Test de composants piloté par les tests (Component Test-Driven Development)",
@@ -326,7 +326,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 30,
+      "questionId": "2-30",
       "enonce": "Laquelle des propositions suivantes décrit LE MIEUX le shift-left ?",
       "choices": [
         "Avec l'accord des développeurs, les activités manuelles situées dans la première partie du processus de test sont automatisées pour soutenir le principe « tester tôt permet de gagner du temps et de l’argent »",
@@ -337,7 +337,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 31,
+      "questionId": "2-31",
       "enonce": "Laquelle des options suivantes est la MOINS susceptible de résulter d’une rétrospective ?",
       "choices": [
         "La qualité des futurs objets de test s’améliore en identifiant de meilleures pratiques de développement",
@@ -348,7 +348,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 32,
+      "questionId": "2-32",
       "enonce": "Lequel des niveaux de test suivants est le PLUS susceptible d’être focalisé sur la validation et de ne pas être réalisé par des testeurs ?",
       "choices": [
         "Le test de composants",
@@ -359,7 +359,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 33,
+      "questionId": "2-33",
       "enonce": "Un logiciel de navigation a été mis à jour, car il suggérait des itinéraires illégaux (circuler à contresens sur des sens uniques). Lequel des énoncés décrit LE MIEUX les tests qui seront effectués ?",
       "choices": [
         "Uniquement un test de confirmation",
@@ -370,7 +370,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 34,
+      "questionId": "2-34",
       "enonce": "Laquelle des propositions suivantes est une bonne pratique de test qui s’applique à tous les cycles de développement logiciel ?",
       "choices": [
         "Chaque niveau de test possède des objectifs de test spécifiques et distincts",
@@ -381,7 +381,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 35,
+      "questionId": "2-35",
       "enonce": "Lequel des exemples suivants illustre une approche de développement « test-first » ?",
       "choices": [
         "Behavior-Driven Development (BDD)",
@@ -392,7 +392,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 36,
+      "questionId": "2-36",
       "enonce": "Lequel des défis suivants est le PLUS susceptible de survenir lors de la mise en place de DevOps ?",
       "choices": [
         "Veiller à ne pas négliger les caractéristiques de qualité non fonctionnelles",
@@ -403,7 +403,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 37,
+      "questionId": "2-37",
       "enonce": "Laquelle des propositions décrit LE MIEUX ce que sont les rétrospectives ?",
       "choices": [
         "Elles permettent aux membres de l’équipe d’identifier ceux qui n’ont pas totalement contribué à la qualité attendue par l’approche équipe intégrée",
@@ -414,7 +414,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 38,
+      "questionId": "2-38",
       "enonce": "Lequel des tests suivants est LE PLUS susceptible d’être réalisé dans le cadre d’un test fonctionnel ?",
       "choices": [
         "Le test vérifie que la fonction de tri classe bien les éléments d’une liste ou d’un tableau en ordre croissant",
@@ -425,7 +425,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 39,
+      "questionId": "2-39",
       "enonce": "Lequel des éléments suivants est LE PLUS susceptible de déclencher un test de maintenance pour un système de change monétaire ?",
       "choices": [
         "Les développeurs ont signalé que le système était difficile à faire évoluer, et les testeurs ont voulu vérifier si c’était vrai",

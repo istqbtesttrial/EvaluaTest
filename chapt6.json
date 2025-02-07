@@ -4,7 +4,7 @@
   "enonceFormat": "markdown",
   "questions": [
     {
-      "questionId": 1,
+      "questionId": "6-1",
       "enonce": "Lequel des énoncés suivants est un exemple d’outil qui prend en charge les tests statiques ?",
       "choices": [
         "Un outil qui aide à suivre les résultats des revues",
@@ -15,7 +15,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 2,
+      "questionId": "6-2",
       "enonce": "Lequel des énoncés suivants est un avantage de l’automatisation des tests ?",
       "choices": [
         "L’exécution des tests est plus rapide",
@@ -26,7 +26,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 3,
+      "questionId": "6-3",
       "enonce": "Quel est l’objectif principal d’un outil d’exécution de tests (test execution tool) ?",
       "choices": [
         "Il exécute des scripts de test automatisés pour tester l’objet de test",
@@ -37,7 +37,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 4,
+      "questionId": "6-4",
       "enonce": "Lequel des énoncés suivants constitue un risque lié à l’automatisation des tests ?",
       "choices": [
         "Utiliser un outil d’automatisation qui ne sera plus pris en charge à l’avenir",
@@ -48,7 +48,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 5,
+      "questionId": "6-5",
       "enonce": "Quelle activité de test un outil de préparation de données prend-il en charge ?",
       "choices": [
         "Le suivi et le contrôle du test",
@@ -59,7 +59,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 6,
+      "questionId": "6-6",
       "enonce": "Lequel des énoncés identifie correctement un risque potentiel de l’automatisation des tests ?",
       "choices": [
         "Elle peut introduire des régressions inconnues en production",
@@ -70,7 +70,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 7,
+      "questionId": "6-7",
       "enonceFormat": "markdown",
       "enonce": "Étant donné les descriptions suivantes :\n1. Supporter le suivi du flux de travail\n2. Faciliter la communication\n3. Machines virtuelles\n4. Soutenir les revues\n\nEt les catégories d’outils suivantes :\nA. Outils de test statique\nB. Outils de support de la scalabilité et de la standardisation du déploiement\nC. Outils DevOps\nD. Outils de collaboration\n\nLequel des appariements suivants décrit LE MIEUX ces descriptions et catégories ?",
       "choices": [
@@ -82,7 +82,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 8,
+      "questionId": "6-8",
       "enonce": "Lequel des énoncés suivants est le PLUS susceptible d’être un avantage de l’automatisation des tests ?",
       "choices": [
         "Il fournit des mesures de couverture trop complexes pour que l’humain puisse les déduire",
@@ -93,7 +93,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 9,
+      "questionId": "6-9",
       "enonce": "Les outils de quelle catégorie aident à organiser les cas de test, les défauts détectés et la gestion de configuration ?",
       "choices": [
         "Les outils d’exécution et de couverture",
@@ -104,7 +104,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 10,
+      "questionId": "6-10",
       "enonce": "Lequel des énoncés suivants est LE PLUS susceptible d’être un avantage de l’automatisation des tests ?",
       "choices": [
         "La possibilité de générer des cas de test sans accès à la base de tests",

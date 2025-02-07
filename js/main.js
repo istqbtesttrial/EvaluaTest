@@ -17,32 +17,28 @@ const retryBtn = document.getElementById('retry-btn');
 const timerDisplay = document.getElementById('timer-display');
 
 /* --- Timer (1h15) --- */
-let timeRemaining = 75 * 60; // 75 minutes (en secondes)
+let timeRemaining = 75 * 60; // 75 minutes en secondes
 let timerInterval; // pour stocker l'intervalle
 
 /**
  * Variables globales :
- * - allQuestions (optionnelle ici, on peut s’en passer totalement)
+ * - allQuestions (optionnel)
  * - selectedQuestions : le tableau final de 40 questions.
  */
 let allQuestions = [];
 let selectedQuestions = [];
 
 /**
- * Fonction pour charger et assembler les questions
- * depuis 6 fichiers JSON : chapt1.json ... chapt6.json.
+ * Charge et assemble les questions depuis 6 fichiers JSON (ex : chapt1.json … chapt6.json)
+ * La répartition est définie par le nombre de questions à tirer dans chaque fichier.
  *
- * Nous allons piocher aléatoirement :
- *  - 8 questions de chapt1
- *  - 6 questions de chapt2
- *  - 4 questions de chapt3
- *  - 11 questions de chapt4
- *  - 9 questions de chapt5
- *  - 2 questions de chapt6
+ * Pour chaque fichier, on enrichit chaque question avec les informations du chapitre (enonceFormat,
+ * chapterId et title). Cela fonctionne aussi bien avec l’ancien format (où questionId est un nombre)
+ * qu’avec le nouveau format (où questionId est une chaîne, par exemple "6-1").
  */
 async function loadQuestionsFromMultipleJson() {
     try {
-        // Répartition et fichiers
+        // Répartition des fichiers et nombre de questions
         const distribution = [
             { file: 'chapt1.json', count: 8 },
             { file: 'chapt2.json', count: 6 },
@@ -54,20 +50,31 @@ async function loadQuestionsFromMultipleJson() {
 
         let finalQuestions = [];
 
-        // Pour chaque chapitre, on récupère le JSON,
-        // on pioche le nombre de questions demandé
         for (const dist of distribution) {
             const response = await fetch(dist.file);
             const data = await response.json();
-            // Si le chapitre définit le format d'enoncé (markdown), on l'applique à toutes les questions
-            if (data.enonceFormat) {
-                data.questions.forEach(q => { q.enonceFormat = data.enonceFormat; });
-            }
+
+            // Pour chaque question, on complète avec les infos du chapitre si disponibles.
+            data.questions.forEach(q => {
+                // Si la question ne définit pas déjà le format d’énoncé, on prend celui du chapitre.
+                if (!q.hasOwnProperty('enonceFormat') && data.enonceFormat) {
+                    q.enonceFormat = data.enonceFormat;
+                }
+                // Ajouter l'identifiant et le titre du chapitre (pour d'éventuelles utilisations ultérieures)
+                if (data.chapterId) {
+                    q.chapterId = data.chapterId;
+                }
+                if (data.title) {
+                    q.chapterTitle = data.title;
+                }
+            });
+
+            // Sélectionner aléatoirement le nombre de questions demandé
             const subset = getRandomQuestions(data.questions, dist.count);
             finalQuestions.push(...subset);
         }
 
-        // finalQuestions contiendra 40 questions
+        // On doit obtenir 40 questions
         return finalQuestions;
     } catch (error) {
         console.error("Erreur lors du chargement des JSON :", error);
@@ -80,24 +87,19 @@ async function loadQuestionsFromMultipleJson() {
    ================================ */
 
 /**
- * Lance l'examen
+ * Démarre l'examen
  */
 async function startExam() {
-    // Masquer la section d'intro
+    // Masquer la section d'intro et afficher la section d'examen
     introSection.classList.add('hidden');
-    // Afficher la section d'examen
     examSection.classList.remove('hidden');
 
-    // Réinitialiser le temps restant
+    // Réinitialiser le timer
     timeRemaining = 75 * 60;
-
-    // Démarrer le timer
     startTimer();
 
-    // Charger et composer la sélection de 40 questions (6 chapitres)
+    // Charger les questions et composer la sélection de 40 questions
     selectedQuestions = await loadQuestionsFromMultipleJson();
-
-    // (Optionnel) Vérifier qu'on a bien 40 questions
     if (selectedQuestions.length < 40) {
         console.warn("Le total de questions récupérées est inférieur à 40 !");
     }
@@ -105,12 +107,12 @@ async function startExam() {
     // Afficher les questions dans le DOM
     displayQuestions(selectedQuestions);
 
-    // Rendre le bouton "Valider mes réponses" visible
+    // Rendre visible le bouton de soumission
     submitBtn.style.display = "inline-block";
 }
 
 /**
- * Affiche dynamiquement les questions dans le DOM
+ * Affiche dynamiquement les questions dans le DOM.
  */
 function displayQuestions(questions) {
     questionsContainer.innerHTML = "";
@@ -119,28 +121,29 @@ function displayQuestions(questions) {
         const questionDiv = document.createElement('div');
         questionDiv.classList.add('question-block');
 
-        // Animations AOS (alternance fade-right / fade-left)
+        // Définir l'animation (alternance fade-right / fade-left)
         const aosEffect = (index % 2 === 0) ? "fade-right" : "fade-left";
         questionDiv.setAttribute("data-aos", aosEffect);
         questionDiv.setAttribute("data-aos-duration", "600");
 
         // Titre de la question
         const questionTitle = document.createElement('h3');
-        // Si la question (ou le chapitre) indique que l'enoncé est en Markdown, on utilise marked pour le convertir
         if (q.enonceFormat && q.enonceFormat === "markdown") {
-            questionTitle.innerHTML = `Question ${index + 1}: ` + marked.parse(q.enonce);
+            // Utilise marked pour convertir le Markdown en HTML
+            questionTitle.innerHTML = `Question ${index + 1}: ${marked.parse(q.enonce)}`;
         } else {
             questionTitle.textContent = `Question ${index + 1}: ${q.enonce}`;
         }
         questionDiv.appendChild(questionTitle);
 
-        // Ajout des choix (radio)
+        // Affichage des choix (boutons radio)
         q.choices.forEach((choiceText, choiceIndex) => {
             const label = document.createElement('label');
             label.classList.add('choice-label');
 
             const radio = document.createElement('input');
             radio.type = 'radio';
+            // Le nom est basé sur questionId : que ce soit un nombre (ancien format) ou une chaîne (nouveau format)
             radio.name = `question-${q.questionId}`;
             radio.value = choiceIndex;
 
@@ -153,92 +156,73 @@ function displayQuestions(questions) {
         questionsContainer.appendChild(questionDiv);
     });
 
-    // Rafraîchir AOS si présent
+    // Si AOS est utilisé, rafraîchir les animations
     if (window.AOS) {
         AOS.refresh();
     }
 }
 
 /**
- * Soumission de l'examen (calcul du score, affichage)
+ * Soumet l'examen, arrête le timer, calcule le score et affiche les résultats.
  */
 function submitExam() {
-    // Arrêter le timer
     clearInterval(timerInterval);
-
-    // Calcul du score (calculateScore est défini dans utils.js)
     const score = calculateScore(selectedQuestions);
-
-    // Afficher les résultats
     showResults(score);
-
-    // Masquer la section exam
     examSection.classList.add('hidden');
 }
 
 /**
- * Affiche les résultats (score, détails)
+ * Affiche les résultats (score global et détail question par question)
  */
 function showResults(score) {
     resultsSection.classList.remove('hidden');
 
-    const totalQuestions = selectedQuestions.length; // Devrait être 40
+    const totalQuestions = selectedQuestions.length; // Doit être 40
     const pourcentage = ((score / totalQuestions) * 100).toFixed(2);
 
     scorePara.textContent = `Vous avez obtenu ${score}/${totalQuestions} (${pourcentage}%).`;
 
-    // Seuil de réussite (26/40)
+    // Seuil de réussite
     const threshold = 26;
     if (score >= threshold) {
         scorePara.textContent += " Félicitations, vous avez réussi l'examen !";
-        // Effet Animate.css (tada) sur le #score si réussite
         scorePara.classList.add("animate__animated", "animate__tada");
     } else {
         scorePara.textContent += " Désolé, vous avez échoué l'examen.";
-        // Effet Animate.css (shakeX) sur le #score si échec
         scorePara.classList.add("animate__animated", "animate__shakeX");
     }
 
-    // Afficher un détail question par question
+    // Détail question par question
     correctionDiv.innerHTML = "";
     selectedQuestions.forEach(q => {
-        const userAnswer = getUserAnswer(q.questionId); // défini dans utils.js
+        const userAnswer = getUserAnswer(q.questionId);
         const isCorrect = (userAnswer === q.correctIndex);
         const resultLine = document.createElement('p');
-        resultLine.innerHTML = `
-          <strong>${q.enonce}</strong> <br>
+        resultLine.innerHTML =
+            `<strong>${q.enonce}</strong> <br>
           Votre réponse : <em>${ q.choices[userAnswer] || "Aucune sélectionnée" }</em> <br>
           Réponse correcte : <em>${q.choices[q.correctIndex]}</em> <br>
           <span style="color:${isCorrect ? 'green' : 'red'};">
             ${isCorrect ? '✔ Bonne réponse' : '✖ Mauvaise réponse'}
-          </span>
-        `;
+          </span>`;
         correctionDiv.appendChild(resultLine);
         correctionDiv.appendChild(document.createElement('hr'));
     });
 
-    // Afficher le bouton "Recommencer"
     retryBtn.style.display = "inline-block";
 }
 
 /**
- * Recommencer le test
+ * Réinitialise l'examen pour permettre une nouvelle tentative.
  */
 function retryExam() {
-    // Cacher la section résultats
     resultsSection.classList.add('hidden');
-    // Retirer les classes d'animation sur #score
     scorePara.classList.remove("animate__animated", "animate__tada", "animate__shakeX");
-
-    // Réafficher l'intro
     introSection.classList.remove('hidden');
-
-    // Nettoyer
     correctionDiv.innerHTML = "";
     questionsContainer.innerHTML = "";
     scorePara.textContent = "";
-
-    // Cacher les boutons
     submitBtn.style.display = "none";
     retryBtn.style.display = "none";
 }
@@ -248,31 +232,27 @@ function retryExam() {
    ================================ */
 function startTimer() {
     updateTimerDisplay(timeRemaining);
-
     timerInterval = setInterval(() => {
         timeRemaining--;
         updateTimerDisplay(timeRemaining);
-
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
             alert("Temps écoulé ! L'examen se termine automatiquement.");
-            submitExam(); // Forcer la soumission
+            submitExam();
         }
     }, 1000);
 }
 
 /**
- * Met à jour l'affichage du chrono (HH:MM:SS)
+ * Met à jour l'affichage du timer (format HH:MM:SS)
  */
 function updateTimerDisplay(seconds) {
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
     const s = seconds % 60;
-
     const hh = (h < 10) ? "0" + h : h;
     const mm = (m < 10) ? "0" + m : m;
     const ss = (s < 10) ? "0" + s : s;
-
     timerDisplay.textContent = `${hh}:${mm}:${ss}`;
 }
 

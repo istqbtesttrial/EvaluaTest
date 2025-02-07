@@ -4,7 +4,7 @@
   "enonceFormat": "markdown",
   "questions": [
     {
-      "questionId": 1,
+      "questionId": "1-1",
       "enonce": "Lorsqu'un testeur vérifie la base de tests pendant la conception des tests dès le début du cycle de vie, quel objectif de test est en cours de réalisation ?",
       "choices": [
         "Renforcer la confiance",
@@ -15,7 +15,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 2,
+      "questionId": "1-2",
       "enonce": "Dans certaines équipes Agiles, les membres sont encouragés à utiliser leurs compétences pour aider l'équipe, quel que soit leur rôle. Cela pourrait signifier que des testeurs aident les développeurs à écrire du code et que des développeurs aident les testeurs à tester. Comment appelle-t-on cette approche ?",
       "choices": [
         "Assistance d'équipe",
@@ -26,7 +26,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 3,
+      "questionId": "1-3",
       "enonce": "Laquelle des propositions suivantes est correcte ?",
       "choices": [
         "Un développeur fait une erreur qui provoque un défaut pouvant se manifester comme une défaillance lors des tests dynamiques",
@@ -37,7 +37,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 4,
+      "questionId": "1-4",
       "enonce": "Pourquoi est-il important d'éviter le principe de l'usure des tests ?",
       "choices": [
         "Les tests dynamiques sont moins fiables pour trouver des bugs",
@@ -48,7 +48,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 5,
+      "questionId": "1-5",
       "enonce": "En suivant un processus de test standard, quand l'activité de contrôle du test doit-elle avoir lieu ?",
       "choices": [
         "Pendant les activités de planification",
@@ -59,7 +59,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 6,
+      "questionId": "1-6",
       "enonce": "Parmi les activités suivantes, laquelle compare la progression de test planifiée avec la progression de test réelle ?",
       "choices": [
         "Suivi du test (test monitoring)",
@@ -70,7 +70,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 7,
+      "questionId": "1-7",
       "enonce": "Si vous travaillez sur un projet contraint par le temps et le budget, ce qui exerce une pression pour que les tests soient réalisés rapidement, comment ajuster l'approche de test ?",
       "choices": [
         "Développer des cas de test détaillés pour réduire l'effort d'automatisation des tests",
@@ -81,7 +81,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 8,
+      "questionId": "1-8",
       "enonce": "Quel est le principal problème lorsque qu'un développeur teste son propre code ?",
       "choices": [
         "Les développeurs ne sont pas de bons testeurs",
@@ -92,7 +92,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 9,
+      "questionId": "1-9",
       "enonce": "De quelle manière l'analyse de la cause racine contribue-t-elle à l'assurance qualité ?",
       "choices": [
         "Aide à mieux identifier et corriger la cause profonde des défauts",
@@ -103,7 +103,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 10,
+      "questionId": "1-10",
       "enonce": "Vous travaillez dans une équipe Agile où l'on reproche aux testeurs de ralentir le processus à cause du temps pris par les tests système. Parmi les approches suivantes, laquelle répartirait mieux les compétences de l'équipe pour accomplir les tâches ?",
       "choices": [
         "Approche d'équipe unifiée (Whole Team)",
@@ -114,7 +114,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 11,
+      "questionId": "1-11",
       "enonce": "Lequel des exemples suivants illustre le débogage ?",
       "choices": [
         "Un testeur trouve un défaut et le signale",
@@ -125,7 +125,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 12,
+      "questionId": "1-12",
       "enonce": "Laquelle des affirmations suivantes est vraie à propos du test exhaustif ?",
       "choices": [
         "C'est une forme de test de performance (stress testing)",
@@ -136,7 +136,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 13,
+      "questionId": "1-13",
       "enonce": "Si vous avez besoin de fournir un rapport montrant la couverture d'exécution des cas de test par rapport aux exigences, qu'est-ce que vous devez suivre ?",
       "choices": [
         "La traçabilité entre les cas de test et les exigences",
@@ -147,7 +147,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 14,
+      "questionId": "1-14",
       "enonce": "Qui rédige normalement le plan de test pour un projet ?",
       "choices": [
         "Le chef de projet (Project Manager)",
@@ -158,7 +158,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 15,
+      "questionId": "1-15",
       "enonce": "Votre équipe a mené une analyse des risques qualité et a déterminé la probabilité, l'impact et le plan d'atténuation pour chaque risque identifié. Dans quel livrable ce type d'informations doit-il être saisi ?",
       "choices": [
         "La stratégie de test (test strategy)",
@@ -169,7 +169,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 16,
+      "questionId": "1-16",
       "enonce": "Vous travaillez avec un testeur junior à qui on a confié une User Story à tester. Il n'a créé qu'un seul test de parcours positif. Vous savez qu'il y a d'autres aspects à tester, y compris des scénarios négatifs. Quelle compétence générique semble lui faire défaut ?",
       "choices": [
         "La communication",
@@ -180,7 +180,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 17,
+      "questionId": "1-17",
       "enonce": "Lequel des énoncés suivants décrit un objectif de test valide ?",
       "choices": [
         "Prouver qu'il n'y a aucun défaut non corrigé dans le système testé",
@@ -191,7 +191,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 18,
+      "questionId": "1-18",
       "enonce": "Lequel des exemples suivants montre des activités de test qui contribuent à la réussite ?",
       "choices": [
         "Impliquer les testeurs durant les différentes phases du cycle de vie (SDLC) aide à détecter des défauts dans les produits d’activités",
@@ -202,7 +202,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 19,
+      "questionId": "1-19",
       "enonce": "Vous avez été affecté en tant que testeur à une équipe qui produit un nouveau système par incréments. Vous constatez qu'aucune modification n'a été apportée aux cas de test de régression existants depuis plusieurs itérations et qu'aucun nouveau défaut de régression n'a été identifié. Votre responsable est satisfait, mais vous ne l'êtes pas. Quel principe de test explique votre scepticisme ?",
       "choices": [
         "L'usure des tests",
@@ -213,7 +213,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 20,
+      "questionId": "1-20",
       "enonce": "Vous travaillez dans une équipe qui développe une application mobile de commande de nourriture. Dans l'itération actuelle, l'équipe a décidé d'implémenter la fonctionnalité de paiement. Laquelle des activités suivantes fait partie de l'analyse des tests ?",
       "choices": [
         "Estimer que les tests d'intégration avec le service de paiement prendront 8 personnes-jours",
@@ -224,7 +224,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 21,
+      "questionId": "1-21",
       "enonce": "Lesquels des facteurs suivants ont une INFLUENCE SIGNIFICATIVE sur l'approche de test ?\ni. Le cycle de vie de développement (SDLC)\nii. Le nombre de défauts détectés dans des projets précédents\niii. Les risques produits identifiés\niv. Nouvelles exigences réglementaires imposant des tests formels en boîte blanche\nv. La configuration de l'environnement de test",
       "choices": [
         "i, ii ont une influence significative",
@@ -235,7 +235,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 22,
+      "questionId": "1-22",
       "enonce": "Parmi les compétences suivantes, lesquelles sont **LES PLUS importantes** pour un testeur ?\n\n**Compétences :**\n\n1. Connaissance du domaine\n2. Créer une vision de produit\n3. Être un bon membre d'équipe\n4. Planifier et organiser le travail de l'équipe\n5. Pensée critique",
       "enonceFormat": "markdown",
       "choices": [
@@ -247,7 +247,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 23,
+      "questionId": "1-23",
       "enonce": "Comment l'approche d'équipe unifiée (Whole Team) se reflète-t-elle dans les interactions entre les testeurs et les représentants métier ?",
       "choices": [
         "Les représentants métier décident des approches d'automatisation des tests",
@@ -258,7 +258,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 24,
+      "questionId": "1-24",
       "enonce": "On vous a confié la tâche d'analyser et de corriger les causes de défaillances dans un nouveau système qui doit être livré. Quelle activité êtes-vous en train de réaliser ?",
       "choices": [
         "Débogage",
@@ -269,7 +269,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 25,
+      "questionId": "1-25",
       "enonce": "Dans de nombreux organismes de développement, le service de test est appelé \"assurance qualité\" (QA). Cette phrase est-elle correcte ou non, et pourquoi ?",
       "choices": [
         "C'est correct. Les tests et l'AQ signifient exactement la même chose",
@@ -280,7 +280,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 26,
+      "questionId": "1-26",
       "enonce": "La sonnerie d'un téléphone dans un bureau voisin distrait un programmeur, ce qui l'amène à coder de manière incorrecte la limite supérieure d'une variable d'entrée. Plus tard, lors des tests système, un testeur remarque que ce champ de saisie accepte des valeurs d'entrée invalides. Lequel des éléments suivants décrit correctement une limite supérieure mal codée ?",
       "choices": [
         "La cause racine",
@@ -291,7 +291,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 27,
+      "questionId": "1-27",
       "enonce": "Considérez le testware suivant :\n\n**Testware :**\n\n| Attribut         | Valeur                                                    |\n| ---------------- | --------------------------------------------------------- |\n| Test Charter     | #04.018                                                  |\n| Durée de session | 1h                                                       |\n| Périmètre        | Page d’inscription                                       |\n| Avec             | Différents jeux de données d’entrée incorrectes          |\n| Objectif         | Découvrir les défauts liés à l’acceptation du processus d’inscription avec des données incorrectes |\n\nQuelle activité de test produit ce testware en tant que livrable ?",
       "enonceFormat": "markdown",
       "choices": [
@@ -303,7 +303,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 28,
+      "questionId": "1-28",
       "enonce": "Lequel des énoncés suivants illustre LE MIEUX la façon dont la traçabilité soutient les tests ?",
       "choices": [
         "Réaliser l'analyse d'impact d'un changement fournira des informations sur l'achèvement des tests",
@@ -314,7 +314,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 29,
+      "questionId": "1-29",
       "enonce": "Laquelle des affirmations suivantes décrit LE MIEUX un avantage de l'indépendance des tests ?",
       "choices": [
         "Le recours à une équipe de test indépendante permet à la direction du projet d’attribuer à cette équipe la responsabilité de la qualité du produit final",
@@ -325,7 +325,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 30,
+      "questionId": "1-30",
       "enonce": "Lequel des exemples suivants illustre une raison pour laquelle les tests sont nécessaires ?",
       "choices": [
         "Les tests dynamiques augmentent la qualité en provoquant des défaillances que les utilisateurs ne pourraient jamais déclencher",
@@ -336,7 +336,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 31,
+      "questionId": "1-31",
       "enonce": "Laquelle des affirmations suivantes concernant l'assurance qualité (QA) et/ou le contrôle qualité (QC) est correcte ?",
       "choices": [
         "La QA est réalisée dans le cadre des tests",
@@ -347,7 +347,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 32,
+      "questionId": "1-32",
       "enonce": "L’un des principes de test stipule que le test exhaustif est impossible. Lequel des exemples suivants illustre l’application de ce principe en pratique ?",
       "choices": [
         "Créer des cas de test couvrant chaque sortie spécifiée possible",
@@ -358,7 +358,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 33,
+      "questionId": "1-33",
       "enonce": "Quelle activité de test consiste à gérer les besoins en données de test, les conditions de test, les besoins d'environnement de test et les cas de test ?",
       "choices": [
         "La conception du test (test design)",
@@ -369,7 +369,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 34,
+      "questionId": "1-34",
       "enonce": "Lequel des éléments suivants est LE PLUS susceptible d’influer sur la manière dont les tests sont effectués pour un objet de test donné ?",
       "choices": [
         "Le niveau d’expérience moyen de l’équipe marketing",
@@ -380,7 +380,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 35,
+      "questionId": "1-35",
       "enonce": "Laquelle des affirmations suivantes est un EXEMPLE CORRECT illustrant la valeur de la traçabilité ?",
       "choices": [
         "La traçabilité entre les risques atténués et les cas de test passés avec succès permet de déterminer le niveau de risque résiduel",
@@ -391,7 +391,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 36,
+      "questionId": "1-36",
       "enonce": "Lequel des éléments suivants est LE PLUS susceptible de constituer un exemple de testeur utilisant une compétence générique lors des tests ?",
       "choices": [
         "La grande connaissance du testeur en matière de jeux vidéo lui a permis de bien s'entendre avec un développeur également passionné de gaming",
@@ -402,7 +402,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 37,
+      "questionId": "1-37",
       "enonce": "Lequel des énoncés suivants constitue un avantage de l'approche d'équipe unifiée (Whole Team) ?",
       "choices": [
         "Elle permet aux membres de l'équipe de prendre n'importe quel rôle à tout moment",
@@ -413,7 +413,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 38,
+      "questionId": "1-38",
       "enonce": "Lequel des énoncés suivants décrit un objectif typique de test ?",
       "choices": [
         "Valider que les exigences documentées sont satisfaites",
@@ -424,7 +424,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 39,
+      "questionId": "1-39",
       "enonce": "Laquelle des affirmations suivantes décrit LE MIEUX la différence entre les tests et le débogage ?",
       "choices": [
         "Les tests provoquent des défaillances, tandis que le débogage corrige ces défaillances",
@@ -435,7 +435,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 40,
+      "questionId": "1-40",
       "enonce": "Le principe de l'illusion de l'absence de défauts (absence-of-defects fallacy) fait partie des principes de test. Lequel des exemples suivants illustre l'application de ce principe dans la pratique ?",
       "choices": [
         "Expliquer qu'il n'est pas possible de prouver l'absence de défauts grâce aux tests",
@@ -446,7 +446,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 41,
+      "questionId": "1-41",
       "enonce": "Étant donné le testware suivant :\n\n**Testware :**\n\n1. **Éléments de couverture**\n2. **Demandes de changement**\n3. **Planning (ordre) d'exécution des tests**\n4. **Conditions de test priorisées**\n\n**Activités de test :**\n\n**A. Analyse du test**\n**B. Conception du test**\n**C. Implémentation du test**\n**D. Clôture du test**\n\n**Question :**\nLaquelle des propositions illustre le MIEUX le testware produit par chaque activité ?",
       "enonceFormat": "markdown",
       "choices": [
@@ -458,7 +458,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 42,
+      "questionId": "1-42",
       "enonce": "Laquelle des affirmations suivantes à propos des différents rôles de test est la PLUS susceptible d'être CORRECTE ?",
       "choices": [
         "En développement Agile, le rôle de gestion de test est principalement du ressort de l'équipe, tandis que le rôle de test revient principalement à une seule personne extérieure à l'équipe",
@@ -469,7 +469,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 43,
+      "questionId": "1-43",
       "enonce": "Lequel des éléments suivants constitue un avantage de l'approche d'équipe unifiée (Whole Team) ?",
       "choices": [
         "Des équipes sans testeurs",
@@ -480,7 +480,7 @@
       "correctIndex": 1
     },
     {
-      "questionId": 44,
+      "questionId": "1-44",
       "enonce": "Laquelle des affirmations suivantes à propos de l'indépendance des tests est CORRECTE ?",
       "choices": [
         "Des testeurs indépendants trouveront des défauts grâce à leur perspective technique différente de celle des développeurs, mais leur indépendance peut conduire à une relation conflictuelle avec les développeurs",
@@ -491,7 +491,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 45,
+      "questionId": "1-45",
       "enonce": "Lequel des énoncés suivants est un objectif typique de test ?",
       "choices": [
         "Trouver et corriger des défauts dans l'objet de test",
@@ -502,7 +502,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 46,
+      "questionId": "1-46",
       "enonce": "Un concepteur rédige une interface utilisateur qui ne répond pas correctement aux besoins des utilisateurs en situation de handicap, parce qu'il est fatigué. Le programmeur met en œuvre cette interface conformément à la conception, mais, soumis à une forte pression de temps, il n’ajoute pas un traitement d’exception adapté au calcul des bonus. En production, certains utilisateurs en situation de handicap se plaignent de l'interface, et l'entreprise est condamnée à une amende par l'autorité compétente. Personne ne constate que le calcul des bonus est parfois erroné.\nLequel des énoncés suivants est CORRECT ?",
       "choices": [
         "La mauvaise évaluation des bonus est un défaut qui se produit occasionnellement",
@@ -513,7 +513,7 @@
       "correctIndex": 2
     },
     {
-      "questionId": 47,
+      "questionId": "1-47",
       "enonce": "Les conditions de test sont utilisées par les testeurs pour générer des cas de test et exécuter les tests. Même si les conditions de test restent identiques, les cas de test varient à chaque fois. Quel principe de test est mis en œuvre en variant ainsi les cas de test ?",
       "choices": [
         "Les tests s'usent",
@@ -524,7 +524,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 48,
+      "questionId": "1-48",
       "enonce": "Considérez les tâches de test suivantes :\n\n**Tâches de test :**\n\n| Numéro | Tâche |\n| ------ | ----- |\n| 1      | Dériver des cas de test à partir des conditions de test |\n| 2      | Identifier le testware réutilisable |\n| 3      | Organiser les cas de test en procédures de test |\n| 4      | Évaluer la base de tests et l'objet de test |\n\n**Activités de test :**\n\n| Lettre | Activité                  |\n| ------ | ------------------------- |\n| A      | Analyse du test           |\n| B      | Conception du test        |\n| C      | Implémentation du test    |\n| D      | Clôture du test           |\n\nLaquelle des correspondances suivantes décrit LE MIEUX le testware produit par ces tâches ?",
       "enonceFormat": "markdown",
       "choices": [
@@ -536,8 +536,8 @@
       "correctIndex": 1
     },
     {
-      "questionId": 49,
-      "enonce": "Étant donné le testware suivant :\n\n**Testware :**\n\n| Numéro | Contenu |\n| ------ | ------- |\n| i      | Rapport de clôture de test |\n| ii     | Données conservées dans une base de données, utilisées comme entrées de test et résultats attendus |\n| iii    | Liste des éléments nécessaires pour construire l'environnement de test |\n| iv     | Séquences documentées de cas de test dans leur ordre d'exécution |\n| v      | Cas de test |\n\nLequel des ensembles suivants correspond LE MIEUX au testware produit lors de l'implémentation du test ?",
+      "questionId": "1-49",
+      "enonce": "Étant donné le testware suivant :\n\n**Testware :**\n\n| Numéro | Contenu                                                                                          |\n| ------ | ------------------------------------------------------------------------------------------------- |\n| i      | Rapport de clôture de test                                                                       |\n| ii     | Données conservées dans une base de données, utilisées comme entrées de test et résultats attendus |\n| iii    | Liste des éléments nécessaires pour construire l'environnement de test                            |\n| iv     | Séquences documentées de cas de test dans leur ordre d'exécution                                 |\n| v      | Cas de test                                                                                      |\n\nLequel des ensembles suivants correspond **LE MIEUX** au testware produit lors de l’implémentation du test ?",
       "enonceFormat": "markdown",
       "choices": [
         "ii, iv",
@@ -548,7 +548,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 50,
+      "questionId": "1-50",
       "enonce": "Lequel des éléments suivants décrit LE MIEUX une tâche effectuée par un responsable du test (test manager) ?",
       "choices": [
         "Évaluer la base de tests et l'objet de test",
@@ -559,7 +559,7 @@
       "correctIndex": 3
     },
     {
-      "questionId": 51,
+      "questionId": "1-51",
       "enonce": "Lequel des énoncés suivants constitue un avantage de l'approche d'équipe unifiée (Whole Team) ?",
       "choices": [
         "Une meilleure communication entre les membres de l'équipe",
@@ -570,7 +570,7 @@
       "correctIndex": 0
     },
     {
-      "questionId": 52,
+      "questionId": "1-52",
       "enonce": "Étant donné les avantages et inconvénients suivants liés à l'indépendance des tests :\n\n- i. Les testeurs travaillent dans un lieu différent de celui des développeurs\n- ii. Les testeurs remettent en question les hypothèses faites par les programmeurs lors de l'écriture du code\n- iii. Une dynamique conflictuelle s'est établie entre testeurs et développeurs\n- iv. Les développeurs se sont convaincus que la qualité relève principalement des testeurs\n- v. Les testeurs ont des biais différents de ceux des développeurs\n\nLesquels sont LES PLUS susceptibles d’être considérés comme des avantages ?",
       "enonceFormat": "markdown",
       "choices": [

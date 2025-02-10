@@ -1,110 +1,173 @@
 /* style.css
-   Toujours un complément minimal à Bootstrap + Animate.css + AOS
+   Feuille de style principale pour EvaluaTest
 */
 
-/* ========== Réinitialisation basique ========== */
+/* ========== Réinitialisation ========== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ========== Corps de page ========== */
+/* ========== Styles généraux ========== */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: #f9f9f9;
-    margin: 0;
-    padding: 0;
+    color: #2d3748;
+    background: #f8fafc;
 }
 
-/* ========== Vos animations persos ========== */
-.fade-in {
-    animation: fadeIn 0.6s forwards;
-    opacity: 0;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
-}
-
-/* .hidden => display none (géré par votre JS) */
 .hidden {
     display: none;
 }
 
-/* ========== Main ========== */
-main {
-    background: #fff;
-    border-radius: 5px;
-    padding: 1em 1.5em;
+/* ========== En-tête ========== */
+header {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* ========== Sections ========== */
-#intro {
-    margin-bottom: 2em;
+/* ========== Contenu principal ========== */
+main {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin: 1rem auto;
+    padding: 2rem;
 }
-#intro p {
-    font-size: 1.1rem;
-    margin-bottom: 1em;
+
+/* ========== Questions ========== */
+.question-block {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s;
+}
+
+.question-block:hover {
+    transform: translateY(-2px);
+}
+
+.question-content {
+    margin-bottom: 1.5rem;
+}
+
+/* ========== Tableaux JSTable ========== */
+.question-block table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    /* Nouveau style pour gestion du contenu long */
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+/* Supposons qu’on veuille 25% / 25% / 25% / 25% */
+.question-block th:nth-child(1),
+.question-block td:nth-child(1) {
+    width: 25% !important;
+}
+
+.question-block th:nth-child(2),
+.question-block td:nth-child(2) {
+    width: 25% !important;
+}
+
+.question-block th:nth-child(3),
+.question-block td:nth-child(3) {
+    width: 25% !important;
+}
+
+.question-block th:nth-child(4),
+.question-block td:nth-child(4) {
+    width: 25% !important;
+}
+
+.question-block th {
+    background-color: #f7fafc;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #e2e8f0;
+    color: #4a5568;
+}
+
+.question-block td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #edf2f7;
+    vertical-align: top;
+}
+
+.question-block tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* ========== Choix de réponse ========== */
+.choice-label {
+    display: block;
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.choice-label:hover {
+    background: #f1f5f9;
+}
+
+.choice-label input[type="radio"] {
+    margin-right: 0.5rem;
+    accent-color: #3b82f6;
 }
 
 /* ========== Timer ========== */
 #timer-container {
-    background: #eee;
-    border-radius: 4px;
-    margin-bottom: 1em;
-    /* L'animation bounceIn est gérée en HTML (class) */
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
 }
-#timer-display {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #d9534f; /* rouge */
-}
-
-/* ========== Blocs de questions ========== */
-.question-block {
-    margin-bottom: 1.5em;
-    padding: 1em;
-    background: #f4f4f4;
-    border-radius: 4px;
-}
-/* On ajoutera un data-aos différent pour chaque question (main.js),
-   ou tout du moins un fadeIn standard, si on veut. */
-
-.question-block h3 {
-    margin-bottom: 0.5em;
-    font-size: 1.05rem;
-}
-.choice-label {
-    margin-right: 0.5em;
-    cursor: pointer;
-}
-
-/* ========== Boutons ========== */
-/* #submit-btn, #retry-btn
-   => On laisse .btn.* (Bootstrap) gérer l'essentiel du style */
 
 /* ========== Résultats ========== */
-#results h2 {
-    margin-bottom: 1em;
-}
-#score {
-    font-weight: bold;
-    margin-bottom: 1em;
-}
-#correction p {
-    margin-bottom: 0.8em;
-    line-height: 1.4em;
+#results {
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 2rem;
 }
 
-/* ========== Footer ========== */
-/* Géré par .bg-primary .text-white + .fade-in + animate__fadeInUp
-   dans index.html */
-footer {
-    text-align: center;
-    margin-top: 1em;
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .question-block {
+        padding: 1rem;
+    }
+
+    .question-block table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .question-block th,
+    .question-block td {
+        min-width: 120px;
+    }
+}
+
+/* ========== Animations personnalisées ========== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-out;
 }

@@ -29,6 +29,14 @@ let allQuestions = [];
 let selectedQuestions = [];
 
 /**
+ * Fonction utilitaire pour sélectionner aléatoirement un sous-ensemble d'éléments dans un tableau.
+ */
+function getRandomQuestions(array, count) {
+    const shuffled = array.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+}
+
+/**
  * Charge et assemble les questions depuis 6 fichiers JSON (ex : chapt1.json … chapt6.json)
  * La répartition est définie par le nombre de questions à tirer dans chaque fichier.
  *
@@ -56,11 +64,9 @@ async function loadQuestionsFromMultipleJson() {
 
             // Pour chaque question, on complète avec les infos du chapitre si disponibles.
             data.questions.forEach(q => {
-                // Si la question ne définit pas déjà le format d’énoncé, on prend celui du chapitre.
                 if (!q.hasOwnProperty('enonceFormat') && data.enonceFormat) {
                     q.enonceFormat = data.enonceFormat;
                 }
-                // Ajouter l'identifiant et le titre du chapitre (pour d'éventuelles utilisations ultérieures)
                 if (data.chapterId) {
                     q.chapterId = data.chapterId;
                 }
@@ -90,24 +96,18 @@ async function loadQuestionsFromMultipleJson() {
  * Démarre l'examen
  */
 async function startExam() {
-    // Masquer la section d'intro et afficher la section d'examen
     introSection.classList.add('hidden');
     examSection.classList.remove('hidden');
 
-    // Réinitialiser le timer
     timeRemaining = 75 * 60;
     startTimer();
 
-    // Charger les questions et composer la sélection de 40 questions
     selectedQuestions = await loadQuestionsFromMultipleJson();
     if (selectedQuestions.length < 40) {
         console.warn("Le total de questions récupérées est inférieur à 40 !");
     }
 
-    // Afficher les questions dans le DOM
     displayQuestions(selectedQuestions);
-
-    // Rendre visible le bouton de soumission
     submitBtn.style.display = "inline-block";
 }
 
@@ -121,45 +121,137 @@ function displayQuestions(questions) {
         const questionDiv = document.createElement('div');
         questionDiv.classList.add('question-block');
 
-        // Définir l'animation (alternance fade-right / fade-left)
+        // Animation AOS (alternance fade-right / fade-left)
         const aosEffect = (index % 2 === 0) ? "fade-right" : "fade-left";
         questionDiv.setAttribute("data-aos", aosEffect);
         questionDiv.setAttribute("data-aos-duration", "600");
 
-        // Titre de la question
-        const questionTitle = document.createElement('h3');
-        if (q.enonceFormat && q.enonceFormat === "markdown") {
-            // Utilise marked pour convertir le Markdown en HTML
-            questionTitle.innerHTML = `Question ${index + 1}: ${marked.parse(q.enonce)}`;
-        } else {
-            questionTitle.textContent = `Question ${index + 1}: ${q.enonce}`;
-        }
-        questionDiv.appendChild(questionTitle);
+        // Création du conteneur pour le contenu de la question
+        const questionContent = document.createElement('div');
+        questionContent.classList.add('question-content');
 
-        // Affichage des choix (boutons radio)
+        if (q.enonceFormat && q.enonceFormat === "markdown") {
+            questionContent.innerHTML = `<strong>Question ${index + 1}:</strong> ${marked.parse(q.enonce)}`;
+        } else {
+            questionContent.textContent = `Question ${index + 1}: ${q.enonce}`;
+        }
+
+        // -------------------------------
+        // Conversion des tableaux Markdown en JSTable avec gestion améliorée
+        // -------------------------------
+        const markdownTables = questionContent.querySelectorAll('table');
+        markdownTables.forEach((table, tableIndex) => {
+            const containerId = `table-${q.questionId}-${tableIndex}`;
+            const tableContainer = document.createElement('table');
+            tableContainer.id = containerId;
+            table.replaceWith(tableContainer);
+
+            // Extraction des en-têtes avec gestion des retours chariot
+            let headers = Array.from(table.querySelectorAll('th')).map(th =>
+                th.textContent.trim().replace(/\n/g, ' ')
+            );
+            if (headers.length === 0) {
+                const firstRow = table.querySelector('tr');
+                if (firstRow) {
+                    headers = Array.from(firstRow.querySelectorAll('td')).map(td =>
+                        td.textContent.trim().replace(/\n/g, ' ')
+                    );
+                }
+            }
+
+            // Extraction des données avec gestion des cellules vides
+            const rows = [];
+            let rowElements = table.querySelectorAll('tbody tr');
+            if (rowElements.length === 0) {
+                rowElements = table.querySelectorAll('tr:not(:first-child)');
+            }
+            rowElements.forEach(tr => {
+                const cells = Array.from(tr.querySelectorAll('td')).map(td =>
+                    td.textContent.trim().replace(/\n/g, ' ') || ""
+                );
+                if (cells.some(cell => cell !== "")) {
+                    const rowData = {};
+                    headers.forEach((header, index) => {
+                        rowData[header] = cells[index] || "";
+                    });
+                    rows.push(rowData);
+                }
+            });
+
+            // Création du tableau via JSTable si les données sont valides
+            if (headers.length > 0 && rows.length > 0) {
+                try {
+                    new JSTable({
+                        table: `#${containerId}`,
+                        data: rows,
+                        columns: headers.map(header => ({
+                            name: header,
+                            title: header,
+                            width: 'auto'
+                        })),
+                        classes: ['table', 'table-bordered', 'table-hover'],
+                        search: false,
+                        pagination: false
+                    });
+                } catch (error) {
+                    console.error("Erreur JSTable :", error);
+                    tableContainer.outerHTML = table.outerHTML; // Fallback au tableau original
+                }
+            } else {
+                tableContainer.outerHTML = table.outerHTML; // Afficher le tableau original
+            }
+        });
+        // -------------------------------
+
+        questionDiv.appendChild(questionContent);
+
+        // Affichage des choix de réponse
         q.choices.forEach((choiceText, choiceIndex) => {
             const label = document.createElement('label');
-            label.classList.add('choice-label');
+            label.classList.add('choice-label', 'd-block', 'mb-2');
 
             const radio = document.createElement('input');
             radio.type = 'radio';
-            // Le nom est basé sur questionId : que ce soit un nombre (ancien format) ou une chaîne (nouveau format)
             radio.name = `question-${q.questionId}`;
             radio.value = choiceIndex;
+            radio.classList.add('me-2');
 
             label.appendChild(radio);
             label.appendChild(document.createTextNode(choiceText));
             questionDiv.appendChild(label);
-            questionDiv.appendChild(document.createElement('br'));
         });
 
         questionsContainer.appendChild(questionDiv);
     });
 
-    // Si AOS est utilisé, rafraîchir les animations
     if (window.AOS) {
         AOS.refresh();
     }
+}
+
+/**
+ * Récupère la réponse sélectionnée par l'utilisateur pour une question donnée.
+ */
+function getUserAnswer(questionId) {
+    const radios = document.getElementsByName(`question-${questionId}`);
+    for (let radio of radios) {
+        if (radio.checked) return parseInt(radio.value);
+    }
+    return null;
+}
+
+/**
+ * Calcule le score en comparant la réponse de l'utilisateur à la réponse correcte.
+ */
+function calculateScore(questions) {
+    let score = 0;
+    questions.forEach(q => {
+        const userAnswer = getUserAnswer(q.questionId);
+        if (userAnswer === q.correctIndex) {
+            score++;
+        }
+    });
+    return score;
 }
 
 /**
@@ -183,7 +275,6 @@ function showResults(score) {
 
     scorePara.textContent = `Vous avez obtenu ${score}/${totalQuestions} (${pourcentage}%).`;
 
-    // Seuil de réussite
     const threshold = 26;
     if (score >= threshold) {
         scorePara.textContent += " Félicitations, vous avez réussi l'examen !";
@@ -193,7 +284,6 @@ function showResults(score) {
         scorePara.classList.add("animate__animated", "animate__shakeX");
     }
 
-    // Détail question par question
     correctionDiv.innerHTML = "";
     selectedQuestions.forEach(q => {
         const userAnswer = getUserAnswer(q.questionId);

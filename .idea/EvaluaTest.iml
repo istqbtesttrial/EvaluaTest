@@ -11,5 +11,6 @@
     <orderEntry type="library" name="animate.css" level="application" />
     <orderEntry type="library" name="marked" level="application" />
     <orderEntry type="library" name="@jstable/jstable" level="application" />
+    <orderEntry type="library" name="sal.js" level="application" />
   </component>
 </module>

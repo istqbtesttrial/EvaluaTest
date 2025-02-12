@@ -95,7 +95,8 @@
     },
     {
       "questionId": "4-9",
-      "enonce": "Vous avez les conditions suivantes et les résultats de ces combinaisons de conditions. En utilisant la technique du tableau de décision, combien de cas de test minimum sont nécessaires pour couvrir ces conditions ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous avez les conditions et résultats suivants :\n\n| Conditions                         | Résultats                  |\n| ---------------------------------- | -------------------------- |\n| Argent comptant valide             | Rejeter l’argent comptant  |\n| Carte de crédit valide             | Rejeter la carte           |\n| Carte de débit valide              | Message d’erreur           |\n| Code PIN valide                    | Rendre l’argent comptant   |\n| La banque accepte (la transaction) | Rembourser la carte        |\n| Sélection valide                   | Vendre l’article           |\n| Article en stock                   |                            |\n\nEn utilisant la technique du tableau de décision, combien de cas de test minimum sont nécessaires pour couvrir ces conditions ?",
       "choices": [
         "7",
         "13",

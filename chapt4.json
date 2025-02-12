@@ -278,12 +278,12 @@
       "questionId": "4-25",
       "enonce": "Votre suite de tests a atteint une couverture de 100% des instructions. Quelle est la conséquence de ce fait ?",
       "choices": [
-        "Chaque instruction du code contenant un défaut a été exécutée au moins une fois",
+        "Chaque instruction du code ,y compris toutes les decisions, a été exécutée au moins une fois",
         "Toute suite de tests contenant plus de cas de test que la vôtre atteindra également 100% de couverture des instructions",
         "Chaque chemin dans le code a été exécuté au moins une fois",
         "Chaque combinaison de valeurs d’entrée a été testée au moins une fois"
       ],
-      "correctIndex": 0
+      "correctIndex": 2
     },
     {
       "questionId": "4-26",

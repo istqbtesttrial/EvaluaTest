@@ -82,7 +82,8 @@
     },
     {
       "questionId": "5-8",
-      "enonce": "On vous a donné l’ensemble de cas de test suivant à exécuter, en précisant de les exécuter par ordre de risque et le plus rapidement possible pour donner un retour d’information aux développeurs au plus tôt.\nVoici les informations : Durée, Risque, Priorité, Dépendances.\n\nQue faut-il exécuter en premier ?",
+      "enonceFormat": "markdown",
+      "enonce": "On vous a donné l’ensemble de cas de test suivant à exécuter, en précisant de les exécuter par ordre de risque et le plus rapidement possible pour donner un retour d’information aux développeurs au plus tôt.\n\nVoici une traduction du tableau en français :\n\n| **ID du cas de test** | **Durée**    | **Priorité de risque** | **Dépendance** |\n|-----------------------|--------------|-------------------------|----------------|\n| 1                     | 30 minutes   | Faible                  | 6              |\n| 2                     | 10 minutes   | Moyenne                 | aucune         |\n| 3                     | 45 minutes   | Élevée                  | 1              |\n| 4                     | 30 minutes   | Élevée                  | 2              |\n| 5                     | 10 minutes   | Moyenne                 | 4              |\n| 6                     | 15 minutes   | Faible                  | 2              |\n\nQue faut-il exécuter en premier ?",
       "choices": [
         "2, 4, 5, 6, 1, 3",
         "4, 3, 2, 5, 6, 1",

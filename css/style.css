@@ -60,32 +60,12 @@ main {
     margin: 1.5rem 0;
     background: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    /* Nouveau style pour gestion du contenu long */
-    table-layout: fixed;
+    /* On retire ici le table-layout fixe par défaut pour laisser l'adaptation
+       et on appliquera table-layout: fixed uniquement aux tableaux nécessitant un format fixe */
     word-wrap: break-word;
 }
 
-/* Supposons qu’on veuille 25% / 25% / 25% / 25% */
-.question-block th:nth-child(1),
-.question-block td:nth-child(1) {
-    width: 25% !important;
-}
-
-.question-block th:nth-child(2),
-.question-block td:nth-child(2) {
-    width: 25% !important;
-}
-
-.question-block th:nth-child(3),
-.question-block td:nth-child(3) {
-    width: 25% !important;
-}
-
-.question-block th:nth-child(4),
-.question-block td:nth-child(4) {
-    width: 25% !important;
-}
-
+/* Les styles par défaut pour th et td restent inchangés */
 .question-block th {
     background-color: #f7fafc;
     padding: 0.75rem;
@@ -103,6 +83,38 @@ main {
 
 .question-block tr:nth-child(even) {
     background-color: #f8fafc;
+}
+
+/* ========== Styles pour tableaux à nombre de colonnes fixe ========== */
+/* Ces styles s'appliquent uniquement aux tableaux auxquels on aura ajouté les classes :
+     - fixed-columns
+     - fixed-columns-2, fixed-columns-3 ou fixed-columns-4 selon le nombre de colonnes */
+
+/* Appliquer table-layout: fixed uniquement aux tableaux fixés */
+.question-block table.fixed-columns {
+    table-layout: fixed;
+}
+
+/* Pour 2 colonnes : première colonne 30%, deuxième colonne 70% */
+.question-block table.fixed-columns.fixed-columns-2 th:nth-child(1),
+.question-block table.fixed-columns.fixed-columns-2 td:nth-child(1) {
+    width: 30% !important;
+}
+.question-block table.fixed-columns.fixed-columns-2 th:nth-child(2),
+.question-block table.fixed-columns.fixed-columns-2 td:nth-child(2) {
+    width: 70% !important;
+}
+
+/* Pour 3 colonnes : 33.33% chacune */
+.question-block table.fixed-columns.fixed-columns-3 th,
+.question-block table.fixed-columns.fixed-columns-3 td {
+    width: 33.33% !important;
+}
+
+/* Pour 4 colonnes : 25% chacune */
+.question-block table.fixed-columns.fixed-columns-4 th,
+.question-block table.fixed-columns.fixed-columns-4 td {
+    width: 25% !important;
 }
 
 /* ========== Choix de réponse ========== */

@@ -71,7 +71,8 @@
     },
     {
       "questionId": "5-7",
-      "enonce": "Votre équipe utilise le Planning Poker pour estimer l’effort d’une User Story.\nLes votes sont les suivants :\n1) Développeur : 3 / Testeur : 8\n2) Développeur : 5 / Testeur : 8\n3) Développeur : 5 / Testeur : 5\nBien que trois tours de vote aient été nécessaires pour atteindre un consensus, quel nombre de points doit-on attribuer à la story ?",
+      "enonceFormat": "markdown",
+      "enonce": "Votre équipe utilise le Planning Poker pour estimer l’effort d’une User Story.\n\nVoici les votes par tour :\n\n| **Tour** | **Développeur** | **Testeur** |\n|----------|-----------------|-------------|\n| **1**        | 3               | 8           |\n| **2**        | 5               | 8           |\n| **3**        | 5               | 5           |\n\nBien que trois tours de vote aient été nécessaires pour atteindre un consensus, quel nombre de points doit-on attribuer à la story ?",
       "choices": [
         "10 car c’est la somme des points",
         "8 car c’était le nombre le plus élevé",
@@ -462,7 +463,8 @@
     },
     {
       "questionId": "5-42",
-      "enonce": "Vous testez une fonction de tri qui reçoit un ensemble de nombres en entrée et renvoie le même ensemble trié par ordre croissant. Le journal d’exécution de test est le suivant :\n\nEnvironnement : build 2.002.2182, cas de test : TCS-3 (5 TC)\nID exécution : 736\nStart 12:43:21.003\n12:43:21.003 Exécution TC1. Input: 3. Output: 3. → passé\n12:43:21.003 Exécution TC2. Input: 3 11 6 5. Output: 3 5 6 11. → passé\n12:43:21.004 Exécution TC3. Input: 8 7 3 7 1. Output: 1 3 7 8. → échec\n12:43:21.005 Exécution TC4. Input: -2 -2 -2 -3 -3. Output: -3 -2. → échec\n12:43:21.005 Exécution TC5. Input: 0 -2 0 3 4 4. Output: -2 0 3 4. → échec\nEnd 12:43:21.005\nTemps total test cycle : 0:00:00.002\n\nQuelle description du dysfonctionnement décrit le mieux l’échec qui peut être utilisée dans un rapport de défaut ?",
+      "enonceFormat": "markdown",
+      "enonce": "Vous testez une fonction de tri qui reçoit un ensemble de nombres en entrée et renvoie le même ensemble trié par ordre croissant. Le journal d’exécution de test est le suivant :\n\nEnvironnement : build 2.002.2182, cas de test : TCS-3 (5 TC)\nID exécution : 736\nStart 12:43:21.003\n\n```\n12:43:21.003 Exécution TC1. Input: 3. Output: 3. → passé\n12:43:21.003 Exécution TC2. Input: 3 11 6 5. Output: 3 5 6 11. → passé\n12:43:21.004 Exécution TC3. Input: 8 7 3 7 1. Output: 1 3 7 8. → échec\n12:43:21.005 Exécution TC4. Input: -2 -2 -2 -3 -3. Output: -3 -2. → échec\n12:43:21.005 Exécution TC5. Input: 0 -2 0 3 4 4. Output: -2 0 3 4. → échec\nEnd 12:43:21.005\nTemps total test cycle : 0:00:00.002\n```\n\nQuelle description du dysfonctionnement décrit le mieux l’échec qui peut être utilisée dans un rapport de défaut ?",
       "choices": [
         "Le système échoue à trier plusieurs ensembles de nombres. Réf. : TC3, TC4, TC5",
         "Le système semble ignorer les duplicatas en triant. Réf. : TC3, TC4, TC5",
@@ -605,12 +607,24 @@
     },
     {
       "questionId": "5-55",
-      "enonce": "Considérez ce rapport d’anomalie pour un Système de Prêt de Livres :\n\nID anomalie : 001 | Titre : Impossible de rendre un livre\nSévérité : High | Priorité : [vide]\nEnvironnement : Windows 10, Google Chrome\n\nDescription : Lors de l’utilisation de la fonction \"Retour d’un livre\", le système n’enregistre pas le retour et le livre reste emprunté par l’utilisateur.\nÉtapes pour reproduire :\n1) Se connecter au Système de Prêt en tant qu’utilisateur ayant déjà un livre emprunté\n2) Cliquer sur \"Retour\" pour le livre emprunté\n   → Le système n’enregistre pas le retour, le livre reste emprunté.\nRésultat attendu : Le livre doit être rendu et ne plus apparaître comme emprunté.\nRésultat réel : Le livre reste emprunté par l’utilisateur et n’est pas marqué comme retourné.\nPièces jointes : [liste vide]\n\nLequel des éléments suivants aiderait le plus le développeur à reproduire rapidement l’échec ?",
+      "enonceFormat": "markdown",
+      "enonce": "Considérez ce rapport d’anomalie pour un Système de Prêt de Livres :\n\n```\nID anomalie : 001 | Titre : Impossible de rendre un livre\nSévérité : High | Priorité : [vide]\nEnvironnement : Windows 10, Google Chrome\n\nDescription : Lors de l’utilisation de la fonction \"Retour d’un livre\", le système n’enregistre pas le retour et le livre reste emprunté par l’utilisateur.\nÉtapes pour reproduire :\n1) Se connecter au Système de Prêt en tant qu’utilisateur ayant déjà un livre emprunté\n2) Cliquer sur \"Retour\" pour le livre emprunté\n   → Le système n’enregistre pas le retour, le livre reste emprunté.\nRésultat attendu : Le livre doit être rendu et ne plus apparaître comme emprunté.\nRésultat réel : Le livre reste emprunté par l’utilisateur et n’est pas marqué comme retourné.\nPièces jointes : [liste vide]\n```\n\nLequel des éléments suivants aiderait le plus le développeur à reproduire rapidement l’échec ?",
       "choices": [
         "Ajouter des informations sur quels utilisateurs et quels livres sont concernés dans la section \"Description\"",
         "Renseigner la valeur manquante du champ \"Priorité\"",
         "Joindre des dumps mémoire et des captures de la base de données à chaque étape décrite",
         "Refaire le même cas de test sur différents environnements et écrire plusieurs rapports de défaut"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "5-56",
+      "enonce": "Parmi les options suivantes, lesquelles sont des métriques courantes utilisées pour rendre compte du niveau de qualité de l’objet de test ?",
+      "choices": [
+        "Nombre de défauts trouvés lors des tests système",
+        "Effort total de conception de test divisé par le nombre de cas de test conçus",
+        "Nombre de procédures de test exécutées",
+        "Temps nécessaire pour corriger un défaut"
       ],
       "correctIndex": 0
     }

@@ -434,6 +434,17 @@
         "L’option de support linguistique du système a été utilisée pour permettre des transactions en anglais et dans la langue locale"
       ],
       "correctIndex": 1
+    },
+    {
+      "questionId": "2-40",
+      "enonce": "Vous travaillez en tant que testeur dans une équipe qui suit le modèle en V. Parmi les activités suivantes, lesquelles PEUVENT être réalisées dans les phases initiales du cycle de vie du développement logiciel (SDLC) ?",
+      "choices": [
+        "Exécution de tests dynamiques",
+        "Test statique",
+        "Exécution de tests d'acceptation",
+        "Test de maintenance"
+      ],
+      "correctIndex": 1
     }
   ]
 }

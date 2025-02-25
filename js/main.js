@@ -178,6 +178,11 @@ function displayQuestions(questions) {
                 }
             });
 
+            // Ajout des classes de style fixe si le nombre de colonnes est de 2, 3 ou 4
+            if (headers.length >= 2 && headers.length <= 4) {
+                tableContainer.classList.add('fixed-columns', `fixed-columns-${headers.length}`);
+            }
+
             // Création du tableau via JSTable si les données sont valides
             if (headers.length > 0 && rows.length > 0) {
                 try {

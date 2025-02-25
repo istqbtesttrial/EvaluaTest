@@ -207,7 +207,7 @@
     {
       "questionId": "4-19",
       "enonceFormat": "markdown",
-      "enonce": "Vous testez un système de pesée qui calcule les coûts d’expédition pour un distributeur régional de pièces auto. Pour des raisons réglementaires, le poids ne peut dépasser 100 livres. Vous voulez inclure l’analyse des valeurs limites (2 valeurs) dans votre conception de test en boîte noire.\n\nVoici les tranches de poids :\n\n- 0 à 10 lb → 5,00 $\n- 11 à 25 lb → 7,50 $\n- 26 à 50 lb → 12,00 $\n- 51 à 100 lb → 17,00 $\n\nCombien de tests devez-vous exécuter pour obtenir 100 % de couverture par analyse de valeurs limites à deux valeurs ?",
+      "enonce": "Vous testez un système de pesée qui calcule les coûts d’expédition pour un distributeur régional de pièces auto. Pour des raisons réglementaires, le poids ne peut dépasser 100 livres. Vous voulez inclure l’analyse des valeurs limites (2 valeurs) dans votre conception de test en boîte noire.\n\nVoici les tranches de poids (tableau transposé) :\n\n| **Poids**              | **Frais d’expédition** |\n|------------------------|------------------------|\n| **0 à 10 livres**      | 5,00 $                |\n| **11 à 25 livres**     | 7,50 $                |\n| **26 à 50 livres**     | 12,00 $               |\n| **51 à 100 livres**    | 17,00 $               |\n\nCombien de tests devez-vous exécuter pour obtenir 100 % de couverture par analyse de valeurs limites à deux valeurs ?",
       "choices": [
         "4",
         "8",
@@ -758,6 +758,42 @@
         "Entrer la page sur trois navigateurs : Edge, Chrome, Opera. Filtre 90–110, résultat : A et B avec la même mise en page"
       ],
       "correctIndex": 0
+    },
+    {
+      "questionId": "4-67",
+      "enonceFormat": "markdown",
+      "enonce": "---\n\nOn vous donne le pseudocode suivant pour passer commande d’un hamburger.  \n> **Remarque** : si vous ajoutez ou supprimez des éléments au hamburger de base, alors ce n’est plus le hamburger de base.\n\n```\nStart\nSelect basic burger\nIf customer adds items\n    While items to be added\n        Ask customer which item\n        Add item\n    End while\nEndif\nIf customer deletes items\n    While items to be deleted\n        Ask customer which item\n        Delete item\n    End while\nEndif\nIf customer wants fries\n    Add fries to order\nEndif\nComplete order\nEnd\n```\n\n**Question** : Lequel des tableaux de décision suivants (a, b, c ou d) correspond correctement à ce pseudocode ?\n\n---\n\n## Propositions de tableaux de décision\n\n### A.\n| **Test n°**             | **1** | **2** | **3** | **4** | **5** | **6** |\n|-------------------------|-------|-------|-------|-------|-------|-------|\n| **Conditions**          |       |       |       |       |       |       |\n| Ajouter des articles    | T     | T     | F     | F     | F     | F     |\n| Supprimer des articles  | F     | F     | T     | T     | F     | F     |\n| Ajouter des frites      | T     | F     | T     | F     | T     | F     |\n| **Résultats**           |       |       |       |       |       |       |\n| Hamburger de base       | X     | X     |       | X     | X     | X     |\n| Hamburger – articles    |       |       | X     | X     |       |       |\n| Articles ajoutés        | X     | X     |       |       |       |       |\n| Frites                  | X     |       | X     |       | X     |       |\n\n---\n\n### B.\n| **Test n°**             | **1** | **2** | **3** | **4** | **5** | **6** | **7** | **8** |\n|-------------------------|-------|-------|-------|-------|-------|-------|-------|-------|\n| **Conditions**          |       |       |       |       |       |       |       |       |\n| Ajouter des articles    | T     | T     | T     | T     | F     | F     | F     | F     |\n| Supprimer des articles  | T     | T     | F     | F     | T     | T     | F     | F     |\n| Ajouter des frites      | T     | F     | T     | F     | T     | F     | T     | F     |\n| **Résultats**           |       |       |       |       |       |       |       |       |\n| Hamburger de base       |       |       |       |       |       |       | X     | X     |\n| Articles supprimés      | X     | X     |       |       | X     | X     |       |       |\n| Articles ajoutés        | X     | X     | X     | X     |       |       |       |       |\n| Frites                  | X     | X     | X     | X     | X     | X     | X     | X     |\n\n---\n\n### C.\n| **Test n°**             | **1** | **2** | **3** | **4** | **5** | **6** | **7** | **8** |\n|-------------------------|-------|-------|-------|-------|-------|-------|-------|-------|\n| **Conditions**          |       |       |       |       |       |       |       |       |\n| Ajouter des articles    | T     | T     | T     | T     | F     | F     | F     | F     |\n| Supprimer des articles  | F     | F     | F     | F     | T     | T     | T     | T     |\n| Ajouter des frites      | T     | F     | T     | F     | T     | F     | T     | F     |\n| **Résultats**           |       |       |       |       |       |       |       |       |\n| Hamburger de base       | X     | X     | X     | X     | X     |       |       |       |\n| Hamburger – articles    |       |       |       |       | X     | X     | X     | X     |\n| Articles ajoutés        | X     | X     | X     | X     |       |       |       |       |\n| Frites                  | X     |       | X     |       | X     |       | X     |       |\n\n---\n\n### D.\n| **Test n°**             | **1** | **2** | **3** | **4** | **5** | **6** | **7** | **8** |\n|-------------------------|-------|-------|-------|-------|-------|-------|-------|-------|\n| **Conditions**          |       |       |       |       |       |       |       |       |\n| Ajouter des articles    | T     | T     | T     | T     | F     | F     | F     | F     |\n| Supprimer des articles  | T     | T     | F     | F     | T     | T     | F     | F     |\n| Ajouter des frites      | T     | F     | T     | F     | T     | F     | T     | F     |\n| **Résultats**           |       |       |       |       |       |       |       |       |\n| Hamburger de base       | X     | X     | X     | X     |       |       | X     | X     |\n| Hamburger – articles    |       |       |       |       | X     | X     |       |       |\n| Articles ajoutés        | X     | X     | X     | X     |       |       |       |       |\n| Frites                  | X     | X     | X     | X     | X     | X     | X     | X     |\n\n",
+      "choices": [
+        "le tableau A",
+        "le tableau B",
+        "le tableau C",
+        "le tableau D"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "questionId": "4-7",
+      "enonceFormat": "markdown",
+      "enonce": "Vous testez une machine qui corrige des copies d’examen et attribue des notes. Les résultats sont :\n\n- de 1 à 49 = F\n- de 50 à 59 = E\n- de 60 à 69 = D\n- de 70 à 79 = C\n- de 80 à 89 = B\n- de 90 à 100 = A\n\nSi vous appliquez la partition d’équivalence, combien de cas de test sont nécessaires pour obtenir la couverture de test minimale ?",
+      "choices": [
+        "6",
+        "8",
+        "10",
+        "12"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "questionId": "4-69",
+      "enonceFormat": "markdown",
+      "enonce": "---\n\nLe tableau de décision ci-dessous contient les règles pour déterminer le risque d’athérosclérose.\n\n|                | **Regle 1** | **Regle 2** | **Regle 3** | **Regle 4** | **Regle 5** |\n|----------------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|\n| **Conditions** |\n| **Cholestérol (mg/dl)** | ≤ 124 | ≤ 124 | 125 – 200 | 125 – 200 | ≥ 201 |\n| **Tension artérielle (mm Hg)** | ≤ 140 | > 140 | ≤ 140 | > 140 | – |\n| **Actions**    |\n| **Niveau de risque** | Très faible | Faible | Moyen | Élevé | Très élevé |\n\nVous avez conçu les cas de test suivants, avec les données d’entrée :\n\n- **TC1** : Cholestérol = 125 mg/dl, Tension = 141 mm Hg  \n- **TC2** : Cholestérol = 200 mg/dl, Tension = 139 mm Hg  \n- **TC3** : Cholestérol = 124 mg/dl, Tension = 201 mm Hg  \n- **TC4** : Cholestérol = 201 mg/dl, Tension = 140 mm Hg  \n- **TC5** : Cholestérol = 199 mg/dl, Tension = 201 mm Hg  \n\nQuelle est la couverture du tableau de décision atteinte par ces cas de test ?\n\n---",
+      "choices": [
+        "40%",
+        "60%",
+        "80%",
+        "100%"
+      ],
+      "correctIndex": 1
     }
   ]
 }

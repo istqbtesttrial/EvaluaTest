@@ -292,8 +292,8 @@
     },
     {
       "questionId": "1-27",
-      "enonce": "Considérez le testware suivant :\n\n**Testware :**\n\n| Attribut         | Valeur                                                    |\n| ---------------- | --------------------------------------------------------- |\n| Test Charter     | #04.018                                                  |\n| Durée de session | 1h                                                       |\n| Périmètre        | Page d’inscription                                       |\n| Avec             | Différents jeux de données d’entrée incorrectes          |\n| Objectif         | Découvrir les défauts liés à l’acceptation du processus d’inscription avec des données incorrectes |\n\nQuelle activité de test produit ce testware en tant que livrable ?",
       "enonceFormat": "markdown",
+      "enonce": "Considérez le testware suivant :\n\n**Testware :**\n\n| Attribut         | Valeur                                                                                             |\n| ---------------- | -------------------------------------------------------------------------------------------------- |\n| Test Charter     | #04.018                                                                                           |\n| Durée de session | 1h                                                                                                |\n| Périmètre        | Page d’inscription                                                                                |\n| Avec             | Différents jeux de données d’entrée incorrectes                                                   |\n| Objectif         | Découvrir les défauts liés à l’acceptation du processus d’inscription avec des données incorrectes |\n\nQuelle activité de test produit ce testware en tant que livrable ?",
       "choices": [
         "La planification du test (test planning)",
         "Le suivi et contrôle du test (test monitoring and control)",
@@ -580,6 +580,17 @@
         "ii, iii, v"
       ],
       "correctIndex": 1
+    },
+    {
+      "questionId": "1-53",
+      "enonce": "Lequel de ces tâches relève PRINCIPALEMENT d'un rôle de test ?",
+      "choices": [
+        "Configurer les environnements de test",
+        "Maintenir le backlog du produit",
+        "Concevoir des solutions pour de nouvelles exigences",
+        "Créer le plan de test"
+      ],
+      "correctIndex": 0
     }
   ]
 }

@@ -401,10 +401,10 @@
       "choices": [
         "TC3",
         "TC5",
-        "TC002",
-        "TC001"
+        "TC2",
+        "TC1"
       ],
-      "correctIndex": 0
+      "correctIndex": 3
     },
     {
       "questionId": "5-37",

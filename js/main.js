@@ -25,7 +25,6 @@ if (unansweredModalEl && window.bootstrap && typeof window.bootstrap.Modal === '
     unansweredModal = new window.bootstrap.Modal(unansweredModalEl);
 }
 
-let unansweredModal = unansweredModalEl ? new bootstrap.Modal(unansweredModalEl) : null;
 
 /* --- Timer (1h15) --- */
 let timeRemaining = 75 * 60; // 75 minutes en secondes

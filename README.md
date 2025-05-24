@@ -12,6 +12,8 @@ python3 -m http.server 8000
 
 Run this command from the project root and then open <http://localhost:8000/> in your browser. The `index.html` file will load and the quiz interface will appear.
 
+This version loads external libraries from public CDNs. An active Internet connection is therefore required while using the application.
+
 ## JSON data format
 
 Questions are organized per chapter. Each `chaptX.json` file contains a structure similar to:

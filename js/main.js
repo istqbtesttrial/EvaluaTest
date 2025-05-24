@@ -32,8 +32,9 @@ let selectedQuestions = [];
  * Fonction utilitaire pour sélectionner aléatoirement un sous-ensemble d'éléments dans un tableau.
  */
 function getRandomQuestions(array, count) {
-    const shuffled = array.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
+    const copy = array.slice();
+    shuffleArray(copy);
+    return copy.slice(0, count);
 }
 
 /**

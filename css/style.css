@@ -10,11 +10,21 @@
 }
 
 /* ========== Styles généraux ========== */
+html, body {
+    height: 100%;
+}
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: #2d3748;
     background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
 }
 
 .hidden {
@@ -33,6 +43,7 @@ main {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     margin: 1rem auto;
     padding: 2rem;
+    flex: 1;
 }
 
 /* ========== Questions ========== */

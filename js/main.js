@@ -16,6 +16,9 @@ const correctionDiv = document.getElementById('correction');
 const retryBtn = document.getElementById('retry-btn');
 const timerDisplay = document.getElementById('timer-display');
 const timerContainer = document.getElementById('timer-container');
+const unansweredModalEl = document.getElementById('unansweredModal');
+const confirmSubmitBtn = document.getElementById('confirm-submit');
+let unansweredModal = unansweredModalEl ? new bootstrap.Modal(unansweredModalEl) : null;
 
 /* --- Timer (1h15) --- */
 let timeRemaining = 75 * 60; // 75 minutes en secondes
@@ -37,6 +40,13 @@ function getRandomQuestions(array, count) {
     const copy = array.slice();
     shuffleArray(copy);
     return copy.slice(0, count);
+}
+
+/**
+ * Vérifie si au moins une question n'a pas de réponse sélectionnée.
+ */
+function hasUnansweredQuestions() {
+    return selectedQuestions.some(q => getUserAnswer(q.questionId) === -1);
 }
 
 /**
@@ -256,6 +266,22 @@ function submitExam() {
 }
 
 /**
+ * Gère le clic sur le bouton de soumission en affichant
+ * un message d'alerte si des questions sont sans réponse.
+ */
+function handleSubmitClick() {
+    if (hasUnansweredQuestions()) {
+        if (unansweredModal) {
+            unansweredModal.show();
+        } else if (confirm("Certaines questions n'ont pas été répondues. Voulez-vous valider malgré tout ?")) {
+            submitExam();
+        }
+    } else {
+        submitExam();
+    }
+}
+
+/**
  * Affiche les résultats (score global et détail question par question)
  */
 function showResults(score) {
@@ -358,7 +384,16 @@ function handleTimerPosition() {
     GESTION DES ÉVÉNEMENTS
    ================================ */
 startBtn.addEventListener('click', startExam);
-submitBtn.addEventListener('click', submitExam);
+submitBtn.addEventListener('click', handleSubmitClick);
 retryBtn.addEventListener('click', retryExam);
 window.addEventListener('scroll', handleTimerPosition);
 window.addEventListener('resize', updateTimerOffset);
+
+if (confirmSubmitBtn) {
+    confirmSubmitBtn.addEventListener('click', () => {
+        if (unansweredModal) {
+            unansweredModal.hide();
+        }
+        submitExam();
+    });
+}

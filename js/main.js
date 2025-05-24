@@ -18,6 +18,13 @@ const timerDisplay = document.getElementById('timer-display');
 const timerContainer = document.getElementById('timer-container');
 const unansweredModalEl = document.getElementById('unansweredModal');
 const confirmSubmitBtn = document.getElementById('confirm-submit');
+
+// Initialise le modal uniquement si Bootstrap est disponible
+let unansweredModal = null;
+if (unansweredModalEl && window.bootstrap && typeof window.bootstrap.Modal === 'function') {
+    unansweredModal = new window.bootstrap.Modal(unansweredModalEl);
+}
+
 let unansweredModal = unansweredModalEl ? new bootstrap.Modal(unansweredModalEl) : null;
 
 /* --- Timer (1h15) --- */

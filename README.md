@@ -1,22 +1,22 @@
 # EvaluaTest
 
-EvaluaTest is a small web application providing practice quizzes for the ISTQB Foundation Level exam. Questions are stored in JSON files and loaded dynamically in the browser.
+EvaluaTest est une petite application web proposant des quiz d'entraînement pour l'examen ISTQB Foundation Level. Les questions sont stockées dans des fichiers JSON et chargées dynamiquement dans le navigateur.
 
-## Launching the quiz locally
+## Lancer le quiz en local
 
-Because the application fetches JSON files with `fetch`, it should be served over HTTP. A quick way to launch it is to use Python's built‑in web server:
+Comme l'application récupère les fichiers JSON avec `fetch`, elle doit être servie via HTTP. Une méthode rapide consiste à utiliser le serveur web intégré de Python :
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Run this command from the project root and then open <http://localhost:8000/> in your browser. The `index.html` file will load and the quiz interface will appear.
+Exécutez cette commande depuis la racine du projet puis ouvrez <http://localhost:8000/> dans votre navigateur. Le fichier `index.html` se chargera et l'interface du quiz apparaîtra.
 
-This version loads external libraries from public CDNs. An active Internet connection is therefore required while using the application.
+Cette version charge des bibliothèques externes depuis des CDN publics. Une connexion Internet active est donc nécessaire pendant l'utilisation de l'application.
 
-## JSON data format
+## Format des données JSON
 
-Questions are organized per chapter. Each `chaptX.json` file contains a structure similar to:
+Les questions sont organisées par chapitre. Chaque fichier `chaptX.json` contient une structure similaire à :
 
 ```json
 {
@@ -34,4 +34,4 @@ Questions are organized per chapter. Each `chaptX.json` file contains a structur
 }
 ```
 
-A consolidated `questions.json` is also provided where questions are grouped under a `chapters` array using a similar format. Each question object includes the statement (`enonce`), available `choices`, and the `correctIndex` of the right answer.
+Un fichier consolidé `questions.json` est également fourni où les questions sont regroupées dans un tableau `chapters` suivant le même format. Chaque objet question contient l'énoncé (`enonce`), les choix disponibles (`choices`) et l'indice (`correctIndex`) de la bonne réponse.

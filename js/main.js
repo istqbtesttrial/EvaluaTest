@@ -105,6 +105,12 @@ async function startExam() {
     timeRemaining = 75 * 60;
     startTimer();
 
+    // Une fois l'animation d'apparition du minuteur terminée,
+    // on recalcule sa position de référence pour le comportement fixe.
+    if (timerContainer) {
+        timerContainer.addEventListener('animationend', updateTimerOffset, { once: true });
+    }
+
     selectedQuestions = await loadQuestionsFromMultipleJson();
     if (selectedQuestions.length < 40) {
         console.warn("Le total de questions récupérées est inférieur à 40 !");

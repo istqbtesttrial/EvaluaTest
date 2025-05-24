@@ -16,10 +16,12 @@ const correctionDiv = document.getElementById('correction');
 const retryBtn = document.getElementById('retry-btn');
 const timerDisplay = document.getElementById('timer-display');
 const timerContainer = document.getElementById('timer-container');
+const timeUsedPara = document.getElementById('time-used');
 
 
 /* --- Timer (1h15) --- */
-let timeRemaining = 75 * 60; // 75 minutes en secondes
+const EXAM_DURATION = 75 * 60; // durée totale de l'examen en secondes (75 min)
+let timeRemaining = EXAM_DURATION; // temps restant en secondes
 let timerInterval; // pour stocker l'intervalle
 let timerOffsetTop = 0; // position initiale du minuteur
 
@@ -103,7 +105,7 @@ async function startExam() {
     introSection.classList.add('hidden');
     examSection.classList.remove('hidden');
 
-    timeRemaining = 75 * 60;
+    timeRemaining = EXAM_DURATION;
     startTimer();
 
     // Une fois l'animation d'apparition du minuteur terminée,
@@ -272,7 +274,14 @@ function showResults(score) {
     const totalQuestions = selectedQuestions.length; // Doit être 40
     const pourcentage = ((score / totalQuestions) * 100).toFixed(2);
 
+    // Calcul du temps utilisé et du pourcentage consommé
+    const timeUsedSec = EXAM_DURATION - timeRemaining;
+    const minutesUsed = Math.floor(timeUsedSec / 60);
+    const secondsUsed = timeUsedSec % 60;
+    const percentUsed = ((timeUsedSec / EXAM_DURATION) * 100).toFixed(2);
+
     scorePara.textContent = `Vous avez obtenu ${score}/${totalQuestions} (${pourcentage}%).`;
+    timeUsedPara.textContent = `Temps utilisé : ${minutesUsed}m${secondsUsed.toString().padStart(2, '0')}s (${percentUsed}% du temps)`;
 
     const threshold = 26;
     if (score >= threshold) {
@@ -312,6 +321,7 @@ function retryExam() {
     correctionDiv.innerHTML = "";
     questionsContainer.innerHTML = "";
     scorePara.textContent = "";
+    timeUsedPara.textContent = "";
     submitBtn.style.display = "none";
     retryBtn.style.display = "none";
 }

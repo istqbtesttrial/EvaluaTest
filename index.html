@@ -109,7 +109,9 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        AOS.init({ once: false, mirror: false });
+        // On joue l'animation AOS une seule fois afin que la section d'examen
+        // ne réapplique pas de transformation lors du défilement.
+        AOS.init({ once: true, mirror: false });
     });
 </script>
 </body>

@@ -16,6 +16,7 @@ const correctionDiv = document.getElementById('correction');
 const retryBtn = document.getElementById('retry-btn');
 const timerDisplay = document.getElementById('timer-display');
 const timerContainer = document.getElementById('timer-container');
+const timeUsedPara = document.getElementById('time-used');
 
 
 /* --- Timer (1h15) --- */
@@ -278,7 +279,6 @@ function showResults(score) {
     const minutesUsed = Math.floor(timeUsedSec / 60);
     const secondsUsed = timeUsedSec % 60;
     const percentUsed = ((timeUsedSec / EXAM_DURATION) * 100).toFixed(2);
-
     const baseText = `Vous avez obtenu ${score}/${totalQuestions} (${pourcentage}%).`;
     const timeText = ` Temps utilisé : ${minutesUsed}m${secondsUsed.toString().padStart(2, '0')}s (${percentUsed}% du temps).`;
     scorePara.textContent = baseText + timeText;
@@ -321,6 +321,7 @@ function retryExam() {
     correctionDiv.innerHTML = "";
     questionsContainer.innerHTML = "";
     scorePara.textContent = "";
+    timeUsedPara.textContent = "";
     submitBtn.style.display = "none";
     retryBtn.style.display = "none";
 }

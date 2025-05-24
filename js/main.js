@@ -15,10 +15,12 @@ const scorePara = document.getElementById('score');
 const correctionDiv = document.getElementById('correction');
 const retryBtn = document.getElementById('retry-btn');
 const timerDisplay = document.getElementById('timer-display');
+const timerContainer = document.getElementById('timer-container');
 
 /* --- Timer (1h15) --- */
 let timeRemaining = 75 * 60; // 75 minutes en secondes
 let timerInterval; // pour stocker l'intervalle
+let timerOffsetTop = 0; // position initiale du minuteur
 
 /**
  * Variables globales :
@@ -109,6 +111,7 @@ async function startExam() {
 
     displayQuestions(selectedQuestions);
     submitBtn.style.display = "inline-block";
+    updateTimerOffset();
 }
 
 /**
@@ -351,9 +354,28 @@ function updateTimerDisplay(seconds) {
     timerDisplay.textContent = `${hh}:${mm}:${ss}`;
 }
 
+// Met à jour la position de référence du minuteur
+function updateTimerOffset() {
+    if (timerContainer) {
+        timerOffsetTop = timerContainer.offsetTop;
+    }
+}
+
+// Ajuste la classe du minuteur en fonction du défilement
+function handleTimerPosition() {
+    if (!timerContainer) return;
+    if (window.scrollY > timerOffsetTop) {
+        timerContainer.classList.add('timer-fixed');
+    } else {
+        timerContainer.classList.remove('timer-fixed');
+    }
+}
+
 /* ================================
     GESTION DES ÉVÉNEMENTS
    ================================ */
 startBtn.addEventListener('click', startExam);
 submitBtn.addEventListener('click', submitExam);
 retryBtn.addEventListener('click', retryExam);
+window.addEventListener('scroll', handleTimerPosition);
+window.addEventListener('resize', updateTimerOffset);

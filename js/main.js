@@ -279,9 +279,9 @@ function showResults(score) {
     const minutesUsed = Math.floor(timeUsedSec / 60);
     const secondsUsed = timeUsedSec % 60;
     const percentUsed = ((timeUsedSec / EXAM_DURATION) * 100).toFixed(2);
-
-    scorePara.textContent = `Vous avez obtenu ${score}/${totalQuestions} (${pourcentage}%).`;
-    timeUsedPara.textContent = `Temps utilisé : ${minutesUsed}m${secondsUsed.toString().padStart(2, '0')}s (${percentUsed}% du temps)`;
+    const baseText = `Vous avez obtenu ${score}/${totalQuestions} (${pourcentage}%).`;
+    const timeText = ` Temps utilisé : ${minutesUsed}m${secondsUsed.toString().padStart(2, '0')}s (${percentUsed}% du temps).`;
+    scorePara.textContent = baseText + timeText;
 
     const threshold = 26;
     if (score >= threshold) {

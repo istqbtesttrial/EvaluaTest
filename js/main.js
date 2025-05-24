@@ -234,30 +234,6 @@ function displayQuestions(questions) {
     }
 }
 
-/**
- * Récupère la réponse sélectionnée par l'utilisateur pour une question donnée.
- */
-function getUserAnswer(questionId) {
-    const radios = document.getElementsByName(`question-${questionId}`);
-    for (let radio of radios) {
-        if (radio.checked) return parseInt(radio.value);
-    }
-    return null;
-}
-
-/**
- * Calcule le score en comparant la réponse de l'utilisateur à la réponse correcte.
- */
-function calculateScore(questions) {
-    let score = 0;
-    questions.forEach(q => {
-        const userAnswer = getUserAnswer(q.questionId);
-        if (userAnswer === q.correctIndex) {
-            score++;
-        }
-    });
-    return score;
-}
 
 /**
  * Soumet l'examen, arrête le timer, calcule le score et affiche les résultats.

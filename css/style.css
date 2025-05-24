@@ -205,3 +205,10 @@ main {
 .fade-in {
     animation: fadeIn 0.4s ease-out;
 }
+
+/* ==== AOS Fixes ==== */
+/* Après l'animation d'apparition, on réinitialise toute transformation
+   appliquée à la section d'examen pour éviter tout décalage persistant. */
+#exam.aos-animate {
+    transform: none !important;
+}

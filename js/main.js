@@ -262,13 +262,23 @@ function submitExam() {
  * Gère le clic sur le bouton de soumission.
  */
 function handleSubmitClick() {
-    const answered = selectedQuestions.some(q => getUserAnswer(q.questionId) !== -1);
-    if (!answered) {
-        const proceed = confirm("Vous n'avez répondu à aucune question. Soumettre l'examen malgré tout ?");
+    // Calculer le nombre de questions auxquelles l'utilisateur a répondu
+    let answeredCount = 0;
+    selectedQuestions.forEach(q => {
+        if (getUserAnswer(q.questionId) !== -1) {
+            answeredCount++;
+        }
+    });
+
+    // Si toutes les questions ne sont pas répondues, demander confirmation
+    if (answeredCount < selectedQuestions.length) {
+        const unanswered = selectedQuestions.length - answeredCount;
+        const proceed = confirm(`Il reste ${unanswered} question${unanswered > 1 ? 's' : ''} non répondue${unanswered > 1 ? 's' : ''}. Soumettre l'examen malgré tout ?`);
         if (!proceed) {
             return;
         }
     }
+
     submitExam();
 }
 

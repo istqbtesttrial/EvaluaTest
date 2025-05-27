@@ -1,7 +1,7 @@
 /********************************************
  * utils.js
  * Fonctions utilitaires pour EvaluaTest
- * (Examens blancs ISTQB v4 Foundation Level)
+ * (Examens blancs ISTQB V4 Foundation Level)
  ********************************************/
 
 /**

@@ -1,7 +1,7 @@
 /********************************************
  * main.js
  * Fichier JavaScript principal pour EvaluaTest
- * (Examens blancs ISTQB v4 Foundation Level)
+ * (Examens blancs ISTQB V4 Foundation Level)
  ********************************************/
 
 /* --- Sélection des éléments HTML --- */

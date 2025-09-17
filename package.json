@@ -1,10 +1,11 @@
 {
   "name": "evaluatest",
   "version": "1.0.0",
-  "description": "EvaluaTest est une petite application web proposant des quiz d'entraînement pour l'examen ISTQB Foundation Level. Les questions sont stockées dans des fichiers JSON et chargées dynamiquement dans le navigateur.",
+  "description": "EvaluaTest est une petite application web proposant des quiz d'entra\u00eenement pour l'examen ISTQB Foundation Level. Les questions sont stock\u00e9es dans des fichiers JSON et charg\u00e9es dynamiquement dans le navigateur.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "node scripts/build-tailwind.mjs"
   },
   "keywords": [],
   "author": "",

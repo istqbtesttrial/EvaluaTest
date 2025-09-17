@@ -34,15 +34,6 @@ let allQuestions = [];
 let selectedQuestions = [];
 
 /**
- * Fonction utilitaire pour sélectionner aléatoirement un sous-ensemble d'éléments dans un tableau.
- */
-function getRandomQuestions(array, count) {
-    const copy = array.slice();
-    shuffleArray(copy);
-    return copy.slice(0, count);
-}
-
-/**
  * Charge et assemble les questions depuis 6 fichiers JSON (ex : chapt1.json … chapt6.json)
  * La répartition est définie par le nombre de questions à tirer dans chaque fichier.
  *

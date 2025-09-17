@@ -315,24 +315,29 @@ function showResults(score) {
         const isCorrect = (userAnswer === q.correctIndex);
 
         const resultLine = document.createElement('div');
+        // Affichage de l'énoncé de la question avec son numéro
+        const questionStatement = document.createElement('div');
+        questionStatement.classList.add('result-question-statement');
 
-        const questionHeader = document.createElement('div');
-        questionHeader.classList.add('result-question-header');
-        questionHeader.innerHTML = `<strong>Question ${index + 1} :</strong>`;
-        resultLine.appendChild(questionHeader);
+        const questionTitle = document.createElement('p');
+        questionTitle.classList.add('result-question-title');
 
-        // Détermination du rendu de l'énoncé (Markdown ou texte brut)
-        const questionContainer = document.createElement('div');
+        const questionNumber = document.createElement('strong');
+        questionNumber.textContent = `Question ${index + 1} :`;
+        questionTitle.appendChild(questionNumber);
         if (q.enonceFormat === 'markdown') {
+            questionStatement.appendChild(questionTitle);
+
             const markdownWrapper = document.createElement('div');
+            markdownWrapper.classList.add('result-question-content');
             markdownWrapper.innerHTML = marked.parse(q.enonce);
-            questionContainer.appendChild(markdownWrapper);
+            questionStatement.appendChild(markdownWrapper);
         } else {
-            const questionText = document.createElement('div');
-            questionText.textContent = q.enonce;
-            questionContainer.appendChild(questionText);
+            questionTitle.append(` ${q.enonce}`);
+            questionStatement.appendChild(questionTitle);
         }
-        resultLine.appendChild(questionContainer);
+
+        resultLine.appendChild(questionStatement);
 
         // Votre réponse
         const userAnswerContainer = document.createElement('div');

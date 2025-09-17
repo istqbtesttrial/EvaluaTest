@@ -127,10 +127,23 @@ main {
 .question-block table.fixed-columns.fixed-columns-4 td {
     width: 25% !important;
 }
-
-.result-question-header {
-    font-weight: 600;
+.result-question-statement {
     margin-top: 1.5rem;
+}
+
+.result-question-title {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.result-question-content {
+    margin-top: 0.5rem;
+}
+
+.result-question-title strong {
+    color: #1d4ed8;
+    margin-right: 0.35rem;
 }
 
 /* ========== Choix de réponse ========== */

@@ -315,7 +315,6 @@ function showResults(score) {
         const isCorrect = (userAnswer === q.correctIndex);
 
         const resultLine = document.createElement('div');
-
         // Affichage de l'énoncé de la question avec son numéro
         const questionStatement = document.createElement('div');
         questionStatement.classList.add('result-question-statement');
@@ -326,7 +325,6 @@ function showResults(score) {
         const questionNumber = document.createElement('strong');
         questionNumber.textContent = `Question ${index + 1} :`;
         questionTitle.appendChild(questionNumber);
-
         if (q.enonceFormat === 'markdown') {
             questionStatement.appendChild(questionTitle);
 

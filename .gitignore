@@ -4,3 +4,7 @@
 
 # OS
 .DS_Store
+
+# Dépendances et builds
+node_modules/
+dist/

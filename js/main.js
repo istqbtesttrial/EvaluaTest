@@ -310,11 +310,16 @@ function showResults(score) {
     }
 
     correctionDiv.innerHTML = "";
-    selectedQuestions.forEach(q => {
+    selectedQuestions.forEach((q, index) => {
         const userAnswer = getUserAnswer(q.questionId);
         const isCorrect = (userAnswer === q.correctIndex);
 
         const resultLine = document.createElement('div');
+
+        const questionHeader = document.createElement('div');
+        questionHeader.classList.add('result-question-header');
+        questionHeader.innerHTML = `<strong>Question ${index + 1} :</strong>`;
+        resultLine.appendChild(questionHeader);
 
         // Détermination du rendu de l'énoncé (Markdown ou texte brut)
         const questionContainer = document.createElement('div');
@@ -323,7 +328,7 @@ function showResults(score) {
             markdownWrapper.innerHTML = marked.parse(q.enonce);
             questionContainer.appendChild(markdownWrapper);
         } else {
-            const questionText = document.createElement('strong');
+            const questionText = document.createElement('div');
             questionText.textContent = q.enonce;
             questionContainer.appendChild(questionText);
         }

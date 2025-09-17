@@ -321,6 +321,17 @@
     },
     {
       "questionId": "3-29",
+      "enonce": "Lequel des éléments suivants est un avantage d’un retour précoce des parties prenantes ?",
+      "choices": [
+        "Il peut être recueilli tôt puis utilisé pour apporter des changements après la mise en production afin de rendre le produit plus convivial",
+        "Il permet au chef de projet d’avoir une meilleure vision des changements nécessaires pour la prochaine version",
+        "Les développeurs comprennent mieux ce qu’ils construisent",
+        "Les testeurs comprennent mieux les exigences liées à l’automatisation des tests"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "questionId": "3-30",
       "enonce": "Quel participant dans le processus de revue est responsable de veiller au bon déroulement des réunions de revue et à ce que tous puissent s’exprimer librement ?",
       "choices": [
         "Le manager",

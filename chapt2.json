@@ -437,6 +437,28 @@
     },
     {
       "questionId": "2-40",
+      "enonce": "Laquelle des pratiques de test suivantes s’applique quel que soit le cycle de vie logiciel utilisé ?",
+      "choices": [
+        "Participation ponctuelle et préparée aux réunions quotidiennes (stand-up)",
+        "Documentation détaillée des cas de test étape par étape",
+        "Veiller à ce qu’il y ait une activité de test correspondante pour chaque activité de développement logiciel",
+        "Impliquer les parties prenantes dans la revue de tous les critères d’acceptation avant la conception des cas de test"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "questionId": "2-41",
+      "enonce": "Dans un modèle de développement Agile, la fin des tests ou l’état « fait » est défini par lequel des éléments suivants ?",
+      "choices": [
+        "La gestion de projet",
+        "Les critères d’entrée",
+        "Les critères de sortie",
+        "La date prévue de fin des tests"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "questionId": "2-42",
       "enonce": "Vous travaillez en tant que testeur dans une équipe qui suit le modèle en V. Parmi les activités suivantes, lesquelles PEUVENT être réalisées dans les phases initiales du cycle de vie du développement logiciel (SDLC) ?",
       "choices": [
         "Exécution de tests dynamiques",

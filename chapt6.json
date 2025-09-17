@@ -105,6 +105,17 @@
     },
     {
       "questionId": "6-10",
+      "enonce": "Quel est l’un des avantages potentiels de l’utilisation d’un outil d’automatisation des tests ?",
+      "choices": [
+        "La qualité des défauts s’améliorera",
+        "Accès facilité aux statistiques sur la progression des tests",
+        "L’espace disque n’est pas nécessaire pour suivre les versions des artefacts de test",
+        "Moins de trafic réseau généré"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "questionId": "6-11",
       "enonce": "Lequel des énoncés suivants est LE PLUS susceptible d’être un avantage de l’automatisation des tests ?",
       "choices": [
         "La possibilité de générer des cas de test sans accès à la base de tests",

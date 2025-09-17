@@ -619,6 +619,17 @@
     },
     {
       "questionId": "5-56",
+      "enonce": "Vous travaillez sur l’estimation d’un projet. Votre responsable, considéré comme expert en estimation, vous a donné les chiffres suivants : Optimiste = 35 jours – Probable = 40 jours – Pessimiste = 65 jours. En appliquant la technique d’estimation à trois points, quelle est l’expression correcte de l’estimation finale ?",
+      "choices": [
+        "E = 46,3 jours, Écart-type = 35",
+        "E = 40 jours, Écart-type = 6,67",
+        "E = 37,3 jours, Écart-type = 43,3",
+        "E = 43,3 jours, Écart-type = 5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "5-57",
       "enonce": "Parmi les options suivantes, lesquelles sont des métriques courantes utilisées pour rendre compte du niveau de qualité de l’objet de test ?",
       "choices": [
         "Nombre de défauts trouvés lors des tests système",

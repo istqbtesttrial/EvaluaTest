@@ -583,6 +583,17 @@
     },
     {
       "questionId": "1-53",
+      "enonce": "Lequel des éléments suivants est un avantage de l’approche « whole team » (équipe entière) ?",
+      "choices": [
+        "Toute personne de l’équipe ayant les compétences nécessaires peut accomplir n’importe quelle tâche",
+        "Les tâches sont assignées à des membres spécifiques de l’équipe qui en sont responsables jusqu’à leur achèvement",
+        "Les testeurs ont une responsabilité claire sur la qualité, ce qui élimine les confusions et les chevauchements",
+        "Les représentants métiers ne sont pas inclus dans l’équipe afin de fournir une évaluation indépendante lors des tests d’acceptation utilisateur (UAT)"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "1-54",
       "enonce": "Lequel de ces tâches relève PRINCIPALEMENT d'un rôle de test ?",
       "choices": [
         "Configurer les environnements de test",

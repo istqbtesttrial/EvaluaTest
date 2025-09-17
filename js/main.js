@@ -305,14 +305,48 @@ function showResults(score) {
     selectedQuestions.forEach(q => {
         const userAnswer = getUserAnswer(q.questionId);
         const isCorrect = (userAnswer === q.correctIndex);
-        const resultLine = document.createElement('p');
-        resultLine.innerHTML =
-            `<strong>${q.enonce}</strong> <br>
-          Votre réponse : <em>${ q.choices[userAnswer] || "Aucune sélectionnée" }</em> <br>
-          Réponse correcte : <em>${q.choices[q.correctIndex]}</em> <br>
-          <span style="color:${isCorrect ? 'green' : 'red'};">
-            ${isCorrect ? '✔ Bonne réponse' : '✖ Mauvaise réponse'}
-          </span>`;
+
+        const resultLine = document.createElement('div');
+
+        // Détermination du rendu de l'énoncé (Markdown ou texte brut)
+        const questionContainer = document.createElement('div');
+        if (q.enonceFormat === 'markdown') {
+            const markdownWrapper = document.createElement('div');
+            markdownWrapper.innerHTML = marked.parse(q.enonce);
+            questionContainer.appendChild(markdownWrapper);
+        } else {
+            const questionText = document.createElement('strong');
+            questionText.textContent = q.enonce;
+            questionContainer.appendChild(questionText);
+        }
+        resultLine.appendChild(questionContainer);
+
+        // Votre réponse
+        const userAnswerContainer = document.createElement('div');
+        const userAnswerLabel = document.createElement('span');
+        userAnswerLabel.textContent = 'Votre réponse : ';
+        const userAnswerValue = document.createElement('em');
+        userAnswerValue.textContent = q.choices[userAnswer] || 'Aucune sélectionnée';
+        userAnswerContainer.append(userAnswerLabel, userAnswerValue);
+        resultLine.appendChild(userAnswerContainer);
+
+        // Réponse correcte
+        const correctAnswerContainer = document.createElement('div');
+        const correctAnswerLabel = document.createElement('span');
+        correctAnswerLabel.textContent = 'Réponse correcte : ';
+        const correctAnswerValue = document.createElement('em');
+        correctAnswerValue.textContent = q.choices[q.correctIndex];
+        correctAnswerContainer.append(correctAnswerLabel, correctAnswerValue);
+        resultLine.appendChild(correctAnswerContainer);
+
+        // Indication correcte / incorrecte
+        const statusContainer = document.createElement('div');
+        const statusSpan = document.createElement('span');
+        statusSpan.style.color = isCorrect ? 'green' : 'red';
+        statusSpan.textContent = isCorrect ? '✔ Bonne réponse' : '✖ Mauvaise réponse';
+        statusContainer.appendChild(statusSpan);
+        resultLine.appendChild(statusContainer);
+
         correctionDiv.appendChild(resultLine);
         correctionDiv.appendChild(document.createElement('hr'));
     });

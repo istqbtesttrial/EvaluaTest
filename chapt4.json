@@ -827,6 +827,127 @@
         "100%"
       ],
       "correctIndex": 1
+    },
+    {
+      "questionId": "4-73",
+      "enonce": "Une exigence fonctionnelle stipule que les valeurs de pression doivent toujours être positives et rester dans une plage comprise entre 100 et 200 livres pour un réservoir particulier (100 et 200 inclus).\nParmi les ensembles suivants, lequel est le minimum qui permettrait d’obtenir une couverture en utilisant la technique de partition d’équivalence ?",
+      "choices": [
+        "Série de tests avec pressions réglées à 98, 110 et 201 livres",
+        "Série de tests avec pressions réglées à 98, 100 et 200 livres",
+        "Série de tests avec pressions réglées à 100, 110 et 200 livres",
+        "Série de tests avec pressions réglées à -1, 0, 175 et 297 livres"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "4-74",
+      "enonce": "Lorsque des tests sont créés pour atteindre la couverture des instructions (statement coverage), qu’exercent-ils ?",
+      "choices": [
+        "Uniquement les décisions dans le code",
+        "Uniquement les boucles dans le code",
+        "Uniquement les instructions exécutables dans le code",
+        "Toutes les lignes du code, y compris les instructions exécutables et les commentaires"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "questionId": "4-75",
+      "enonce": "Laquelle des techniques suivantes peut être utilisée pour développer des user stories en collaboration avec les développeurs et le métier ?",
+      "choices": [
+        "DevOps",
+        "CI/CD",
+        "Brainstorming",
+        "Partition d’équivalence"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "questionId": "4-76",
+      "enonce": "Laquelle des options suivantes est une approche méthodique de l’erreur guessing ?",
+      "choices": [
+        "Créer une liste de défaillances et défauts possibles et concevoir des tests pour chacun",
+        "Demander aux développeurs où sont les erreurs probables et discuter des tests à effectuer",
+        "Examiner le code pour déterminer les zones complexes et les cibler avec des tests",
+        "Identifier toutes les décisions du code et concevoir des tests pour chacune"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "questionId": "4-77",
+      "enonce": "Comment la couverture de branches est-elle déterminée ?",
+      "choices": [
+        "En divisant le nombre de branches du code testées par le nombre total de branches du code",
+        "En divisant le nombre de branches du code sur un chemin testé par le nombre total de chemins",
+        "En divisant le nombre d’instructions dans le code par le nombre de branches testées",
+        "En comptant le nombre de branches du code testées"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "4-78",
+      "enonce": "Vous utilisez l’analyse des valeurs limites pour déterminer vos données de test. Quelles valeurs utiliser pour tester une routine qui exige un entier (x) strictement supérieur à zéro et inférieur à 100, afin d’obtenir une couverture minimale de 100 % avec la technique des deux points (BVA) ?",
+      "choices": [
+        "0, 100",
+        "-1, 1, 99, 101",
+        "0, 1, 99, 100",
+        "-1, 0, 1, 99, 100, 101"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "4-79",
+      "enonce": "Si des cas de test sont écrits au format given/when/then, quel type de développement piloté par les tests est utilisé ?",
+      "choices": [
+        "Test-Driven Development (TDD)",
+        "Acceptance Test-Driven Development (ATDD)",
+        "Business-Driven Development",
+        "Behavior-Driven Development (BDD)"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "4-80",
+      "enonce": "Les tests exploratoires sont une technique de test basée sur l’expérience :",
+      "choices": [
+        "Où un développeur et un testeur travaillent ensemble sur le même poste : pendant que le développeur écrit activement du code, le testeur explore le code pour trouver des défauts",
+        "Qui peut être organisée en sessions guidées par des chartes de test décrivant des objectifs de test qui orienteront l’exploration des testeurs",
+        "Où une équipe de testeurs explore toutes les techniques de test possibles afin de déterminer la combinaison la plus appropriée de ces techniques à appliquer pour un projet de test",
+        "Qui vise à trouver des défauts en concevant des tests qui exercent toutes les combinaisons possibles de valeurs d’entrée et de préconditions"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "questionId": "4-81",
+      "enonce": "Laquelle des affirmations suivantes à propos des tests basés sur des checklists est VRAIE ?",
+      "choices": [
+        "Les tests basés sur des checklists sont une technique de gestion de réunion de revue qui peut être appliquée dans les revues où l’utilisation de checklists est obligatoire, comme c’est souvent le cas dans les revues formelles",
+        "Les tests basés sur des checklists sont une technique de revue qui peut être utilisée dans un processus de revue formelle où les réviseurs, lors de la revue individuelle, tentent de détecter des problèmes dans le produit de travail en se basant sur une checklist",
+        "Dans les tests basés sur des checklists, l’utilisation de checklists avec un haut niveau de détail est plus susceptible de produire des cas de test plus faciles à reproduire que ceux utilisant des checklists à faible niveau de détail",
+        "Les checklists utilisées dans les tests basés sur des checklists doivent être revues périodiquement afin d’être mises à jour, car avec le temps, les cas de test conçus avec la même checklist peuvent devenir moins efficaces pour trouver des défauts"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "4-82",
+      "enonce": "Laquelle des affirmations suivantes est VRAIE ?",
+      "choices": [
+        "Les tests d’acceptation utilisateur sont généralement automatisés et visent à vérifier les critères d’acceptation des user stories",
+        "Les critères d’acceptation pour les user stories peuvent inclure des détails sur les définitions de données, par exemple en décrivant le format, les valeurs autorisées et les valeurs par défaut pour un élément de données",
+        "Les critères d’acceptation pour les user stories doivent se concentrer sur les scénarios positifs, tandis que les scénarios négatifs doivent être exclus",
+        "Les tests dérivés des critères d’acceptation pour les user stories ne sont inclus dans aucun des quatre quadrants de test"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "questionId": "4-83",
+      "enonce": "Une exigence spécifie qu’un certain identifiant (ID) doit comporter entre 5 et 10 caractères, ne contenir que des caractères alphanumériques, et que son premier caractère doit être une lettre. En tant que testeur, vous souhaitez appliquer une partition d’équivalence unidimensionnelle pour tester cet ID. Cela signifie que vous devez appliquer la partition d’équivalence individuellement : à la longueur de l’ID, au type de caractères contenus dans l’ID, et au type du premier caractère de l’ID. Quel est le nombre de partitions à couvrir ?",
+      "choices": [
+        "7",
+        "6",
+        "5",
+        "3"
+      ],
+      "correctIndex": 1
     }
   ]
 }

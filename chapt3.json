@@ -340,6 +340,50 @@
         "Le responsable de la revue"
       ],
       "correctIndex": 1
+    },
+    {
+      "questionId": "3-31",
+      "enonce": "Vous venez d’achever une rétrospective à la fin d’un sprint. Un développeur a soulevé un problème : les rapports de défauts ne contiennent pas d’informations sur la configuration, les données et le système utilisés lorsque l’échec s’est produit. Quand cela arrive, ils rejettent le rapport, et le testeur doit le mettre à jour et le renvoyer. Cela peut prendre trois ou quatre itérations pour avoir toutes les informations. L’équipe de test prend ce retour et améliorera les détails inclus dans les rapports de défauts.\nCeci est un exemple de quel type de bénéfice du test ?",
+      "choices": [
+        "Efficacité / efficience accrue des tests",
+        "Renforcement d’équipe et apprentissage",
+        "Amélioration de la qualité de la base de test",
+        "Amélioration de la qualité des cas de test"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "questionId": "3-32",
+      "enonce": "Quelle est une manière raisonnable de contrôler et de minimiser le coût des tests et du développement ?",
+      "choices": [
+        "Mener des revues formelles pour détecter les défauts le plus tôt possible",
+        "Effectuer une analyse d’utilisabilité avant la conception de l’interface utilisateur",
+        "Automatiser la détection d’erreurs au début des tests d’acceptation",
+        "Recruter du personnel de test externalisé à bas coût pour les tests système"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "3-33",
+      "enonce": "Lequel des éléments suivants devriez-vous examiner à l’aide de tests statiques ?",
+      "choices": [
+        "Fuite mémoire pendant l’exécution",
+        "Performance d’un module sous charge",
+        "Sortie interactive d’un débogueur",
+        "Plan de test"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "3-34",
+      "enonce": "Lors de quelle activité du processus de revue les caractéristiques de qualité sont-elles sélectionnées pour l’évaluation ?",
+      "choices": [
+        "Initialisation",
+        "Planification",
+        "Analyse",
+        "Correction"
+      ],
+      "correctIndex": 3
     }
   ]
 }

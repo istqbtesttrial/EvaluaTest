@@ -467,6 +467,39 @@
         "Test de maintenance"
       ],
       "correctIndex": 1
+    },
+    {
+      "questionId": "2-43",
+      "enonce": "Lequel des éléments suivants suggère le mieux la nécessité d’un test de maintenance ?",
+      "choices": [
+        "Défauts trouvés en test alpha",
+        "Première mise en production du logiciel",
+        "Changements de besoins lors des activités de pré-déploiement",
+        "Ajout d’une nouvelle fonctionnalité à un système existant"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "2-44",
+      "enonce": "Étant donné l’exigence suivante : le système doit calculer la position de la voiture avec l’équation : nouvelle_distance_parcourue + ancienne_position. Quel type de test doit être mis en œuvre pour garantir que cette exigence est respectée ?",
+      "choices": [
+        "Fonctionnel",
+        "Fiabilité",
+        "Performance",
+        "Maintenabilité"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "2-45",
+      "enonce": "Votre entreprise travaillait selon un modèle en cascade. Elle a décidé d’implémenter DevOps et utilisera CI/CD. Quel changement sera nécessaire pour l’équipe de test ?",
+      "choices": [
+        "Aucun changement, l’approche actuelle reste applicable",
+        "Un accent accru sur l’automatisation des tests pour fournir des tests continus",
+        "Plus de temps nécessaire pour analyser les exigences et concevoir des cas de test",
+        "Moins besoin de testeurs techniques car les développeurs géreront les tests techniques"
+      ],
+      "correctIndex": 1
     }
   ]
 }

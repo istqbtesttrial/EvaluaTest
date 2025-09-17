@@ -602,6 +602,127 @@
         "Créer le plan de test"
       ],
       "correctIndex": 0
+    },
+    {
+      "questionId": "1-55",
+      "enonce": "Si vous êtes responsable de l’analyse et de la conception des tests, quel est votre rôle principal dans l’équipe ?",
+      "choices": [
+        "Analyste métier",
+        "Responsable de tests",
+        "Développeur",
+        "Testeur"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "1-56",
+      "enonce": "Laquelle des options suivantes est soutenue par une bonne traçabilité de l’information ?",
+      "choices": [
+        "Portabilité du code d’automatisation des tests",
+        "Compréhension des rapports de tests",
+        "Fiabilité des environnements de test",
+        "Stabilité du système testé"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "1-57",
+      "enonce": "Quel principe de test fournit une bonne raison de baser les tests sur les priorités d’atténuation des risques ?",
+      "choices": [
+        "Les tests montrent la présence de défauts",
+        "Les tests exhaustifs sont impossibles",
+        "Les tests s’usent",
+        "Les défauts ont tendance à se regrouper dans quelques modules"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "1-58",
+      "enonce": "Si un développeur analyse un échec pour en déterminer la cause, dans quel type d’activité s’engage-t-il ?",
+      "choices": [
+        "Test",
+        "Conception et Analyse",
+        "Débogage",
+        "Gestion de configuration"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "questionId": "1-59",
+      "enonce": "Lequel des éléments suivants est un objectif de test valide ?",
+      "choices": [
+        "Trouver les zones stables du code qui ne nécessitent pas de test",
+        "Déboguer les incidents pour déterminer la cause du problème",
+        "Trouver les échecs et les défauts dans l’objet de test",
+        "Participer aux revues de code pour améliorer les compétences en script"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "questionId": "1-60",
+      "enonce": "Les tests peuvent être perçus comme une activité destructive. Laquelle des compétences génériques suivantes aidera un testeur à surmonter cette barrière ?",
+      "choices": [
+        "Pensée analytique",
+        "Communication avec empathie",
+        "Curiosité",
+        "Connaissance des outils"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "questionId": "1-61",
+      "enonce": "Lequel des éléments suivants est un exemple de produit de travail de test ?",
+      "choices": [
+        "Plan de test",
+        "Sélection de plateforme de test",
+        "Base de code",
+        "Sélection d’outil de test"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "1-62",
+      "enonce": "Un objectif typique du test est de :",
+      "choices": [
+        "Déterminer le niveau de détail le plus approprié avec lequel concevoir les cas de test",
+        "Vérifier la conformité de l’objet de test avec les exigences réglementaires",
+        "Planifier les activités de test conformément à la politique et à la stratégie de test existantes",
+        "Vérifier la création et la configuration correctes de l’environnement de test"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "questionId": "1-63",
+      "enonce": "Lequel des éléments suivants est un avantage de l’approche de l’équipe entière (whole team approach) ?",
+      "choices": [
+        "Elle aide à éviter le risque que des tâches associées à une user story n’avancent pas sur le tableau de tâches Agile à un rythme acceptable pendant une itération",
+        "Elle aide les membres de l’équipe à comprendre l’état actuel d’une itération en visualisant la quantité de travail restant par rapport au temps alloué à l’itération",
+        "Elle aide toute l’équipe à être plus efficace dans la conception de cas de test en exigeant que tous les membres de l’équipe maîtrisent tous les types de techniques de test",
+        "Elle aide les membres de l’équipe à développer de meilleures relations entre eux et à rendre leur collaboration plus efficace au bénéfice du projet"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "1-64",
+      "enonce": "Une application est soumise à une charge constante pendant une longue période dans le cadre d’un test de performance. Pendant ce test, le temps de réponse de l’application ralentit régulièrement, ce qui entraîne le non-respect d’une exigence. Ce ralentissement est causé par une fuite de mémoire où le code de l’application ne libère pas correctement une partie de la mémoire allouée dynamiquement lorsqu’elle n’est plus nécessaire. Laquelle des affirmations suivantes est VRAIE ?",
+      "choices": [
+        "Le ralentissement est une défaillance tandis que la fuite de mémoire est un défaut",
+        "Le ralentissement est un défaut tandis que la fuite de mémoire est une erreur",
+        "Le ralentissement est une erreur, la fuite de mémoire est un défaut",
+        "Le ralentissement est un défaut ; la fuite de mémoire est une défaillance"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "1-65",
+      "enonce": "En plus de tester de manière approfondie les spécifications des exigences, une équipe de développement vise à impliquer les utilisateurs le plus tôt possible dans le processus de développement, en utilisant des pratiques telles que le prototypage, afin de s’assurer que les systèmes logiciels développés répondront aux attentes des utilisateurs. Cette approche est particulièrement utile pour atténuer les risques associés à l’un des sept principes de test. Lequel ?",
+      "choices": [
+        "Les tests s’usent",
+        "Le mythe de l’absence d’erreurs (absence-of-errors fallacy)",
+        "Logiciel fonctionnel plutôt que documentation complète",
+        "Les défauts se regroupent"
+      ],
+      "correctIndex": 1
     }
   ]
 }

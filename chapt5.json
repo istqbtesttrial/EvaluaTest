@@ -638,6 +638,94 @@
         "Temps nécessaire pour corriger un défaut"
       ],
       "correctIndex": 0
+    },
+    {
+      "questionId": "5-58",
+      "enonce": "De quelle manière la gestion de configuration aide-t-elle le testeur ?",
+      "choices": [
+        "Elle vérifie que les cas de test sont exécutés dans le bon ordre",
+        "Elle s’assure que des régressions ne se produisent pas",
+        "Elle impose des tests unitaires et des mesures appropriés",
+        "Elle identifie de manière unique les éléments à tester"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "5-59",
+      "enonce": "Vous avez reçu les cas de test suivants à exécuter. On vous a dit que la sécurité et l’utilisabilité sont respectivement les priorités les plus élevées pour cette application bancaire. Quel est l’ordre correct d’exécution ?\n\nMettre à jour le solde du compte client\n\nInterroger le solde du compte client\n\nSupprimer une demande de relevé papier\n\nChanger la taille de la police pour améliorer la lisibilité\n\nCréer un nouveau bénéficiaire dans la liste de paiement automatique du client",
+      "choices": [
+        "3, 1, 5, 2, 4",
+        "1, 2, 5, 4, 3",
+        "1, 3, 5, 2, 4",
+        "4, 3, 1, 2, 5"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "5-60",
+      "enonce": "Quand l’analyse détaillée des risques pour une story est-elle réalisée pour la première fois ?",
+      "choices": [
+        "Planification du projet",
+        "Planification de l’itération",
+        "Planification de la version",
+        "Planification d’une épopée (Epic)"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "questionId": "5-61",
+      "enonce": "Vous travaillez avec une équipe distribuée géographiquement et par fuseaux horaires. Il est important que toute l’équipe ait toujours accès aux dernières informations d’exécution des tests. Quelle est la méthode la plus appropriée pour communiquer ce statut ?",
+      "choices": [
+        "Réunions quotidiennes avec tout le monde",
+        "Tableaux de bord connectés aux systèmes de gestion de tests et de défauts qui se mettent à jour automatiquement",
+        "E-mails envoyés toutes les heures à tous les membres de l’équipe avec les nouveaux problèmes en rouge dans l’objet",
+        "Rapports de test formels publiés chaque semaine avec graphiques de tendance et état des défauts résiduels"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "questionId": "5-62",
+      "enonce": "Laquelle des affirmations suivantes est correcte concernant le Quadrant Q2 des quadrants de test ?",
+      "choices": [
+        "Il est orienté technologie, soutient l’équipe et contient les tests de composants et d’intégration de composants",
+        "Il est orienté métier, critique le produit, et contient les tests exploratoires et d’utilisabilité",
+        "Il est orienté technologie, critique le produit, et contient les tests de fumée et de performance",
+        "Il est orienté métier, soutient l’équipe, et contient les tests fonctionnels et les tests d’API"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "5-63",
+      "enonce": "Lequel des éléments suivants fournit deux actions définies de réponse au risque pour aider à contrôler le risque produit ?",
+      "choices": [
+        "Refuser le risque, Atténuer le risque par les tests",
+        "Accepter le risque, Abandonner le risque",
+        "Abandonner le risque, Retarder le risque",
+        "Transférer le risque, Accepter le risque"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "questionId": "5-64",
+      "enonce": "Vous êtes testeur fonctionnel et effectuez des tests système d’une application de réservation de vols. Après connexion, vous sélectionnez l’option « Nouvelle Réservation » puis cliquez sur « Soumettre » sans changer les valeurs par défaut. Le système a facturé votre carte test 523,00 $ au lieu de 1 046,00 $. Cela se produit à chaque fois que vous exécutez le cas de test. Vous créez un rapport de défaut avec : la date de l’incident – l’identité du testeur – les étapes pour reproduire (100 % reproductible) – l’impact et la priorité – les résultats attendus et réels. Quelle information manque ?",
+      "choices": [
+        "L’environnement de test dans lequel le test a été exécuté",
+        "Les résultats attendus du cas de test",
+        "Le nom du développeur qui aurait dû détecter l’erreur en test unitaire",
+        "La fréquence d’occurrence"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "questionId": "5-65",
+      "enonce": "Lequel des éléments suivants fournit deux actions définies de réponse au risque pour aider à contrôler le risque produit ?",
+      "choices": [
+        "Refuser le risque, Annuler le risque",
+        "Accepter le risque, Abandonner le risque",
+        "Abandonner le risque, Retarder le risque",
+        "Transférer le risque, Accepter le risque"
+      ],
+      "correctIndex": 3
     }
   ]
 }

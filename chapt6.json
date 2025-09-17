@@ -124,6 +124,17 @@
         "La réduction des erreurs humaines grâce à une plus grande cohérence et répétabilité"
       ],
       "correctIndex": 3
+    },
+    {
+      "questionId": "6-12",
+      "enonce": "Quelle est une fonction clé d’un outil de gestion de tests ?",
+      "choices": [
+        "Facilite la gestion et le contrôle des activités de test",
+        "Génère des données de test basées sur des critères de gestion de tests",
+        "Génère des spécifications de test détaillées basées sur le plan de test",
+        "Analyse et applique les normes de codage et de test"
+      ],
+      "correctIndex": 0
     }
   ]
 }

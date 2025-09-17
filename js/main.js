@@ -57,6 +57,11 @@ async function loadQuestionsFromMultipleJson() {
 
         for (const dist of distribution) {
             const response = await fetch(dist.file);
+            if (!response.ok) {
+                const errorMessage = `Échec du chargement du fichier ${dist.file} (statut ${response.status})`;
+                console.error(errorMessage);
+                throw new Error(errorMessage);
+            }
             const data = await response.json();
 
             // Pour chaque question, on complète avec les infos du chapitre si disponibles.
@@ -81,6 +86,9 @@ async function loadQuestionsFromMultipleJson() {
         return finalQuestions;
     } catch (error) {
         console.error("Erreur lors du chargement des JSON :", error);
+        if (typeof window !== 'undefined' && typeof window.alert === 'function') {
+            window.alert(`Impossible de charger les questions pour un chapitre : ${error.message}`);
+        }
         return [];
     }
 }

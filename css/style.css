@@ -128,6 +128,11 @@ main {
     width: 25% !important;
 }
 
+.result-question-header {
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
 /* ========== Choix de réponse ========== */
 .choice-label {
     display: block;

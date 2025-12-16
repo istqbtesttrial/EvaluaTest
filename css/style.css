@@ -31,6 +31,29 @@ footer {
     display: none;
 }
 
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-link:focus {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    padding: 0.75rem 1rem;
+    background: #111827;
+    color: #f9fafb;
+    z-index: 1001;
+    border-radius: 0.5rem;
+    text-decoration: none;
+}
+
 /* ========== En-tête ========== */
 header {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);

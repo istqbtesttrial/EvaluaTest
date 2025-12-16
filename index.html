@@ -41,6 +41,7 @@
     </style>
 </head>
 <body class="bg-light">
+<a href="#exam" class="skip-link">Passer directement au questionnaire</a>
 
 <header class="text-center p-4 mb-3 bg-primary text-white animate__animated animate__fadeInDown">
     <h1 class="mb-1"><i class="fas fa-graduation-cap"></i> EvaluaTest</h1>
@@ -65,9 +66,12 @@
     <section id="exam" class="hidden" data-aos="fadeIn" data-aos-duration="700">
         <h2 class="mb-4 text-center animate__animated animate__fadeInDown">Examen en cours</h2>
 
-        <div id="timer-container" class="bg-warning p-3 rounded mb-4 text-center animate__animated animate__bounceIn">
-            <strong><i class="fas fa-stopwatch"></i> Temps restant :</strong>
-            <span id="timer-display" class="fw-bold fs-5 text-danger">01:15:00</span>
+        <div id="timer-container" class="bg-warning p-3 rounded mb-4 text-center animate__animated animate__bounceIn" role="status" aria-live="polite" tabindex="-1">
+            <strong><i class="fas fa-stopwatch" aria-hidden="true"></i> Temps restant :</strong>
+            <span id="timer-display" class="fw-bold fs-5 text-danger" role="timer" aria-live="polite" aria-atomic="true">01:15:00</span>
+            <div class="mt-2">
+                <button id="focus-timer-btn" type="button" class="btn btn-outline-dark btn-sm">Mettre le minuteur au focus</button>
+            </div>
         </div>
 
         <div id="questions-container" class="animate__animated animate__fadeIn">
@@ -83,7 +87,7 @@
 
 
     <section id="results" class="hidden mt-5" data-aos="zoom-in" data-aos-duration="700">
-        <h2 class="text-center mb-4 animate__animated animate__fadeInDown">Résultats</h2>
+        <h2 id="results-heading" class="text-center mb-4 animate__animated animate__fadeInDown" tabindex="-1">Résultats</h2>
         <p id="score" class="fs-5 text-center"></p>
         <p id="time-used" class="fs-6 text-muted text-center"></p>
         <div id="correction" class="mt-3">

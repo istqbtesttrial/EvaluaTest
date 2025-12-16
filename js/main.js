@@ -17,6 +17,7 @@ const retryBtn = document.getElementById('retry-btn');
 const timerDisplay = document.getElementById('timer-display');
 const timerContainer = document.getElementById('timer-container');
 const timeUsedPara = document.getElementById('time-used');
+const resultsHeading = document.getElementById('results-heading');
 
 
 /* --- Timer (1h15) --- */
@@ -121,6 +122,7 @@ async function startExam() {
     displayQuestions(selectedQuestions);
     submitBtn.style.display = "inline-block";
     updateTimerOffset();
+    focusFirstQuestion();
 }
 
 /**
@@ -130,8 +132,16 @@ function displayQuestions(questions) {
     questionsContainer.innerHTML = "";
 
     questions.forEach((q, index) => {
-        const questionDiv = document.createElement('div');
+        const questionDiv = document.createElement('fieldset');
         questionDiv.classList.add('question-block');
+        questionDiv.setAttribute('role', 'group');
+        questionDiv.setAttribute('aria-labelledby', `question-title-${index + 1}`);
+        questionDiv.tabIndex = -1;
+
+        const legend = document.createElement('legend');
+        legend.id = `question-title-${index + 1}`;
+        legend.textContent = `Question ${index + 1} :`;
+        questionDiv.appendChild(legend);
 
         // Animation AOS (alternance fade-right / fade-left)
         const aosEffect = (index % 2 === 0) ? "fade-right" : "fade-left";
@@ -143,9 +153,11 @@ function displayQuestions(questions) {
         questionContent.classList.add('question-content');
 
         if (q.enonceFormat && q.enonceFormat === "markdown") {
-            questionContent.innerHTML = `<strong>Question ${index + 1}:</strong> ${marked.parse(q.enonce)}`;
+            questionContent.innerHTML = marked.parse(q.enonce);
         } else {
-            questionContent.textContent = `Question ${index + 1}: ${q.enonce}`;
+            const questionText = document.createElement('p');
+            questionText.textContent = q.enonce;
+            questionContent.appendChild(questionText);
         }
 
         // -------------------------------
@@ -232,6 +244,7 @@ function displayQuestions(questions) {
             radio.name = `question-${q.questionId}`;
             radio.value = choiceIndex;
             radio.classList.add('me-2');
+            radio.setAttribute('aria-describedby', `question-title-${index + 1}`);
 
             label.appendChild(radio);
             label.appendChild(document.createTextNode(choiceText));
@@ -370,6 +383,10 @@ function showResults(score) {
     });
 
     retryBtn.style.display = "inline-block";
+
+    if (resultsHeading) {
+        resultsHeading.focus();
+    }
 }
 
 /**
@@ -414,6 +431,10 @@ function updateTimerDisplay(seconds) {
     const mm = (m < 10) ? "0" + m : m;
     const ss = (s < 10) ? "0" + s : s;
     timerDisplay.textContent = `${hh}:${mm}:${ss}`;
+
+    if (timerDisplay) {
+        timerDisplay.setAttribute('aria-label', `Temps restant ${hh} heures, ${mm} minutes et ${ss} secondes`);
+    }
 }
 
 // Met à jour la position de référence du minuteur
@@ -430,6 +451,13 @@ function handleTimerPosition() {
         timerContainer.classList.add('timer-fixed');
     } else {
         timerContainer.classList.remove('timer-fixed');
+    }
+}
+
+function focusFirstQuestion() {
+    const firstQuestion = questionsContainer.querySelector('.question-block');
+    if (firstQuestion) {
+        firstQuestion.focus({ preventScroll: false });
     }
 }
 

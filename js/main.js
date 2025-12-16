@@ -17,7 +17,6 @@ const retryBtn = document.getElementById('retry-btn');
 const timerDisplay = document.getElementById('timer-display');
 const timerContainer = document.getElementById('timer-container');
 const timeUsedPara = document.getElementById('time-used');
-const focusTimerBtn = document.getElementById('focus-timer-btn');
 const resultsHeading = document.getElementById('results-heading');
 
 
@@ -470,10 +469,3 @@ submitBtn.addEventListener('click', handleSubmitClick);
 retryBtn.addEventListener('click', retryExam);
 window.addEventListener('scroll', handleTimerPosition);
 window.addEventListener('resize', updateTimerOffset);
-
-if (focusTimerBtn && timerContainer) {
-    focusTimerBtn.addEventListener('click', () => {
-        timerContainer.focus({ preventScroll: true });
-        timerContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-}

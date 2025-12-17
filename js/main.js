@@ -24,7 +24,6 @@ const resultsHeading = document.getElementById('results-heading');
 const EXAM_DURATION = 75 * 60; // durée totale de l'examen en secondes (75 min)
 let timeRemaining = EXAM_DURATION; // temps restant en secondes
 let timerInterval; // pour stocker l'intervalle
-let timerOffsetTop = 0; // position initiale du minuteur
 
 /**
  * Variables globales :
@@ -108,12 +107,6 @@ async function startExam() {
     timeRemaining = EXAM_DURATION;
     startTimer();
 
-    // Une fois l'animation d'apparition du minuteur terminée,
-    // on recalcule sa position de référence pour le comportement fixe.
-    if (timerContainer) {
-        timerContainer.addEventListener('animationend', updateTimerOffset, { once: true });
-    }
-
     selectedQuestions = await loadQuestionsFromMultipleJson();
     if (selectedQuestions.length < 40) {
         console.warn("Le total de questions récupérées est inférieur à 40 !");
@@ -121,7 +114,6 @@ async function startExam() {
 
     displayQuestions(selectedQuestions);
     submitBtn.style.display = "inline-block";
-    updateTimerOffset();
     focusFirstQuestion();
 }
 
@@ -437,23 +429,6 @@ function updateTimerDisplay(seconds) {
     }
 }
 
-// Met à jour la position de référence du minuteur
-function updateTimerOffset() {
-    if (timerContainer) {
-        timerOffsetTop = timerContainer.offsetTop;
-    }
-}
-
-// Ajuste la classe du minuteur en fonction du défilement
-function handleTimerPosition() {
-    if (!timerContainer) return;
-    if (window.scrollY > timerOffsetTop) {
-        timerContainer.classList.add('timer-fixed');
-    } else {
-        timerContainer.classList.remove('timer-fixed');
-    }
-}
-
 function focusFirstQuestion() {
     const firstQuestion = questionsContainer.querySelector('.question-block');
     if (firstQuestion) {
@@ -467,5 +442,3 @@ function focusFirstQuestion() {
 startBtn.addEventListener('click', startExam);
 submitBtn.addEventListener('click', handleSubmitClick);
 retryBtn.addEventListener('click', retryExam);
-window.addEventListener('scroll', handleTimerPosition);
-window.addEventListener('resize', updateTimerOffset);

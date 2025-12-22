@@ -10,6 +10,7 @@ const introSection = document.getElementById('intro');
 const examSection = document.getElementById('exam');
 const questionsContainer = document.getElementById('questions-container');
 const submitBtn = document.getElementById('submit-btn');
+const examHeading = document.getElementById('exam-heading');
 const resultsSection = document.getElementById('results');
 const scorePara = document.getElementById('score');
 const correctionDiv = document.getElementById('correction');
@@ -53,7 +54,38 @@ function getInitialExamState() {
 
 function setExamState(newState) {
     examState = newState;
+    applyExamState();
     updateTimerVisibility();
+}
+
+function applyExamState() {
+    const isIdle = examState === 'idle';
+    const isRunning = examState === 'running';
+    const isResults = examState === 'results';
+
+    if (introSection) {
+        introSection.classList.toggle('hidden', !isIdle);
+    }
+
+    if (examSection) {
+        examSection.classList.toggle('hidden', !isRunning);
+    }
+
+    if (examHeading) {
+        examHeading.classList.toggle('hidden', !isRunning);
+    }
+
+    if (submitBtn) {
+        submitBtn.style.display = isRunning ? 'inline-block' : 'none';
+    }
+
+    if (resultsSection) {
+        resultsSection.classList.toggle('hidden', !isResults);
+    }
+
+    if (retryBtn) {
+        retryBtn.style.display = isResults ? 'inline-block' : 'none';
+    }
 }
 
 /**
@@ -124,9 +156,6 @@ async function loadQuestionsFromMultipleJson() {
  * Démarre l'examen
  */
 async function startExam() {
-    introSection.classList.add('hidden');
-    examSection.classList.remove('hidden');
-
     setExamState('running');
     timeRemaining = EXAM_DURATION;
     startTimer();
@@ -137,7 +166,6 @@ async function startExam() {
     }
 
     displayQuestions(selectedQuestions);
-    submitBtn.style.display = "inline-block";
     focusFirstQuestion();
 }
 
@@ -288,7 +316,6 @@ function submitExam() {
     showResults(score, userAnswers);
 
     questionsContainer.innerHTML = "";
-    examSection.classList.add('hidden');
 }
 
 /**
@@ -489,6 +516,7 @@ function focusFirstQuestion() {
 }
 
 examState = getInitialExamState();
+applyExamState();
 updateTimerVisibility();
 
 /* ================================

@@ -12,7 +12,6 @@ const questionsContainer = document.getElementById('questions-container');
 const submitBtn = document.getElementById('submit-btn');
 const examHeading = document.getElementById('exam-heading');
 const mainContainer = document.querySelector('main');
-const pageBody = document.body;
 const resultsSection = document.getElementById('results');
 const scorePara = document.getElementById('score');
 const correctionDiv = document.getElementById('correction');
@@ -92,10 +91,6 @@ function applyExamState() {
 
     if (mainContainer) {
         mainContainer.classList.toggle('results-visible', isResults);
-    }
-
-    if (pageBody) {
-        pageBody.classList.toggle('results-mode', isResults);
     }
 }
 

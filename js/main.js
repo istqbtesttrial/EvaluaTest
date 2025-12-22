@@ -19,6 +19,10 @@ const timerContainer = document.getElementById('timer-container');
 const timeUsedPara = document.getElementById('time-used');
 const resultsHeading = document.getElementById('results-heading');
 
+if (timerContainer) {
+    timerContainer.setAttribute('aria-hidden', 'true');
+}
+
 
 /* --- Timer (1h15) --- */
 const EXAM_DURATION = 75 * 60; // durée totale de l'examen en secondes (75 min)
@@ -103,6 +107,11 @@ async function loadQuestionsFromMultipleJson() {
 async function startExam() {
     introSection.classList.add('hidden');
     examSection.classList.remove('hidden');
+
+    if (timerContainer) {
+        timerContainer.classList.remove('hidden');
+        timerContainer.setAttribute('aria-hidden', 'false');
+    }
 
     timeRemaining = EXAM_DURATION;
     startTimer();
@@ -257,8 +266,13 @@ function displayQuestions(questions) {
  */
 function submitExam() {
     clearInterval(timerInterval);
-    const score = calculateScore(selectedQuestions);
-    showResults(score);
+    hideTimerContainer();
+
+    const userAnswers = collectUserAnswers(selectedQuestions);
+    const score = calculateScore(selectedQuestions, userAnswers);
+    showResults(score, userAnswers);
+
+    questionsContainer.innerHTML = "";
     examSection.classList.add('hidden');
 }
 
@@ -289,7 +303,7 @@ function handleSubmitClick() {
 /**
  * Affiche les résultats (score global et détail question par question)
  */
-function showResults(score) {
+function showResults(score, userAnswers = {}) {
     resultsSection.classList.remove('hidden');
 
     const totalQuestions = selectedQuestions.length; // Doit être 40
@@ -316,7 +330,9 @@ function showResults(score) {
 
     correctionDiv.innerHTML = "";
     selectedQuestions.forEach((q, index) => {
-        const userAnswer = getUserAnswer(q.questionId);
+        const userAnswer = userAnswers.hasOwnProperty(q.questionId)
+            ? userAnswers[q.questionId]
+            : getUserAnswer(q.questionId);
         const isCorrect = (userAnswer === q.correctIndex);
 
         const resultLine = document.createElement('div');
@@ -394,11 +410,21 @@ function retryExam() {
     timeUsedPara.textContent = "";
     submitBtn.style.display = "none";
     retryBtn.style.display = "none";
+    hideTimerContainer();
+    updateTimerDisplay(EXAM_DURATION);
 }
 
 /* ================================
     FONCTIONS TIMER
    ================================ */
+function collectUserAnswers(questions) {
+    const answers = {};
+    questions.forEach(q => {
+        answers[q.questionId] = getUserAnswer(q.questionId);
+    });
+    return answers;
+}
+
 function startTimer() {
     updateTimerDisplay(timeRemaining);
     timerInterval = setInterval(() => {
@@ -426,6 +452,13 @@ function updateTimerDisplay(seconds) {
 
     if (timerDisplay) {
         timerDisplay.setAttribute('aria-label', `Temps restant ${hh} heures, ${mm} minutes et ${ss} secondes`);
+    }
+}
+
+function hideTimerContainer() {
+    if (timerContainer) {
+        timerContainer.classList.add('hidden');
+        timerContainer.setAttribute('aria-hidden', 'true');
     }
 }
 

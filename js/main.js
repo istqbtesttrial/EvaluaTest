@@ -18,6 +18,7 @@ const timerDisplay = document.getElementById('timer-display');
 const timerContainer = document.getElementById('timer-container');
 const timeUsedPara = document.getElementById('time-used');
 const resultsHeading = document.getElementById('results-heading');
+let examState = 'idle';
 
 if (timerContainer) {
     timerContainer.setAttribute('aria-hidden', 'true');
@@ -36,6 +37,24 @@ let timerInterval; // pour stocker l'intervalle
  */
 let allQuestions = [];
 let selectedQuestions = [];
+
+/* ================================
+    GESTION D'ÉTAT GLOBAL
+   ================================ */
+function getInitialExamState() {
+    if (resultsSection && !resultsSection.classList.contains('hidden')) {
+        return 'results';
+    }
+    if (examSection && !examSection.classList.contains('hidden')) {
+        return 'running';
+    }
+    return 'idle';
+}
+
+function setExamState(newState) {
+    examState = newState;
+    updateTimerVisibility();
+}
 
 /**
  * Charge et assemble les questions depuis 6 fichiers JSON (ex : chapt1.json … chapt6.json)
@@ -108,11 +127,7 @@ async function startExam() {
     introSection.classList.add('hidden');
     examSection.classList.remove('hidden');
 
-    if (timerContainer) {
-        timerContainer.classList.remove('hidden');
-        timerContainer.setAttribute('aria-hidden', 'false');
-    }
-
+    setExamState('running');
     timeRemaining = EXAM_DURATION;
     startTimer();
 
@@ -266,7 +281,7 @@ function displayQuestions(questions) {
  */
 function submitExam() {
     clearInterval(timerInterval);
-    hideTimerContainer();
+    setExamState('results');
 
     const userAnswers = collectUserAnswers(selectedQuestions);
     const score = calculateScore(selectedQuestions, userAnswers);
@@ -410,7 +425,7 @@ function retryExam() {
     timeUsedPara.textContent = "";
     submitBtn.style.display = "none";
     retryBtn.style.display = "none";
-    hideTimerContainer();
+    setExamState('idle');
     updateTimerDisplay(EXAM_DURATION);
 }
 
@@ -455,11 +470,15 @@ function updateTimerDisplay(seconds) {
     }
 }
 
-function hideTimerContainer() {
-    if (timerContainer) {
-        timerContainer.classList.add('hidden');
-        timerContainer.setAttribute('aria-hidden', 'true');
+function updateTimerVisibility() {
+    if (!timerContainer) {
+        return;
     }
+
+    const shouldShowTimer = examState === 'running';
+    timerContainer.classList.toggle('hidden', !shouldShowTimer);
+    timerContainer.classList.toggle('is-hidden', !shouldShowTimer);
+    timerContainer.setAttribute('aria-hidden', shouldShowTimer ? 'false' : 'true');
 }
 
 function focusFirstQuestion() {
@@ -468,6 +487,9 @@ function focusFirstQuestion() {
         firstQuestion.focus({ preventScroll: false });
     }
 }
+
+examState = getInitialExamState();
+updateTimerVisibility();
 
 /* ================================
     GESTION DES ÉVÉNEMENTS

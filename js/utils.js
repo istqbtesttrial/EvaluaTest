@@ -27,10 +27,12 @@ function getRandomQuestions(questions, n) {
 /**
  * Calcule le score de l'utilisateur en comptant les réponses justes.
  */
-function calculateScore(selectedQuestions) {
+function calculateScore(selectedQuestions, userAnswersMap = null) {
     let score = 0;
     selectedQuestions.forEach(q => {
-        const userAnswer = getUserAnswer(q.questionId);
+        const userAnswer = userAnswersMap && userAnswersMap.hasOwnProperty(q.questionId)
+            ? userAnswersMap[q.questionId]
+            : getUserAnswer(q.questionId);
         if (userAnswer === q.correctIndex) {
             score++;
         }

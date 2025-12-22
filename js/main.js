@@ -11,6 +11,7 @@ const examSection = document.getElementById('exam');
 const questionsContainer = document.getElementById('questions-container');
 const submitBtn = document.getElementById('submit-btn');
 const examHeading = document.getElementById('exam-heading');
+const mainContainer = document.querySelector('main');
 const resultsSection = document.getElementById('results');
 const scorePara = document.getElementById('score');
 const correctionDiv = document.getElementById('correction');
@@ -81,10 +82,15 @@ function applyExamState() {
 
     if (resultsSection) {
         resultsSection.classList.toggle('hidden', !isResults);
+        resultsSection.classList.toggle('mt-5', !isResults);
     }
 
     if (retryBtn) {
         retryBtn.style.display = isResults ? 'inline-block' : 'none';
+    }
+
+    if (mainContainer) {
+        mainContainer.classList.toggle('results-visible', isResults);
     }
 }
 

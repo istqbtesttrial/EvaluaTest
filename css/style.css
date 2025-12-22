@@ -76,6 +76,10 @@ main {
     animation: mainFadeIn 0.32s ease-out forwards;
 }
 
+main.results-visible #results {
+    margin-top: 0;
+}
+
 /* ========== Mise en page de l'examen ========== */
 #exam {
     display: grid;

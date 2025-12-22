@@ -72,6 +72,35 @@ main {
     animation: mainFadeIn 0.32s ease-out forwards;
 }
 
+/* ========== Mise en page de l'examen ========== */
+#exam {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 992px) {
+    #exam {
+        grid-template-columns: minmax(0, 1fr) 15rem;
+        align-items: start;
+    }
+
+    #exam > h2 {
+        grid-column: 1 / -1;
+    }
+
+    #questions-container,
+    #exam .submit-container {
+        grid-column: 1 / 2;
+    }
+
+    #timer-container {
+        grid-column: 2 / 3;
+        grid-row: 2 / span 2;
+        justify-self: end;
+    }
+}
+
 /* ========== Questions ========== */
 .question-block {
     background: #fff;
@@ -200,11 +229,9 @@ main {
     background: #fff3cd;
     border: 1px solid #ffeeba;
     color: #856404;
-    position: fixed;
-    top: 6rem;
-    right: 1.5rem;
-    width: 9.5rem;
-    aspect-ratio: 1 / 1;
+    position: sticky;
+    top: 0.75rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -215,6 +242,7 @@ main {
     box-shadow: 0 12px 30px rgba(0,0,0,0.14);
     text-align: center;
     z-index: 1100;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 #timer-container strong {
@@ -226,20 +254,11 @@ main {
 }
 
 @media (min-width: 992px) {
-    #exam {
-        padding-right: 11rem;
-    }
-}
-
-@media (max-width: 991.98px) {
     #timer-container {
-        position: sticky;
-        top: 0.75rem;
-        right: auto;
-        width: 100%;
-        aspect-ratio: auto;
-        margin-bottom: 1rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        top: 1.5rem;
+        max-width: 15rem;
+        margin-left: auto;
+        box-shadow: 0 6px 14px rgba(0,0,0,0.12);
     }
 }
 

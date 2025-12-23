@@ -24,8 +24,12 @@ const resultsBadge = document.getElementById('results-badge');
 const progressCount = document.getElementById('progress-count');
 const progressTrack = document.getElementById('progress-track');
 const progressBar = document.getElementById('progress-bar');
+const progressContainer = document.querySelector('.exam-progress');
+const progressChip = document.getElementById('progress-chip');
 let examState = 'idle';
 let isLoadingQuestions = false;
+let progressObserver;
+let isProgressInView = true;
 
 if (timerContainer) {
     timerContainer.setAttribute('aria-hidden', 'true');
@@ -63,6 +67,7 @@ function setExamState(newState) {
     examState = newState;
     applyExamState();
     updateTimerVisibility();
+    updateProgressVisibility();
 }
 
 function applyExamState() {
@@ -356,6 +361,11 @@ function updateProgress() {
     progressTrack.setAttribute('aria-valuemax', total.toString());
     progressTrack.setAttribute('aria-valuenow', answeredCount.toString());
     progressBar.style.width = `${percent}%`;
+
+    if (progressChip) {
+        progressChip.textContent = `${answeredCount}/${total}`;
+        progressChip.setAttribute('aria-label', `Progression ${answeredCount} sur ${total}`);
+    }
 }
 
 
@@ -587,6 +597,42 @@ function updateTimerVisibility() {
     timerContainer.setAttribute('aria-hidden', shouldShowTimer ? 'false' : 'true');
 }
 
+function updateProgressVisibility() {
+    const isRunning = examState === 'running';
+    const showBar = isRunning && isProgressInView;
+
+    if (progressContainer) {
+        progressContainer.classList.toggle('is-collapsed', !showBar);
+    }
+
+    if (progressChip) {
+        const showChip = isRunning && !isProgressInView;
+        progressChip.classList.toggle('is-visible', showChip);
+        progressChip.setAttribute('aria-hidden', showChip ? 'false' : 'true');
+    }
+}
+
+function initProgressObserver() {
+    if (!progressContainer || !('IntersectionObserver' in window)) {
+        return;
+    }
+
+    progressObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.target !== progressContainer) {
+                return;
+            }
+
+            isProgressInView = entry.isIntersecting && entry.intersectionRatio >= 0.2;
+            updateProgressVisibility();
+        });
+    }, {
+        threshold: [0, 0.2, 1]
+    });
+
+    progressObserver.observe(progressContainer);
+}
+
 function focusFirstQuestion() {
     const firstQuestion = questionsContainer.querySelector('.question-block');
     if (firstQuestion) {
@@ -598,6 +644,8 @@ examState = getInitialExamState();
 applyExamState();
 updateTimerVisibility();
 updateProgress();
+updateProgressVisibility();
+initProgressObserver();
 
 /* ================================
     GESTION DES ÉVÉNEMENTS

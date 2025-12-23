@@ -27,18 +27,6 @@
     <!-- === Votre feuille de style === -->
     <link rel="stylesheet" href="css/style.css">
 
-    <style>
-        html, body {
-            font-family: 'Roboto', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .hero-bg {
-            background: linear-gradient(135deg, #06b6d4 0%, #fde047 100%);
-        }
-        .nav-link:hover {
-            color: #9333EA;
-        }
-    </style>
 </head>
 <body class="bg-light">
 <a href="#exam" class="skip-link">Passer directement au questionnaire</a>
@@ -66,6 +54,16 @@
     <section id="exam" class="hidden" data-aos="fadeIn" data-aos-duration="700">
         <h2 id="exam-heading" class="mb-4 text-center animate__animated animate__fadeInDown">Examen en cours</h2>
 
+        <div class="exam-progress" role="status" aria-live="polite">
+            <div class="progress-meta">
+                <span id="progress-label">Progression</span>
+                <span id="progress-count">0/0</span>
+            </div>
+            <div id="progress-track" class="progress-track" role="progressbar" aria-labelledby="progress-label" aria-valuemin="0" aria-valuemax="40" aria-valuenow="0">
+                <div id="progress-bar" class="progress-bar" aria-hidden="true"></div>
+            </div>
+        </div>
+
         <div id="timer-container" class="bg-warning p-3 rounded mb-4 text-center animate__animated animate__bounceIn hidden is-hidden" role="status" aria-live="polite" tabindex="-1">
             <strong><i class="fas fa-stopwatch" aria-hidden="true"></i> Temps restant :</strong>
             <span id="timer-display" class="fw-bold fs-5 text-danger" role="timer" aria-live="polite" aria-atomic="true">01:15:00</span>
@@ -85,6 +83,7 @@
 
     <section id="results" class="hidden mt-5" data-aos="zoom-in" data-aos-duration="700">
         <h2 id="results-heading" class="text-center mb-4 animate__animated animate__fadeInDown" tabindex="-1">Résultats</h2>
+        <div id="results-badge" class="results-badge" role="status" aria-live="polite"></div>
         <p id="score" class="fs-5 text-center"></p>
         <p id="time-used" class="fs-6 text-muted text-center"></p>
         <div id="correction" class="mt-3">
@@ -116,7 +115,15 @@
     document.addEventListener('DOMContentLoaded', function() {
         // On joue l'animation AOS une seule fois afin que la section d'examen
         // ne réapplique pas de transformation lors du défilement.
-        AOS.init({ once: true, mirror: false });
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        AOS.init({
+            once: true,
+            mirror: false,
+            duration: 700,
+            easing: 'ease-out-cubic',
+            offset: 80,
+            disable: prefersReducedMotion
+        });
     });
 </script>
 </body>

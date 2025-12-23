@@ -20,6 +20,10 @@ const timerDisplay = document.getElementById('timer-display');
 const timerContainer = document.getElementById('timer-container');
 const timeUsedPara = document.getElementById('time-used');
 const resultsHeading = document.getElementById('results-heading');
+const resultsBadge = document.getElementById('results-badge');
+const progressCount = document.getElementById('progress-count');
+const progressTrack = document.getElementById('progress-track');
+const progressBar = document.getElementById('progress-bar');
 let examState = 'idle';
 let isLoadingQuestions = false;
 
@@ -30,6 +34,7 @@ if (timerContainer) {
 
 /* --- Timer (1h15) --- */
 const EXAM_DURATION = 75 * 60; // durée totale de l'examen en secondes (75 min)
+const URGENT_THRESHOLD = 5 * 60; // seuil d'urgence (5 min)
 let timeRemaining = EXAM_DURATION; // temps restant en secondes
 let timerInterval; // pour stocker l'intervalle
 
@@ -186,6 +191,7 @@ async function startExam() {
 
         startTimer();
         displayQuestions(selectedQuestions);
+        updateProgress();
         focusFirstQuestion();
     } finally {
         isLoadingQuestions = false;
@@ -198,6 +204,7 @@ function handleQuestionLoadFailure() {
     timeRemaining = EXAM_DURATION;
     selectedQuestions = [];
     updateTimerDisplay(EXAM_DURATION);
+    updateProgress();
 }
 
 /**
@@ -334,6 +341,23 @@ function displayQuestions(questions) {
     }
 }
 
+function updateProgress() {
+    if (!progressCount || !progressTrack || !progressBar) {
+        return;
+    }
+
+    const total = selectedQuestions.length;
+    const answeredCount = selectedQuestions.reduce((count, question) => {
+        return getUserAnswer(question.questionId) !== -1 ? count + 1 : count;
+    }, 0);
+
+    const percent = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
+    progressCount.textContent = `${answeredCount}/${total}`;
+    progressTrack.setAttribute('aria-valuemax', total.toString());
+    progressTrack.setAttribute('aria-valuenow', answeredCount.toString());
+    progressBar.style.width = `${percent}%`;
+}
+
 
 /**
  * Soumet l'examen, arrête le timer, calcule le score et affiche les résultats.
@@ -396,9 +420,19 @@ function showResults(score, userAnswers = {}) {
     if (score >= threshold) {
         scorePara.textContent += " Félicitations, vous avez réussi l'examen !";
         scorePara.classList.add("animate__animated", "animate__tada");
+        if (resultsBadge) {
+            resultsBadge.textContent = "Réussi ✅";
+            resultsBadge.classList.remove('is-fail');
+            resultsBadge.classList.add('is-success');
+        }
     } else {
         scorePara.textContent += " Désolé, vous avez échoué l'examen.";
         scorePara.classList.add("animate__animated", "animate__shakeX");
+        if (resultsBadge) {
+            resultsBadge.textContent = "Échec ❌";
+            resultsBadge.classList.remove('is-success');
+            resultsBadge.classList.add('is-fail');
+        }
     }
 
     correctionDiv.innerHTML = "";
@@ -481,10 +515,15 @@ function retryExam() {
     questionsContainer.innerHTML = "";
     scorePara.textContent = "";
     timeUsedPara.textContent = "";
+    if (resultsBadge) {
+        resultsBadge.textContent = "";
+        resultsBadge.classList.remove('is-success', 'is-fail');
+    }
     submitBtn.style.display = "none";
     retryBtn.style.display = "none";
     setExamState('idle');
     updateTimerDisplay(EXAM_DURATION);
+    updateProgress();
 }
 
 /* ================================
@@ -530,6 +569,11 @@ function updateTimerDisplay(seconds) {
     if (timerDisplay) {
         timerDisplay.setAttribute('aria-label', `Temps restant ${hh} heures, ${mm} minutes et ${ss} secondes`);
     }
+
+    if (timerContainer) {
+        const isUrgent = seconds > 0 && seconds <= URGENT_THRESHOLD;
+        timerContainer.classList.toggle('is-urgent', isUrgent);
+    }
 }
 
 function updateTimerVisibility() {
@@ -553,6 +597,7 @@ function focusFirstQuestion() {
 examState = getInitialExamState();
 applyExamState();
 updateTimerVisibility();
+updateProgress();
 
 /* ================================
     GESTION DES ÉVÉNEMENTS
@@ -560,3 +605,8 @@ updateTimerVisibility();
 startBtn.addEventListener('click', startExam);
 submitBtn.addEventListener('click', handleSubmitClick);
 retryBtn.addEventListener('click', retryExam);
+questionsContainer.addEventListener('change', (event) => {
+    if (event.target.matches('input[type="radio"]')) {
+        updateProgress();
+    }
+});

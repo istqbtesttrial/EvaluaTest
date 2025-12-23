@@ -351,19 +351,41 @@ main.results-visible #results {
     margin: 0.25rem 0;
     border-radius: 0.25rem;
     cursor: pointer;
+    border: 1px solid transparent;
+    background: #fff;
     transition: background var(--motion-duration-fast) var(--motion-ease-standard),
         box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+        border-color var(--motion-duration-fast) var(--motion-ease-standard),
         transform var(--motion-duration-fast) var(--motion-ease-out);
 }
 
 .choice-label:hover {
     background: #f1f5f9;
+    border-color: #cbd5f5;
 }
 
 .choice-label:focus-within {
     background: #e0f2fe;
+    border-color: #60a5fa;
     box-shadow: var(--focus-ring);
     transform: translateY(-1px);
+}
+
+.choice-label.is-selected {
+    background: #dbeafe;
+    border-color: #60a5fa;
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.12);
+}
+
+.choice-label.is-selected:hover {
+    background: #c7d2fe;
+    border-color: #3b82f6;
+}
+
+.choice-label.is-selected:focus-within {
+    background: #bfdbfe;
+    border-color: #2563eb;
+    box-shadow: var(--focus-ring-strong);
 }
 
 .choice-label input[type="radio"] {

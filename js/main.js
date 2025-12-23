@@ -21,6 +21,7 @@ const timerContainer = document.getElementById('timer-container');
 const timeUsedPara = document.getElementById('time-used');
 const resultsHeading = document.getElementById('results-heading');
 let examState = 'idle';
+let isLoadingQuestions = false;
 
 if (timerContainer) {
     timerContainer.setAttribute('aria-hidden', 'true');
@@ -162,17 +163,41 @@ async function loadQuestionsFromMultipleJson() {
  * Démarre l'examen
  */
 async function startExam() {
-    setExamState('running');
-    timeRemaining = EXAM_DURATION;
-    startTimer();
-
-    selectedQuestions = await loadQuestionsFromMultipleJson();
-    if (selectedQuestions.length < 40) {
-        console.warn("Le total de questions récupérées est inférieur à 40 !");
+    if (examState === 'running' || isLoadingQuestions) {
+        return;
     }
 
-    displayQuestions(selectedQuestions);
-    focusFirstQuestion();
+    isLoadingQuestions = true;
+    setExamState('running');
+    clearInterval(timerInterval);
+    timeRemaining = EXAM_DURATION;
+    updateTimerDisplay(timeRemaining);
+
+    try {
+        selectedQuestions = await loadQuestionsFromMultipleJson();
+        if (selectedQuestions.length === 0) {
+            handleQuestionLoadFailure();
+            return;
+        }
+
+        if (selectedQuestions.length < 40) {
+            console.warn("Le total de questions récupérées est inférieur à 40 !");
+        }
+
+        startTimer();
+        displayQuestions(selectedQuestions);
+        focusFirstQuestion();
+    } finally {
+        isLoadingQuestions = false;
+    }
+}
+
+function handleQuestionLoadFailure() {
+    clearInterval(timerInterval);
+    setExamState('idle');
+    timeRemaining = EXAM_DURATION;
+    selectedQuestions = [];
+    updateTimerDisplay(EXAM_DURATION);
 }
 
 /**
@@ -490,6 +515,10 @@ function startTimer() {
  * Met à jour l'affichage du timer (format HH:MM:SS)
  */
 function updateTimerDisplay(seconds) {
+    if (!timerDisplay) {
+        return;
+    }
+
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
     const s = seconds % 60;

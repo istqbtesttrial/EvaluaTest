@@ -655,6 +655,16 @@ submitBtn.addEventListener('click', handleSubmitClick);
 retryBtn.addEventListener('click', retryExam);
 questionsContainer.addEventListener('change', (event) => {
     if (event.target.matches('input[type="radio"]')) {
+        const currentLabel = event.target.closest('label');
+        const questionBlock = event.target.closest('.question-block');
+        if (questionBlock) {
+            questionBlock.querySelectorAll('.choice-label.is-selected').forEach((label) => {
+                label.classList.remove('is-selected');
+            });
+        }
+        if (currentLabel) {
+            currentLabel.classList.add('is-selected');
+        }
         updateProgress();
     }
 });

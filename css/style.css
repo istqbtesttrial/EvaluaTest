@@ -172,6 +172,15 @@ main.results-visible #results {
     display: grid;
     gap: 0.6rem;
     box-shadow: 0 8px 20px rgba(30, 64, 175, 0.12);
+    transition: opacity var(--motion-duration-base) var(--motion-ease-out),
+        transform var(--motion-duration-base) var(--motion-ease-out);
+    will-change: opacity, transform;
+}
+
+.exam-progress.is-collapsed {
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
 }
 
 .progress-meta {
@@ -406,6 +415,33 @@ main.results-visible #results {
     font-size: 1.4rem;
 }
 
+.progress-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3.5rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 0.65rem;
+    background: #dbeafe;
+    border: 1px solid #93c5fd;
+    color: #1e3a8a;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 6px 14px rgba(30, 64, 175, 0.18);
+    opacity: 0;
+    transform: translateY(-4px);
+    visibility: hidden;
+    transition: opacity var(--motion-duration-base) var(--motion-ease-out),
+        transform var(--motion-duration-base) var(--motion-ease-out);
+    will-change: opacity, transform;
+}
+
+.progress-chip.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
 @media (min-width: 992px) {
     #timer-container {
         top: 1.5rem;
@@ -522,6 +558,11 @@ main.results-visible #results {
     }
 
     .progress-bar {
+        transition: none;
+    }
+
+    .exam-progress,
+    .progress-chip {
         transition: none;
     }
 

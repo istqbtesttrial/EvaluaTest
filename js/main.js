@@ -42,9 +42,11 @@ const EXAM_DURATION = 75 * 60; // durée totale de l'examen en secondes (75 min)
 const URGENT_THRESHOLD = 5 * 60; // seuil d'urgence (5 min)
 let timeRemaining = EXAM_DURATION; // temps restant en secondes
 let timerInterval; // pour stocker l'intervalle
-const EXIT_STAGGER_RANGE_MS = [60, 120];
-const EXIT_DURATION_RANGE_MS = [260, 360];
-const EXIT_SCROLL_WAIT_MS = 450;
+const EXIT_CARD_DURATION_MS = 200;
+const EXIT_SCROLL_DURATION_MS = 200;
+const EXIT_SCROLL_DELTA_MIN = 120;
+const EXIT_SCROLL_DELTA_MAX = 240;
+const EXIT_FINAL_SCROLL_MS = 260;
 
 /**
  * Variables globales :
@@ -141,6 +143,10 @@ function getRandomItem(items) {
     return items[Math.floor(Math.random() * items.length)];
 }
 
+function clampValue(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+}
+
 function animateElement(target, keyframes, options) {
     if (window.motion && typeof window.motion.animate === 'function') {
         return window.motion.animate(target, keyframes, options);
@@ -197,6 +203,42 @@ function buildExitAnimation(card) {
     return getRandomItem(variants);
 }
 
+function smoothScrollTo(targetY, duration) {
+    if (duration <= 0) {
+        window.scrollTo(0, targetY);
+        return Promise.resolve();
+    }
+
+    const startY = window.scrollY || window.pageYOffset;
+    const delta = targetY - startY;
+    const startTime = performance.now();
+
+    return new Promise((resolve) => {
+        function step(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = 0.5 - Math.cos(progress * Math.PI) / 2;
+            window.scrollTo(0, startY + delta * ease);
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                resolve();
+            }
+        }
+        requestAnimationFrame(step);
+    });
+}
+
+function smoothScrollBy(deltaY, duration) {
+    return smoothScrollTo((window.scrollY || window.pageYOffset) + deltaY, duration);
+}
+
+function getScrollDeltaForCard(card) {
+    const cardHeight = card.getBoundingClientRect().height || 0;
+    const baseDelta = Math.max(cardHeight, EXIT_SCROLL_DELTA_MIN);
+    return clampValue(baseDelta, EXIT_SCROLL_DELTA_MIN, EXIT_SCROLL_DELTA_MAX);
+}
+
 async function runQuestionExitTransition(cards) {
     if (!cards.length) {
         return;
@@ -216,44 +258,41 @@ async function runQuestionExitTransition(cards) {
         return;
     }
 
-    let cumulativeDelay = 0;
-    const animations = cards.map((card, index) => {
-        if (index > 0) {
-            cumulativeDelay += getRandomBetween(EXIT_STAGGER_RANGE_MS[0], EXIT_STAGGER_RANGE_MS[1]);
-        }
+    for (const card of cards) {
         const { keyframes, easing } = buildExitAnimation(card);
-        const duration = getRandomBetween(EXIT_DURATION_RANGE_MS[0], EXIT_DURATION_RANGE_MS[1]);
+        const duration = EXIT_CARD_DURATION_MS;
+        const scrollDelta = getScrollDeltaForCard(card);
 
         card.style.willChange = 'transform, opacity';
         card.style.pointerEvents = 'none';
 
         const animation = animateElement(card, keyframes, {
             duration,
-            delay: cumulativeDelay,
             easing,
             fill: 'forwards'
         });
 
-        return Promise.resolve(animation.finished)
-            .catch(() => {})
-            .then(() => {
-                card.style.display = 'none';
-            });
-    });
+        await Promise.all([
+            Promise.resolve(animation.finished).catch(() => {}),
+            smoothScrollBy(-scrollDelta, EXIT_SCROLL_DURATION_MS)
+        ]);
 
-    await Promise.all(animations);
+        card.style.display = 'none';
+    }
 }
 
 function scrollToResults() {
     const reducedMotion = prefersReducedMotion();
-    return new Promise((resolve) => {
-        window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
-        if (reducedMotion) {
-            resolve();
-            return;
-        }
-        window.setTimeout(resolve, EXIT_SCROLL_WAIT_MS);
-    });
+    if (reducedMotion) {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+        return Promise.resolve();
+    }
+
+    const targetTop = resultsSection
+        ? Math.max(resultsSection.getBoundingClientRect().top + window.scrollY - 16, 0)
+        : 0;
+
+    return smoothScrollTo(targetTop, EXIT_FINAL_SCROLL_MS);
 }
 
 async function completeExamSubmission({ score, userAnswers }) {

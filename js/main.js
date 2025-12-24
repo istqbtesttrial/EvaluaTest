@@ -30,6 +30,7 @@ let examState = 'idle';
 let isLoadingQuestions = false;
 let progressObserver;
 let isProgressInView = true;
+let isTransitioning = false;
 
 if (timerContainer) {
     timerContainer.setAttribute('aria-hidden', 'true');
@@ -41,6 +42,9 @@ const EXAM_DURATION = 75 * 60; // durée totale de l'examen en secondes (75 min)
 const URGENT_THRESHOLD = 5 * 60; // seuil d'urgence (5 min)
 let timeRemaining = EXAM_DURATION; // temps restant en secondes
 let timerInterval; // pour stocker l'intervalle
+const EXIT_STAGGER_RANGE_MS = [60, 120];
+const EXIT_DURATION_RANGE_MS = [260, 360];
+const EXIT_SCROLL_WAIT_MS = 450;
 
 /**
  * Variables globales :
@@ -103,6 +107,165 @@ function applyExamState() {
     if (mainContainer) {
         mainContainer.classList.toggle('results-visible', isResults);
     }
+}
+
+// -------------------------------
+// Transition de fin d'examen
+// -------------------------------
+function prefersReducedMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function setTransitionLock(isLocked) {
+    document.body.classList.toggle('is-transitioning', isLocked);
+    if (submitBtn) {
+        submitBtn.disabled = isLocked;
+    }
+    if (questionsContainer) {
+        const inputs = questionsContainer.querySelectorAll('input, select, textarea, button');
+        inputs.forEach((input) => {
+            input.disabled = isLocked;
+        });
+    }
+}
+
+function getRandomBetween(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function getRandomSign() {
+    return Math.random() < 0.5 ? -1 : 1;
+}
+
+function getRandomItem(items) {
+    return items[Math.floor(Math.random() * items.length)];
+}
+
+function animateElement(target, keyframes, options) {
+    if (window.motion && typeof window.motion.animate === 'function') {
+        return window.motion.animate(target, keyframes, options);
+    }
+    return target.animate(keyframes, options);
+}
+
+function buildExitAnimation(card) {
+    const rotate = getRandomBetween(6, 14) * getRandomSign();
+    const translateX = getRandomBetween(24, 60) * getRandomSign();
+    const translateY = getRandomBetween(12, 26);
+    const flipAxis = getRandomItem(['X', 'Y']);
+    const flipAngle = getRandomBetween(45, 70) * getRandomSign();
+
+    const variants = [
+        {
+            keyframes: [
+                { opacity: 1, transform: 'translateY(0) scale(1) rotate(0deg)' },
+                { opacity: 0, transform: `translateY(${translateY / 2}px) scale(0.75) rotate(${rotate}deg)` }
+            ],
+            easing: 'cubic-bezier(0.2, 0.9, 0.3, 1)'
+        },
+        {
+            keyframes: [
+                { opacity: 1, transform: 'translateX(0) rotate(0deg)' },
+                { opacity: 0, transform: `translateX(${translateX}px) rotate(${rotate}deg)` }
+            ],
+            easing: 'cubic-bezier(0.3, 0.8, 0.35, 1)'
+        },
+        {
+            keyframes: [
+                { opacity: 1, transform: 'scale(1) rotate(0deg)', offset: 0 },
+                { opacity: 1, transform: `scale(1.08) rotate(${rotate / 2}deg)`, offset: 0.4 },
+                { opacity: 0, transform: `scale(0.6) rotate(${rotate}deg)`, offset: 1 }
+            ],
+            easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+        },
+        {
+            keyframes: [
+                { opacity: 1, transform: 'translateY(0) scale(1)' },
+                { opacity: 0, transform: `translateY(${translateY}px) scale(0.92) rotate(${rotate}deg)` }
+            ],
+            easing: 'cubic-bezier(0.25, 0.7, 0.35, 1)'
+        },
+        {
+            keyframes: [
+                { opacity: 1, transform: 'perspective(800px) rotateX(0deg) rotateY(0deg)' },
+                { opacity: 0, transform: `perspective(800px) rotate${flipAxis}(${flipAngle}deg) scale(0.9)` }
+            ],
+            easing: 'cubic-bezier(0.2, 0.85, 0.35, 1)'
+        }
+    ];
+
+    return getRandomItem(variants);
+}
+
+async function runQuestionExitTransition(cards) {
+    if (!cards.length) {
+        return;
+    }
+
+    const reducedMotion = prefersReducedMotion();
+    if (questionsContainer) {
+        questionsContainer.style.minHeight = `${questionsContainer.offsetHeight}px`;
+    }
+
+    if (reducedMotion) {
+        cards.forEach((card) => {
+            card.style.opacity = '0';
+            card.style.transform = 'none';
+            card.style.display = 'none';
+        });
+        return;
+    }
+
+    let cumulativeDelay = 0;
+    const animations = cards.map((card, index) => {
+        if (index > 0) {
+            cumulativeDelay += getRandomBetween(EXIT_STAGGER_RANGE_MS[0], EXIT_STAGGER_RANGE_MS[1]);
+        }
+        const { keyframes, easing } = buildExitAnimation(card);
+        const duration = getRandomBetween(EXIT_DURATION_RANGE_MS[0], EXIT_DURATION_RANGE_MS[1]);
+
+        card.style.willChange = 'transform, opacity';
+        card.style.pointerEvents = 'none';
+
+        const animation = animateElement(card, keyframes, {
+            duration,
+            delay: cumulativeDelay,
+            easing,
+            fill: 'forwards'
+        });
+
+        return Promise.resolve(animation.finished)
+            .catch(() => {})
+            .then(() => {
+                card.style.display = 'none';
+            });
+    });
+
+    await Promise.all(animations);
+}
+
+function scrollToResults() {
+    const reducedMotion = prefersReducedMotion();
+    return new Promise((resolve) => {
+        window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+        if (reducedMotion) {
+            resolve();
+            return;
+        }
+        window.setTimeout(resolve, EXIT_SCROLL_WAIT_MS);
+    });
+}
+
+async function completeExamSubmission({ score, userAnswers }) {
+    const cards = Array.from(questionsContainer.querySelectorAll('.question-block'));
+    await runQuestionExitTransition(cards);
+    await scrollToResults();
+
+    setExamState('results');
+    showResults(score, userAnswers);
+
+    questionsContainer.innerHTML = "";
+    questionsContainer.style.minHeight = "";
 }
 
 /**
@@ -178,6 +341,8 @@ async function startExam() {
     }
 
     isLoadingQuestions = true;
+    isTransitioning = false;
+    setTransitionLock(false);
     setExamState('running');
     clearInterval(timerInterval);
     timeRemaining = EXAM_DURATION;
@@ -370,41 +535,54 @@ function updateProgress() {
 
 
 /**
- * Soumet l'examen, arrête le timer, calcule le score et affiche les résultats.
+ * Lance la transition de fin d'examen (animation + affichage des résultats).
  */
-function submitExam() {
+async function startExamCompletion({ requireConfirm = false, showTimeoutAlert = false } = {}) {
+    if (examState !== 'running' || isTransitioning) {
+        return;
+    }
+
+    if (requireConfirm) {
+        let answeredCount = 0;
+        selectedQuestions.forEach(q => {
+            if (getUserAnswer(q.questionId) !== -1) {
+                answeredCount++;
+            }
+        });
+
+        if (answeredCount < selectedQuestions.length) {
+            const unanswered = selectedQuestions.length - answeredCount;
+            const proceed = confirm(`Il reste ${unanswered} question${unanswered > 1 ? 's' : ''} non répondue${unanswered > 1 ? 's' : ''}. Soumettre l'examen malgré tout ?`);
+            if (!proceed) {
+                return;
+            }
+        }
+    }
+
+    if (showTimeoutAlert && typeof window !== 'undefined' && typeof window.alert === 'function') {
+        window.alert("Temps écoulé ! L'examen se termine automatiquement.");
+    }
+
+    isTransitioning = true;
     clearInterval(timerInterval);
-    setExamState('results');
+    setTransitionLock(true);
 
     const userAnswers = collectUserAnswers(selectedQuestions);
     const score = calculateScore(selectedQuestions, userAnswers);
-    showResults(score, userAnswers);
 
-    questionsContainer.innerHTML = "";
+    try {
+        await completeExamSubmission({ score, userAnswers });
+    } finally {
+        isTransitioning = false;
+        setTransitionLock(false);
+    }
 }
 
 /**
  * Gère le clic sur le bouton de soumission.
  */
 function handleSubmitClick() {
-    // Calculer le nombre de questions auxquelles l'utilisateur a répondu
-    let answeredCount = 0;
-    selectedQuestions.forEach(q => {
-        if (getUserAnswer(q.questionId) !== -1) {
-            answeredCount++;
-        }
-    });
-
-    // Si toutes les questions ne sont pas répondues, demander confirmation
-    if (answeredCount < selectedQuestions.length) {
-        const unanswered = selectedQuestions.length - answeredCount;
-        const proceed = confirm(`Il reste ${unanswered} question${unanswered > 1 ? 's' : ''} non répondue${unanswered > 1 ? 's' : ''}. Soumettre l'examen malgré tout ?`);
-        if (!proceed) {
-            return;
-        }
-    }
-
-    submitExam();
+    startExamCompletion({ requireConfirm: true });
 }
 
 /**
@@ -518,11 +696,14 @@ function showResults(score, userAnswers = {}) {
  * Réinitialise l'examen pour permettre une nouvelle tentative.
  */
 function retryExam() {
+    isTransitioning = false;
+    setTransitionLock(false);
     resultsSection.classList.add('hidden');
     scorePara.classList.remove("animate__animated", "animate__tada", "animate__shakeX");
     introSection.classList.remove('hidden');
     correctionDiv.innerHTML = "";
     questionsContainer.innerHTML = "";
+    questionsContainer.style.minHeight = "";
     scorePara.textContent = "";
     timeUsedPara.textContent = "";
     if (resultsBadge) {
@@ -531,6 +712,7 @@ function retryExam() {
     }
     submitBtn.style.display = "none";
     retryBtn.style.display = "none";
+    submitBtn.disabled = false;
     setExamState('idle');
     updateTimerDisplay(EXAM_DURATION);
     updateProgress();
@@ -554,8 +736,7 @@ function startTimer() {
         updateTimerDisplay(timeRemaining);
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
-            alert("Temps écoulé ! L'examen se termine automatiquement.");
-            submitExam();
+            startExamCompletion({ showTimeoutAlert: true });
         }
     }, 1000);
 }

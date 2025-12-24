@@ -247,6 +247,15 @@ main.results-visible #results {
     transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
 
+.is-transitioning #exam {
+    pointer-events: none;
+}
+
+.is-transitioning .question-block {
+    cursor: default;
+    transition: none;
+}
+
 .question-block:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12), 0 6px 14px rgba(15, 23, 42, 0.06);

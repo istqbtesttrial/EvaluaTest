@@ -229,10 +229,6 @@ function smoothScrollTo(targetY, duration) {
     });
 }
 
-function smoothScrollBy(deltaY, duration) {
-    return smoothScrollTo((window.scrollY || window.pageYOffset) + deltaY, duration);
-}
-
 function getScrollDeltaForCard(card) {
     const cardHeight = card.getBoundingClientRect().height || 0;
     const baseDelta = Math.max(cardHeight, EXIT_SCROLL_DELTA_MIN);
@@ -244,24 +240,16 @@ async function runQuestionExitTransition(cards) {
         return;
     }
 
-    const reducedMotion = prefersReducedMotion();
     if (questionsContainer) {
         questionsContainer.style.minHeight = `${questionsContainer.offsetHeight}px`;
-    }
-
-    if (reducedMotion) {
-        cards.forEach((card) => {
-            card.style.opacity = '0';
-            card.style.transform = 'none';
-            card.style.display = 'none';
-        });
-        return;
     }
 
     for (const card of cards) {
         const { keyframes, easing } = buildExitAnimation(card);
         const duration = EXIT_CARD_DURATION_MS;
         const scrollDelta = getScrollDeltaForCard(card);
+        const startScroll = window.scrollY || window.pageYOffset;
+        const targetScroll = Math.max(0, startScroll - scrollDelta);
 
         card.style.willChange = 'transform, opacity';
         card.style.pointerEvents = 'none';
@@ -274,34 +262,66 @@ async function runQuestionExitTransition(cards) {
 
         await Promise.all([
             Promise.resolve(animation.finished).catch(() => {}),
-            smoothScrollBy(-scrollDelta, EXIT_SCROLL_DURATION_MS)
+            smoothScrollTo(targetScroll, EXIT_SCROLL_DURATION_MS)
         ]);
 
         card.style.display = 'none';
     }
 }
 
-function scrollToResults() {
+function finalizeScrollToTop() {
     const reducedMotion = prefersReducedMotion();
     if (reducedMotion) {
         window.scrollTo({ top: 0, behavior: 'auto' });
         return Promise.resolve();
     }
 
-    const targetTop = resultsSection
-        ? Math.max(resultsSection.getBoundingClientRect().top + window.scrollY - 16, 0)
-        : 0;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    return smoothScrollTo(targetTop, EXIT_FINAL_SCROLL_MS);
+    return new Promise((resolve) => {
+        const startTime = performance.now();
+
+        function verifyPosition(now) {
+            if (window.scrollY === 0) {
+                resolve();
+                return;
+            }
+
+            if (now - startTime >= EXIT_FINAL_SCROLL_MS) {
+                window.scrollTo({ top: 0, behavior: 'auto' });
+                resolve();
+                return;
+            }
+
+            requestAnimationFrame(verifyPosition);
+        }
+
+        requestAnimationFrame(verifyPosition);
+    });
 }
 
 async function completeExamSubmission({ score, userAnswers }) {
     const cards = Array.from(questionsContainer.querySelectorAll('.question-block'));
-    await runQuestionExitTransition(cards);
-    await scrollToResults();
+    const reducedMotion = prefersReducedMotion();
 
+    if (reducedMotion) {
+        cards.forEach((card) => {
+            card.style.opacity = '0';
+            card.style.transform = 'none';
+            card.style.display = 'none';
+        });
+        setExamState('results');
+        showResults(score, userAnswers);
+        await finalizeScrollToTop();
+        questionsContainer.innerHTML = "";
+        questionsContainer.style.minHeight = "";
+        return;
+    }
+
+    await runQuestionExitTransition(cards);
     setExamState('results');
     showResults(score, userAnswers);
+    await finalizeScrollToTop();
 
     questionsContainer.innerHTML = "";
     questionsContainer.style.minHeight = "";

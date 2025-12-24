@@ -42,10 +42,9 @@ const EXAM_DURATION = 75 * 60; // durée totale de l'examen en secondes (75 min)
 const URGENT_THRESHOLD = 5 * 60; // seuil d'urgence (5 min)
 let timeRemaining = EXAM_DURATION; // temps restant en secondes
 let timerInterval; // pour stocker l'intervalle
-const EXIT_CARD_DURATION_MS = 200;
-const EXIT_SCROLL_DURATION_MS = 200;
-const EXIT_SCROLL_DELTA_MIN = 120;
-const EXIT_SCROLL_DELTA_MAX = 240;
+const EXIT_TOTAL_DURATION_MS = 1800;
+const EXIT_CARD_DURATION_MIN = 60;
+const EXIT_CARD_DURATION_MAX = 200;
 const EXIT_FINAL_SCROLL_MS = 260;
 
 /**
@@ -203,36 +202,8 @@ function buildExitAnimation(card) {
     return getRandomItem(variants);
 }
 
-function smoothScrollTo(targetY, duration) {
-    if (duration <= 0) {
-        window.scrollTo(0, targetY);
-        return Promise.resolve();
-    }
-
-    const startY = window.scrollY || window.pageYOffset;
-    const delta = targetY - startY;
-    const startTime = performance.now();
-
-    return new Promise((resolve) => {
-        function step(now) {
-            const elapsed = now - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const ease = 0.5 - Math.cos(progress * Math.PI) / 2;
-            window.scrollTo(0, startY + delta * ease);
-            if (progress < 1) {
-                requestAnimationFrame(step);
-            } else {
-                resolve();
-            }
-        }
-        requestAnimationFrame(step);
-    });
-}
-
-function getScrollDeltaForCard(card) {
-    const cardHeight = card.getBoundingClientRect().height || 0;
-    const baseDelta = Math.max(cardHeight, EXIT_SCROLL_DELTA_MIN);
-    return clampValue(baseDelta, EXIT_SCROLL_DELTA_MIN, EXIT_SCROLL_DELTA_MAX);
+function easeInOutSine(progress) {
+    return 0.5 - Math.cos(progress * Math.PI) / 2;
 }
 
 async function runQuestionExitTransition(cards) {
@@ -244,29 +215,63 @@ async function runQuestionExitTransition(cards) {
         questionsContainer.style.minHeight = `${questionsContainer.offsetHeight}px`;
     }
 
-    for (const card of cards) {
-        const { keyframes, easing } = buildExitAnimation(card);
-        const duration = EXIT_CARD_DURATION_MS;
-        const scrollDelta = getScrollDeltaForCard(card);
-        const startScroll = window.scrollY || window.pageYOffset;
-        const targetScroll = Math.max(0, startScroll - scrollDelta);
+    const totalDuration = EXIT_TOTAL_DURATION_MS;
+    const cardCount = cards.length;
+    const baseDuration = totalDuration / cardCount;
+    const cardDuration = clampValue(baseDuration, EXIT_CARD_DURATION_MIN, EXIT_CARD_DURATION_MAX);
+    const cardStagger = cardCount > 1 ? (totalDuration - cardDuration) / (cardCount - 1) : totalDuration;
+    const startScroll = window.scrollY || window.pageYOffset;
 
+    const animationItems = cards.map((card, index) => {
+        const { keyframes, easing } = buildExitAnimation(card);
         card.style.willChange = 'transform, opacity';
         card.style.pointerEvents = 'none';
 
         const animation = animateElement(card, keyframes, {
-            duration,
+            duration: cardDuration,
             easing,
             fill: 'forwards'
         });
+        animation.pause();
 
-        await Promise.all([
-            Promise.resolve(animation.finished).catch(() => {}),
-            smoothScrollTo(targetScroll, EXIT_SCROLL_DURATION_MS)
-        ]);
+        return {
+            card,
+            animation,
+            startTime: index * cardStagger,
+            done: false
+        };
+    });
 
-        card.style.display = 'none';
-    }
+    return new Promise((resolve) => {
+        const timelineStart = performance.now();
+
+        function step(now) {
+            const elapsed = now - timelineStart;
+            const progress = clampValue(elapsed / totalDuration, 0, 1);
+            const eased = easeInOutSine(progress);
+
+            window.scrollTo(0, startScroll * (1 - eased));
+
+            animationItems.forEach((item) => {
+                const localElapsed = elapsed - item.startTime;
+                const localProgress = clampValue(localElapsed / cardDuration, 0, 1);
+                item.animation.currentTime = localProgress * cardDuration;
+                if (localProgress >= 1 && !item.done) {
+                    item.card.style.display = 'none';
+                    item.done = true;
+                }
+            });
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                window.scrollTo(0, 0);
+                resolve();
+            }
+        }
+
+        requestAnimationFrame(step);
+    });
 }
 
 function finalizeScrollToTop() {

@@ -11,7 +11,7 @@ L'objectif principal du projet est de proposer une **expérience d'examen blanc 
 
 ## Fonctionnalités actuelles
 
-- Écran de connexion avant accès au test
+- Écran de connexion avant accès au test (barrière d’accès légère et dissuasive pour l’espace élèves)
 - Session avec option **Rester connecté**
 - Bouton **Se déconnecter**
 - Démarrage d'un examen blanc complet
@@ -51,6 +51,8 @@ L'objectif principal du projet est de proposer une **expérience d'examen blanc 
 3. Ouvrez votre navigateur et allez sur <http://localhost:8000/>.
 4. Connectez-vous avec les identifiants configurés dans le projet.
 5. Lancez l'examen, répondez aux questions, puis validez pour voir les résultats.
+
+> Note : l’écran de connexion sert surtout de filtre dissuasif pour réserver l’accès aux élèves. Ce n’est pas une sécurité forte, l’application restant volontairement 100% frontend sur GitHub Pages.
 
 > Astuce : gardez le terminal ouvert pendant l'utilisation. Pour arrêter le serveur, appuyez sur `Ctrl + C`.
 

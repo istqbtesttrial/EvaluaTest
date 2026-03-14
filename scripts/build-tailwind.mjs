@@ -13,9 +13,10 @@ const inputCss = await readFile(inputPath, 'utf8');
 
 const filesToScan = [
   path.join(projectRoot, 'index.html'),
-  path.join(projectRoot, 'js', 'main.js'),
-  path.join(projectRoot, 'js', 'utils.js'),
   path.join(projectRoot, 'css', 'style.css'),
+  ...['main.js', 'utils.js', 'constants.js', 'dom.js', 'storage.js', 'auth.js', 'dashboard.js', 'results.js', 'state.js', 'exam.js', 'timer-ui.js', 'transitions.js', 'question-renderer.js'].map((file) =>
+    path.join(projectRoot, 'js', file),
+  ),
 ];
 
 const candidateSet = new Set();

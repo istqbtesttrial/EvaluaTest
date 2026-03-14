@@ -37,19 +37,40 @@
 </header>
 
 <main class="container mb-5">
-    <section id="intro" class="text-center mb-5 animate__animated animate__fadeInUp" data-aos="zoom-in" data-aos-duration="800">
+    <section id="login-section" class="mb-5 animate__animated animate__fadeInUp" data-aos="zoom-in" data-aos-duration="800">
+        <div class="login-card mx-auto">
+            <div class="text-center mb-4">
+                <h2 class="mb-2"><i class="fas fa-lock"></i> Accès sécurisé</h2>
+                <p class="mb-0 text-muted">Connecte-toi pour accéder aux examens EvaluaTest.</p>
+            </div>
+
+            <form id="login-form" class="login-form" novalidate>
+                <div class="mb-3">
+                    <label for="login-username" class="form-label">Login</label>
+                    <input id="login-username" name="username" type="text" class="form-control" autocomplete="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="login-password" class="form-label">Mot de passe</label>
+                    <input id="login-password" name="password" type="password" class="form-control" autocomplete="current-password" required>
+                </div>
+                <div id="login-error" class="alert alert-danger hidden" role="alert" aria-live="polite"></div>
+                <button id="login-btn" type="submit" class="btn btn-primary btn-lg w-100">
+                    <i class="fas fa-right-to-bracket"></i> Se connecter
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <section id="intro" class="text-center mb-5 animate__animated animate__fadeInUp hidden" data-aos="zoom-in" data-aos-duration="800">
         <p class="mb-4">
             Bienvenue sur <strong>EvaluaTest</strong>, la plateforme d’examens blancs
             pour la certification <strong>ISTQB V4 Foundation Level</strong>.<br>
-            Cliquez sur le bouton ci-dessous pour commencer votre examen.
+            Clique sur le bouton ci-dessous pour commencer ton examen.
         </p>
         <button id="start-btn" class="btn btn-success btn-lg px-4 mt-3 animate__animated animate__pulse animate__infinite">
             <i class="fas fa-play"></i> Commencer l'examen
         </button>
-
     </section>
-
-
 
     <section id="exam" class="hidden" data-aos="fadeIn" data-aos-duration="700">
         <h2 id="exam-heading" class="mb-4 text-center animate__animated animate__fadeInDown">Examen en cours</h2>

@@ -6,6 +6,12 @@
 
 /* --- Sélection des éléments HTML --- */
 const startBtn = document.getElementById('start-btn');
+const loginSection = document.getElementById('login-section');
+const loginForm = document.getElementById('login-form');
+const loginBtn = document.getElementById('login-btn');
+const loginError = document.getElementById('login-error');
+const loginUsername = document.getElementById('login-username');
+const loginPassword = document.getElementById('login-password');
 const introSection = document.getElementById('intro');
 const examSection = document.getElementById('exam');
 const questionsContainer = document.getElementById('questions-container');
@@ -55,10 +61,27 @@ const EXIT_FINAL_SCROLL_MS = 260;
 let allQuestions = [];
 let selectedQuestions = [];
 
+const AUTH_STORAGE_KEY = 'evaluatest-authenticated';
+const APP_CREDENTIALS = {
+    username: 'joe',
+    password: 'admin'
+};
+
 /* ================================
     GESTION D'ÉTAT GLOBAL
    ================================ */
+function isAuthenticated() {
+    return window.localStorage.getItem(AUTH_STORAGE_KEY) === 'true';
+}
+
+function setAuthenticated(value) {
+    window.localStorage.setItem(AUTH_STORAGE_KEY, value ? 'true' : 'false');
+}
+
 function getInitialExamState() {
+    if (!isAuthenticated()) {
+        return 'locked';
+    }
     if (resultsSection && !resultsSection.classList.contains('hidden')) {
         return 'results';
     }
@@ -76,9 +99,14 @@ function setExamState(newState) {
 }
 
 function applyExamState() {
+    const isLocked = examState === 'locked';
     const isIdle = examState === 'idle';
     const isRunning = examState === 'running';
     const isResults = examState === 'results';
+
+    if (loginSection) {
+        loginSection.classList.toggle('hidden', !isLocked);
+    }
 
     if (introSection) {
         introSection.classList.toggle('hidden', !isIdle);
@@ -99,6 +127,10 @@ function applyExamState() {
     if (resultsSection) {
         resultsSection.classList.toggle('hidden', !isResults);
         resultsSection.classList.toggle('mt-5', !isResults);
+    }
+
+    if (loginBtn) {
+        loginBtn.disabled = !isLocked && isTransitioning;
     }
 
     if (retryBtn) {
@@ -439,6 +471,46 @@ function handleQuestionLoadFailure() {
     selectedQuestions = [];
     updateTimerDisplay(EXAM_DURATION);
     updateProgress();
+}
+
+function showLoginError(message) {
+    if (!loginError) {
+        return;
+    }
+    loginError.textContent = message;
+    loginError.classList.remove('hidden');
+}
+
+function clearLoginError() {
+    if (!loginError) {
+        return;
+    }
+    loginError.textContent = '';
+    loginError.classList.add('hidden');
+}
+
+function handleLogin(event) {
+    event.preventDefault();
+
+    const username = loginUsername ? loginUsername.value.trim() : '';
+    const password = loginPassword ? loginPassword.value : '';
+
+    if (!username || !password) {
+        showLoginError('Merci de renseigner le login et le mot de passe.');
+        return;
+    }
+
+    if (username === APP_CREDENTIALS.username && password === APP_CREDENTIALS.password) {
+        clearLoginError();
+        setAuthenticated(true);
+        if (loginPassword) {
+            loginPassword.value = '';
+        }
+        setExamState('idle');
+        return;
+    }
+
+    showLoginError('Login ou mot de passe incorrect.');
 }
 
 /**
@@ -891,10 +963,23 @@ updateTimerVisibility();
 updateProgress();
 updateProgressVisibility();
 initProgressObserver();
+clearLoginError();
 
 /* ================================
     GESTION DES ÉVÉNEMENTS
    ================================ */
+if (loginForm) {
+    loginForm.addEventListener('submit', handleLogin);
+}
+
+if (loginUsername) {
+    loginUsername.addEventListener('input', clearLoginError);
+}
+
+if (loginPassword) {
+    loginPassword.addEventListener('input', clearLoginError);
+}
+
 startBtn.addEventListener('click', startExam);
 submitBtn.addEventListener('click', handleSubmitClick);
 retryBtn.addEventListener('click', retryExam);

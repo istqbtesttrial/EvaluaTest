@@ -71,8 +71,36 @@
         <p class="mb-4">
             Bienvenue sur <strong>EvaluaTest</strong>, la plateforme d’examens blancs
             pour la certification <strong>ISTQB V4 Foundation Level</strong>.<br>
-            Clique sur le bouton ci-dessous pour commencer ton examen.
+            Lance une session pour offrir à tes élèves une expérience proche de l’examen officiel.
         </p>
+
+        <div id="dashboard" class="dashboard-grid mb-4" aria-label="Tableau de bord utilisateur">
+            <article class="dashboard-card">
+                <span class="dashboard-label">Dernier score</span>
+                <strong id="dashboard-last-score" class="dashboard-value">-</strong>
+            </article>
+            <article class="dashboard-card">
+                <span class="dashboard-label">Meilleur score</span>
+                <strong id="dashboard-best-score" class="dashboard-value">-</strong>
+            </article>
+            <article class="dashboard-card">
+                <span class="dashboard-label">Tentatives</span>
+                <strong id="dashboard-attempts" class="dashboard-value">0</strong>
+            </article>
+            <article class="dashboard-card">
+                <span class="dashboard-label">Temps moyen</span>
+                <strong id="dashboard-average-time" class="dashboard-value">-</strong>
+            </article>
+        </div>
+
+        <div id="history-panel" class="history-panel mb-4 hidden">
+            <div class="history-panel-header">
+                <h3 class="mb-0">Historique récent</h3>
+                <small class="text-muted">Tes 5 dernières sessions</small>
+            </div>
+            <div id="history-list" class="history-list"></div>
+        </div>
+
         <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 align-items-center">
             <button id="start-btn" class="btn btn-success btn-lg px-4 mt-3 animate__animated animate__pulse animate__infinite">
                 <i class="fas fa-play"></i> Commencer l'examen
@@ -106,6 +134,19 @@
             <!-- Les questions générées via JavaScript -->
         </div>
 
+        <div id="submit-summary" class="submit-summary hidden" role="status" aria-live="polite">
+            <div class="submit-summary-card">
+                <div>
+                    <strong>Résumé avant validation</strong>
+                    <p class="mb-0 text-muted">Vérifie rapidement ta progression avant d’envoyer l’examen.</p>
+                </div>
+                <div class="submit-summary-stats">
+                    <span id="summary-answered" class="summary-pill">Répondues : 0</span>
+                    <span id="summary-unanswered" class="summary-pill summary-pill-warning">Non répondues : 0</span>
+                </div>
+            </div>
+        </div>
+
         <div class="submit-container text-center mt-4">
             <button id="submit-btn" style="display: none;" class="btn btn-primary btn-lg animate__animated animate__slideInUp">
                 <i class="fas fa-check"></i> Valider mes réponses
@@ -119,6 +160,34 @@
         <div id="results-badge" class="results-badge" role="status" aria-live="polite"></div>
         <p id="score" class="fs-5 text-center"></p>
         <p id="time-used" class="fs-6 text-muted text-center"></p>
+
+        <div id="results-summary" class="results-summary-grid mb-4">
+            <article class="results-summary-card">
+                <span class="results-summary-label">Bonnes réponses</span>
+                <strong id="results-correct-count" class="results-summary-value">0</strong>
+            </article>
+            <article class="results-summary-card">
+                <span class="results-summary-label">Mauvaises réponses</span>
+                <strong id="results-incorrect-count" class="results-summary-value">0</strong>
+            </article>
+            <article class="results-summary-card">
+                <span class="results-summary-label">Questions sans réponse</span>
+                <strong id="results-unanswered-count" class="results-summary-value">0</strong>
+            </article>
+        </div>
+
+        <div id="results-insight" class="results-insight mb-4"></div>
+
+        <div class="results-toolbar mb-3">
+            <label for="results-filter" class="results-filter-label">Afficher :</label>
+            <select id="results-filter" class="form-select results-filter-select">
+                <option value="all">Toutes les questions</option>
+                <option value="incorrect">Seulement les erreurs</option>
+                <option value="unanswered">Seulement les non-répondues</option>
+                <option value="correct">Seulement les bonnes réponses</option>
+            </select>
+        </div>
+
         <div id="correction" class="mt-3">
             <!-- Détails des résultats -->
         </div>

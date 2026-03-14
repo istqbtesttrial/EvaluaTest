@@ -15,6 +15,12 @@ const loginPassword = document.getElementById('login-password');
 const rememberMeCheckbox = document.getElementById('remember-me');
 const introSection = document.getElementById('intro');
 const logoutBtn = document.getElementById('logout-btn');
+const dashboardLastScore = document.getElementById('dashboard-last-score');
+const dashboardBestScore = document.getElementById('dashboard-best-score');
+const dashboardAttempts = document.getElementById('dashboard-attempts');
+const dashboardAverageTime = document.getElementById('dashboard-average-time');
+const historyPanel = document.getElementById('history-panel');
+const historyList = document.getElementById('history-list');
 const examSection = document.getElementById('exam');
 const questionsContainer = document.getElementById('questions-container');
 const submitBtn = document.getElementById('submit-btn');
@@ -34,6 +40,14 @@ const progressTrack = document.getElementById('progress-track');
 const progressBar = document.getElementById('progress-bar');
 const progressContainer = document.querySelector('.exam-progress');
 const progressChip = document.getElementById('progress-chip');
+const submitSummary = document.getElementById('submit-summary');
+const summaryAnswered = document.getElementById('summary-answered');
+const summaryUnanswered = document.getElementById('summary-unanswered');
+const resultsCorrectCount = document.getElementById('results-correct-count');
+const resultsIncorrectCount = document.getElementById('results-incorrect-count');
+const resultsUnansweredCount = document.getElementById('results-unanswered-count');
+const resultsInsight = document.getElementById('results-insight');
+const resultsFilter = document.getElementById('results-filter');
 let examState = 'idle';
 let isLoadingQuestions = false;
 let progressObserver;
@@ -64,7 +78,10 @@ let allQuestions = [];
 let selectedQuestions = [];
 
 const AUTH_STORAGE_KEY = 'evaluatest-authenticated';
+const ATTEMPT_HISTORY_KEY = 'evaluatest-attempt-history';
+const MAX_HISTORY_ITEMS = 12;
 let isUserAuthenticated = false;
+let latestResultItems = [];
 const APP_CREDENTIALS = {
     username: 'joe',
     password: 'admin'
@@ -141,6 +158,10 @@ function applyExamState() {
     if (resultsSection) {
         resultsSection.classList.toggle('hidden', !isResults);
         resultsSection.classList.toggle('mt-5', !isResults);
+    }
+
+    if (submitSummary) {
+        submitSummary.classList.toggle('hidden', !isRunning);
     }
 
     if (loginBtn) {
@@ -487,6 +508,99 @@ function handleQuestionLoadFailure() {
     updateProgress();
 }
 
+function formatDuration(seconds) {
+    if (!Number.isFinite(seconds) || seconds <= 0) {
+        return '-';
+    }
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}m${remainingSeconds.toString().padStart(2, '0')}s`;
+}
+
+function getAttemptHistory() {
+    try {
+        const raw = window.localStorage.getItem(ATTEMPT_HISTORY_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+        console.warn('Impossible de lire l’historique des tentatives.', error);
+        return [];
+    }
+}
+
+function saveAttemptHistory(history) {
+    window.localStorage.setItem(ATTEMPT_HISTORY_KEY, JSON.stringify(history.slice(0, MAX_HISTORY_ITEMS)));
+}
+
+function recordAttempt({ score, totalQuestions, percent, timeUsedSec, unansweredCount }) {
+    const history = getAttemptHistory();
+    history.unshift({
+        score,
+        totalQuestions,
+        percent,
+        timeUsedSec,
+        unansweredCount,
+        takenAt: new Date().toISOString()
+    });
+    saveAttemptHistory(history);
+    renderDashboard();
+}
+
+function renderDashboard() {
+    const history = getAttemptHistory();
+    const lastAttempt = history[0];
+    const bestAttempt = history.reduce((best, attempt) => {
+        if (!best) {
+            return attempt;
+        }
+        return attempt.percent > best.percent ? attempt : best;
+    }, null);
+    const averageTime = history.length
+        ? Math.round(history.reduce((sum, attempt) => sum + (attempt.timeUsedSec || 0), 0) / history.length)
+        : 0;
+
+    if (dashboardLastScore) {
+        dashboardLastScore.textContent = lastAttempt ? `${lastAttempt.score}/${lastAttempt.totalQuestions}` : '-';
+    }
+    if (dashboardBestScore) {
+        dashboardBestScore.textContent = bestAttempt ? `${bestAttempt.score}/${bestAttempt.totalQuestions}` : '-';
+    }
+    if (dashboardAttempts) {
+        dashboardAttempts.textContent = `${history.length}`;
+    }
+    if (dashboardAverageTime) {
+        dashboardAverageTime.textContent = history.length ? formatDuration(averageTime) : '-';
+    }
+
+    if (!historyPanel || !historyList) {
+        return;
+    }
+
+    if (!history.length) {
+        historyPanel.classList.add('hidden');
+        historyList.innerHTML = '';
+        return;
+    }
+
+    historyPanel.classList.remove('hidden');
+    historyList.innerHTML = history.slice(0, 5).map((attempt, index) => {
+        const date = new Date(attempt.takenAt);
+        const readableDate = Number.isNaN(date.getTime()) ? 'Session récente' : date.toLocaleString('fr-FR');
+        return `
+            <article class="history-item ${index === 0 ? 'is-latest' : ''}">
+                <div>
+                    <strong>${attempt.score}/${attempt.totalQuestions}</strong>
+                    <span>${attempt.percent.toFixed(2)}%</span>
+                </div>
+                <div>
+                    <small>${readableDate}</small>
+                    <small>${formatDuration(attempt.timeUsedSec)} · ${attempt.unansweredCount} non-répondues</small>
+                </div>
+            </article>
+        `;
+    }).join('');
+}
+
 function showLoginError(message) {
     if (!loginError) {
         return;
@@ -693,6 +807,7 @@ function updateProgress() {
     const answeredCount = selectedQuestions.reduce((count, question) => {
         return getUserAnswer(question.questionId) !== -1 ? count + 1 : count;
     }, 0);
+    const unansweredCount = Math.max(total - answeredCount, 0);
 
     const percent = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
     progressCount.textContent = `${answeredCount}/${total}`;
@@ -703,6 +818,17 @@ function updateProgress() {
     if (progressChip) {
         progressChip.textContent = `${answeredCount}/${total}`;
         progressChip.setAttribute('aria-label', `Progression ${answeredCount} sur ${total}`);
+    }
+
+    if (submitSummary) {
+        const shouldShowSummary = examState === 'running' && total > 0;
+        submitSummary.classList.toggle('hidden', !shouldShowSummary);
+    }
+    if (summaryAnswered) {
+        summaryAnswered.textContent = `Répondues : ${answeredCount}`;
+    }
+    if (summaryUnanswered) {
+        summaryUnanswered.textContent = `Non répondues : ${unansweredCount}`;
     }
 }
 
@@ -764,20 +890,43 @@ function handleSubmitClick() {
 function showResults(score, userAnswers = {}) {
     resultsSection.classList.remove('hidden');
 
-    const totalQuestions = selectedQuestions.length; // Doit être 40
-    const pourcentage = ((score / totalQuestions) * 100).toFixed(2);
-
-    // Calcul du temps utilisé et du pourcentage consommé
+    const totalQuestions = selectedQuestions.length;
+    const pourcentage = totalQuestions > 0 ? ((score / totalQuestions) * 100) : 0;
     const timeUsedSec = EXAM_DURATION - timeRemaining;
     const minutesUsed = Math.floor(timeUsedSec / 60);
     const secondsUsed = timeUsedSec % 60;
     const percentUsed = ((timeUsedSec / EXAM_DURATION) * 100).toFixed(2);
-    const baseText = `Vous avez obtenu ${score}/${totalQuestions} (${pourcentage}%).`;
-    const timeText = ` Temps utilisé : ${minutesUsed}m${secondsUsed.toString().padStart(2, '0')}s (${percentUsed}% du temps).`;
+    const baseText = `Vous avez obtenu ${score}/${totalQuestions} (${pourcentage.toFixed(2)}%).`;
+    const timeText = `Temps utilisé : ${minutesUsed}m${secondsUsed.toString().padStart(2, '0')}s (${percentUsed}% du temps).`;
     scorePara.textContent = baseText;
     timeUsedPara.textContent = timeText;
+    scorePara.classList.remove("animate__animated", "animate__tada", "animate__shakeX");
 
     const threshold = 26;
+    const resultItems = selectedQuestions.map((q, index) => {
+        const userAnswer = userAnswers.hasOwnProperty(q.questionId)
+            ? userAnswers[q.questionId]
+            : getUserAnswer(q.questionId);
+        const isUnanswered = userAnswer === -1;
+        const isCorrect = userAnswer === q.correctIndex;
+        return { q, index, userAnswer, isUnanswered, isCorrect };
+    });
+    latestResultItems = resultItems;
+
+    const correctCount = resultItems.filter((item) => item.isCorrect).length;
+    const unansweredCount = resultItems.filter((item) => item.isUnanswered).length;
+    const incorrectCount = totalQuestions - correctCount - unansweredCount;
+
+    if (resultsCorrectCount) {
+        resultsCorrectCount.textContent = `${correctCount}`;
+    }
+    if (resultsIncorrectCount) {
+        resultsIncorrectCount.textContent = `${incorrectCount}`;
+    }
+    if (resultsUnansweredCount) {
+        resultsUnansweredCount.textContent = `${unansweredCount}`;
+    }
+
     if (score >= threshold) {
         scorePara.textContent += " Félicitations, vous avez réussi l'examen !";
         scorePara.classList.add("animate__animated", "animate__tada");
@@ -796,73 +945,110 @@ function showResults(score, userAnswers = {}) {
         }
     }
 
-    correctionDiv.innerHTML = "";
-    selectedQuestions.forEach((q, index) => {
-        const userAnswer = userAnswers.hasOwnProperty(q.questionId)
-            ? userAnswers[q.questionId]
-            : getUserAnswer(q.questionId);
-        const isCorrect = (userAnswer === q.correctIndex);
-
-        const resultLine = document.createElement('div');
-        // Affichage de l'énoncé de la question avec son numéro
-        const questionStatement = document.createElement('div');
-        questionStatement.classList.add('result-question-statement');
-
-        const questionTitle = document.createElement('p');
-        questionTitle.classList.add('result-question-title');
-
-        const questionNumber = document.createElement('strong');
-        questionNumber.textContent = `Question ${index + 1} :`;
-        questionTitle.appendChild(questionNumber);
-        if (q.enonceFormat === 'markdown') {
-            questionStatement.appendChild(questionTitle);
-
-            const markdownWrapper = document.createElement('div');
-            markdownWrapper.classList.add('result-question-content');
-            markdownWrapper.innerHTML = marked.parse(q.enonce);
-            questionStatement.appendChild(markdownWrapper);
+    if (resultsInsight) {
+        if (incorrectCount === 0 && unansweredCount === 0) {
+            resultsInsight.innerHTML = `<strong>Excellent travail.</strong> Toutes les questions ont reçu une réponse correcte.`;
+        } else if (unansweredCount > 0) {
+            resultsInsight.innerHTML = `<strong>Point d’attention :</strong> ${unansweredCount} question(s) n’ont pas reçu de réponse. Revois surtout ta gestion du temps avant la prochaine session.`;
         } else {
-            questionTitle.append(` ${q.enonce}`);
-            questionStatement.appendChild(questionTitle);
+            resultsInsight.innerHTML = `<strong>Conseil :</strong> concentre-toi d’abord sur les ${incorrectCount} question(s) incorrectes ci-dessous, puis relis les bonnes réponses pour consolider la logique attendue.`;
         }
+    }
 
-        resultLine.appendChild(questionStatement);
-
-        // Votre réponse
-        const userAnswerContainer = document.createElement('div');
-        const userAnswerLabel = document.createElement('span');
-        userAnswerLabel.textContent = 'Votre réponse : ';
-        const userAnswerValue = document.createElement('em');
-        userAnswerValue.textContent = q.choices[userAnswer] || 'Aucune sélectionnée';
-        userAnswerContainer.append(userAnswerLabel, userAnswerValue);
-        resultLine.appendChild(userAnswerContainer);
-
-        // Réponse correcte
-        const correctAnswerContainer = document.createElement('div');
-        const correctAnswerLabel = document.createElement('span');
-        correctAnswerLabel.textContent = 'Réponse correcte : ';
-        const correctAnswerValue = document.createElement('em');
-        correctAnswerValue.textContent = q.choices[q.correctIndex];
-        correctAnswerContainer.append(correctAnswerLabel, correctAnswerValue);
-        resultLine.appendChild(correctAnswerContainer);
-
-        // Indication correcte / incorrecte
-        const statusContainer = document.createElement('div');
-        const statusSpan = document.createElement('span');
-        statusSpan.style.color = isCorrect ? 'green' : 'red';
-        statusSpan.textContent = isCorrect ? '✔ Bonne réponse' : '✖ Mauvaise réponse';
-        statusContainer.appendChild(statusSpan);
-        resultLine.appendChild(statusContainer);
-
-        correctionDiv.appendChild(resultLine);
-        correctionDiv.appendChild(document.createElement('hr'));
+    recordAttempt({
+        score,
+        totalQuestions,
+        percent: pourcentage,
+        timeUsedSec,
+        unansweredCount
     });
+
+    renderCorrections('all');
+    if (resultsFilter) {
+        resultsFilter.value = 'all';
+    }
 
     retryBtn.style.display = "inline-block";
 
     if (resultsHeading) {
         resultsHeading.focus();
     }
+}
+
+function renderCorrections(filter = 'all') {
+    if (!correctionDiv) {
+        return;
+    }
+
+    const filteredItems = latestResultItems.filter((item) => {
+        if (filter === 'incorrect') {
+            return !item.isCorrect && !item.isUnanswered;
+        }
+        if (filter === 'unanswered') {
+            return item.isUnanswered;
+        }
+        if (filter === 'correct') {
+            return item.isCorrect;
+        }
+        return true;
+    });
+
+    correctionDiv.innerHTML = '';
+
+    if (!filteredItems.length) {
+        correctionDiv.innerHTML = '<p class="text-center text-muted mt-3">Aucune question dans ce filtre.</p>';
+        return;
+    }
+
+    filteredItems.forEach((item) => {
+        const { q, index, userAnswer, isCorrect, isUnanswered } = item;
+        const resultLine = document.createElement('article');
+        resultLine.classList.add('result-card');
+        resultLine.dataset.resultState = isCorrect ? 'correct' : (isUnanswered ? 'unanswered' : 'incorrect');
+
+        const questionStatement = document.createElement('div');
+        questionStatement.classList.add('result-question-statement');
+
+        const questionTitle = document.createElement('p');
+        questionTitle.classList.add('result-question-title');
+        questionTitle.innerHTML = `<strong>Question ${index + 1} :</strong>`;
+        questionStatement.appendChild(questionTitle);
+
+        if (q.enonceFormat === 'markdown') {
+            const markdownWrapper = document.createElement('div');
+            markdownWrapper.classList.add('result-question-content');
+            markdownWrapper.innerHTML = marked.parse(q.enonce);
+            questionStatement.appendChild(markdownWrapper);
+        } else {
+            const text = document.createElement('p');
+            text.classList.add('result-question-content');
+            text.textContent = q.enonce;
+            questionStatement.appendChild(text);
+        }
+
+        const answerGrid = document.createElement('div');
+        answerGrid.classList.add('result-answer-grid');
+        answerGrid.innerHTML = `
+            <div><span class="result-answer-label">Votre réponse</span><em>${q.choices[userAnswer] || 'Aucune sélectionnée'}</em></div>
+            <div><span class="result-answer-label">Réponse correcte</span><em>${q.choices[q.correctIndex]}</em></div>
+        `;
+
+        const status = document.createElement('div');
+        status.classList.add('result-status-pill');
+        status.classList.add(isCorrect ? 'is-correct' : (isUnanswered ? 'is-unanswered' : 'is-incorrect'));
+        status.textContent = isCorrect ? '✔ Bonne réponse' : (isUnanswered ? '⏳ Non répondue' : '✖ À revoir');
+
+        const insight = document.createElement('p');
+        insight.classList.add('result-insight-text');
+        insight.textContent = isCorrect
+            ? 'Bonne logique : retiens bien le raisonnement qui mène à cette réponse.'
+            : isUnanswered
+                ? 'Cette question a été laissée vide. En simulation officielle, surveille ton rythme pour éviter ce cas.'
+                : 'À retravailler : compare ta réponse à la bonne et identifie précisément ce qui t’a induit en erreur.';
+
+        resultLine.append(questionStatement, answerGrid, status, insight);
+        correctionDiv.appendChild(resultLine);
+    });
 }
 
 /**
@@ -879,16 +1065,34 @@ function retryExam() {
     questionsContainer.style.minHeight = "";
     scorePara.textContent = "";
     timeUsedPara.textContent = "";
+    latestResultItems = [];
     if (resultsBadge) {
         resultsBadge.textContent = "";
         resultsBadge.classList.remove('is-success', 'is-fail');
     }
+    if (resultsInsight) {
+        resultsInsight.innerHTML = '';
+    }
+    if (resultsCorrectCount) {
+        resultsCorrectCount.textContent = '0';
+    }
+    if (resultsIncorrectCount) {
+        resultsIncorrectCount.textContent = '0';
+    }
+    if (resultsUnansweredCount) {
+        resultsUnansweredCount.textContent = '0';
+    }
+    if (resultsFilter) {
+        resultsFilter.value = 'all';
+    }
     submitBtn.style.display = "none";
     retryBtn.style.display = "none";
     submitBtn.disabled = false;
+    timeRemaining = EXAM_DURATION;
     setExamState('idle');
     updateTimerDisplay(EXAM_DURATION);
     updateProgress();
+    renderDashboard();
 }
 
 /* ================================
@@ -1002,6 +1206,7 @@ updateProgress();
 updateProgressVisibility();
 initProgressObserver();
 clearLoginError();
+renderDashboard();
 
 /* ================================
     GESTION DES ÉVÉNEMENTS
@@ -1020,6 +1225,12 @@ if (loginPassword) {
 
 if (logoutBtn) {
     logoutBtn.addEventListener('click', handleLogout);
+}
+
+if (resultsFilter) {
+    resultsFilter.addEventListener('change', (event) => {
+        renderCorrections(event.target.value);
+    });
 }
 
 window.addEventListener('pageshow', () => {

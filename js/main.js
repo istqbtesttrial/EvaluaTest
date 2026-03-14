@@ -61,7 +61,7 @@ const EXIT_FINAL_SCROLL_MS = 260;
 let allQuestions = [];
 let selectedQuestions = [];
 
-const AUTH_STORAGE_KEY = 'evaluatest-authenticated';
+let isUserAuthenticated = false;
 const APP_CREDENTIALS = {
     username: 'joe',
     password: 'admin'
@@ -71,11 +71,11 @@ const APP_CREDENTIALS = {
     GESTION D'ÉTAT GLOBAL
    ================================ */
 function isAuthenticated() {
-    return window.localStorage.getItem(AUTH_STORAGE_KEY) === 'true';
+    return isUserAuthenticated;
 }
 
 function setAuthenticated(value) {
-    window.localStorage.setItem(AUTH_STORAGE_KEY, value ? 'true' : 'false');
+    isUserAuthenticated = Boolean(value);
 }
 
 function getInitialExamState() {

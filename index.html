@@ -53,6 +53,12 @@
                     <label for="login-password" class="form-label">Mot de passe</label>
                     <input id="login-password" name="password" type="password" class="form-control" autocomplete="current-password" required>
                 </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" value="1" id="remember-me">
+                    <label class="form-check-label" for="remember-me">
+                        Rester connecté
+                    </label>
+                </div>
                 <div id="login-error" class="alert alert-danger hidden" role="alert" aria-live="polite"></div>
                 <button id="login-btn" type="submit" class="btn btn-primary btn-lg w-100">
                     <i class="fas fa-right-to-bracket"></i> Se connecter
@@ -67,9 +73,14 @@
             pour la certification <strong>ISTQB V4 Foundation Level</strong>.<br>
             Clique sur le bouton ci-dessous pour commencer ton examen.
         </p>
-        <button id="start-btn" class="btn btn-success btn-lg px-4 mt-3 animate__animated animate__pulse animate__infinite">
-            <i class="fas fa-play"></i> Commencer l'examen
-        </button>
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 align-items-center">
+            <button id="start-btn" class="btn btn-success btn-lg px-4 mt-3 animate__animated animate__pulse animate__infinite">
+                <i class="fas fa-play"></i> Commencer l'examen
+            </button>
+            <button id="logout-btn" class="btn btn-outline-secondary btn-lg px-4 mt-3">
+                <i class="fas fa-right-from-bracket"></i> Se déconnecter
+            </button>
+        </div>
     </section>
 
     <section id="exam" class="hidden" data-aos="fadeIn" data-aos-duration="700">

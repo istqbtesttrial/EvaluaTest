@@ -12,7 +12,9 @@ const loginBtn = document.getElementById('login-btn');
 const loginError = document.getElementById('login-error');
 const loginUsername = document.getElementById('login-username');
 const loginPassword = document.getElementById('login-password');
+const rememberMeCheckbox = document.getElementById('remember-me');
 const introSection = document.getElementById('intro');
+const logoutBtn = document.getElementById('logout-btn');
 const examSection = document.getElementById('exam');
 const questionsContainer = document.getElementById('questions-container');
 const submitBtn = document.getElementById('submit-btn');
@@ -61,6 +63,7 @@ const EXIT_FINAL_SCROLL_MS = 260;
 let allQuestions = [];
 let selectedQuestions = [];
 
+const AUTH_STORAGE_KEY = 'evaluatest-authenticated';
 let isUserAuthenticated = false;
 const APP_CREDENTIALS = {
     username: 'joe',
@@ -74,8 +77,19 @@ function isAuthenticated() {
     return isUserAuthenticated;
 }
 
-function setAuthenticated(value) {
+function setAuthenticated(value, options = {}) {
+    const shouldRemember = Boolean(options.remember);
     isUserAuthenticated = Boolean(value);
+
+    if (isUserAuthenticated && shouldRemember) {
+        window.localStorage.setItem(AUTH_STORAGE_KEY, 'true');
+    } else {
+        window.localStorage.removeItem(AUTH_STORAGE_KEY);
+    }
+}
+
+function syncAuthFromStorage() {
+    isUserAuthenticated = window.localStorage.getItem(AUTH_STORAGE_KEY) === 'true';
 }
 
 function getInitialExamState() {
@@ -494,6 +508,7 @@ function handleLogin(event) {
 
     const username = loginUsername ? loginUsername.value.trim() : '';
     const password = loginPassword ? loginPassword.value : '';
+    const remember = rememberMeCheckbox ? rememberMeCheckbox.checked : false;
 
     if (!username || !password) {
         showLoginError('Merci de renseigner le login et le mot de passe.');
@@ -502,7 +517,7 @@ function handleLogin(event) {
 
     if (username === APP_CREDENTIALS.username && password === APP_CREDENTIALS.password) {
         clearLoginError();
-        setAuthenticated(true);
+        setAuthenticated(true, { remember });
         if (loginPassword) {
             loginPassword.value = '';
         }
@@ -511,6 +526,28 @@ function handleLogin(event) {
     }
 
     showLoginError('Login ou mot de passe incorrect.');
+}
+
+function handleLogout() {
+    clearInterval(timerInterval);
+    setAuthenticated(false);
+    selectedQuestions = [];
+    questionsContainer.innerHTML = '';
+    questionsContainer.style.minHeight = '';
+    correctionDiv.innerHTML = '';
+    timeRemaining = EXAM_DURATION;
+    updateTimerDisplay(EXAM_DURATION);
+    updateProgress();
+    if (loginUsername) {
+        loginUsername.value = '';
+    }
+    if (loginPassword) {
+        loginPassword.value = '';
+    }
+    if (rememberMeCheckbox) {
+        rememberMeCheckbox.checked = false;
+    }
+    setExamState('locked');
 }
 
 /**
@@ -957,6 +994,7 @@ function focusFirstQuestion() {
     }
 }
 
+syncAuthFromStorage();
 examState = getInitialExamState();
 applyExamState();
 updateTimerVisibility();
@@ -979,6 +1017,17 @@ if (loginUsername) {
 if (loginPassword) {
     loginPassword.addEventListener('input', clearLoginError);
 }
+
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', handleLogout);
+}
+
+window.addEventListener('pageshow', () => {
+    syncAuthFromStorage();
+    if (!isAuthenticated()) {
+        setExamState('locked');
+    }
+});
 
 startBtn.addEventListener('click', startExam);
 submitBtn.addEventListener('click', handleSubmitClick);

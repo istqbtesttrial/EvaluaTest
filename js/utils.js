@@ -67,3 +67,13 @@ function selectQuestionsByChapter(chapters, distribution) {
     });
     return selected;
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        shuffleArray,
+        getRandomQuestions,
+        calculateScore,
+        getUserAnswer,
+        selectQuestionsByChapter,
+    };
+}
